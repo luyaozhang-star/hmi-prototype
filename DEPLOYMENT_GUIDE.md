@@ -251,6 +251,25 @@ sudo firewall-cmd --reload
    lsof -ti:5173 | xargs kill -9
    ```
 
+4. **macOS Frontend Network Interface Error:**
+   ```
+   Error: SystemError [ERR_SYSTEM_ERROR]: A system error occurred: 
+   uv_interface_addresses returned Unknown system error 1
+   ```
+   
+   **Solution:**
+   - This is a macOS-specific permission issue with network interfaces
+   - Run the frontend directly from terminal:
+     ```bash
+     cd frontend
+     npm run dev
+     ```
+   - If using Cursor or other IDE terminals, you may need to grant additional permissions
+   - Alternatively, use the start script with proper permissions:
+     ```bash
+     ./start-frontend.sh
+     ```
+
 ---
 
 ## 🎯 Quick Reference
@@ -293,6 +312,13 @@ http://localhost:5173
 ### Mac
 - Terminal app works great
 - Can use the `.sh` scripts provided
+- **Important:** If frontend fails with network interface error, use manual command:
+  ```bash
+  cd frontend
+  npm run dev
+  # If this fails with "ERR_SYSTEM_ERROR: uv_interface_addresses", 
+  # it's a macOS permission issue. Contact admin or use development tools.
+  ```
 
 ### Linux
 - Terminal app
