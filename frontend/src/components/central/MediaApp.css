@@ -1,0 +1,251 @@
+.media-app {
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.media-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.now-playing {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  margin-bottom: 2rem;
+}
+
+.album-art {
+  width: 150px;
+  height: 150px;
+  background: rgba(33, 150, 243, 0.2);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  flex-shrink: 0;
+}
+
+.track-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.track-name {
+  font-size: 2rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.artist-name {
+  font-size: 1.25rem;
+  color: #2196F3;
+}
+
+.track-status {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.5rem;
+}
+
+.playback-progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.progress-time {
+  font-size: 0.9rem;
+  color: #9e9e9e;
+  min-width: 40px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2196F3, #21CBF3);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.media-controls {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.media-button {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.media-button:hover {
+  border-color: #2196F3;
+  transform: scale(1.1);
+}
+
+.media-button.play-button {
+  width: 90px;
+  height: 90px;
+  background: rgba(33, 150, 243, 0.2);
+  border-color: #2196F3;
+  color: #2196F3;
+  font-size: 2.5rem;
+}
+
+.media-button.secondary {
+  width: 60px;
+  height: 60px;
+  font-size: 1.5rem;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  margin-bottom: 2rem;
+}
+
+.volume-button {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.volume-button:hover {
+  transform: scale(1.2);
+}
+
+.volume-slider-container {
+  flex: 1;
+  text-align: center;
+}
+
+.volume-slider {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+}
+
+.volume-value {
+  margin-top: 0.5rem;
+  color: #2196F3;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.playlist-section {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.playlist-title {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.playlist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.playlist-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(33, 150, 243, 0.3);
+}
+
+.playlist-item.active {
+  background: rgba(33, 150, 243, 0.15);
+  border-color: rgba(33, 150, 243, 0.5);
+}
+
+.playlist-icon {
+  font-size: 1.5rem;
+}
+
+.playlist-info {
+  flex: 1;
+}
+
+.playlist-track {
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 0.25rem;
+}
+
+.playlist-artist {
+  font-size: 0.85rem;
+  color: #9e9e9e;
+}
+
+.playlist-duration {
+  font-size: 0.9rem;
+  color: #9e9e9e;
+}
+

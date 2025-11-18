@@ -1,0 +1,78 @@
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  z-index: 100;
+}
+
+/* Left side - Home button */
+.nav-left {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+/* Right side - Other buttons centered */
+.nav-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-buttons-group {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-button {
+  width: 64px;
+  height: 64px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button:hover {
+  transform: scale(1.1);
+}
+
+.nav-button svg {
+  width: 64px;
+  height: 64px;
+  display: block;
+}
+
+/* Inactive state - darker gradient */
+.nav-button:not(.active) stop:first-child {
+  stop-color: #969696;
+}
+
+.nav-button:not(.active) stop:last-child {
+  stop-color: #595959;
+}
+
+/* Active state - brighter gradient (white to gray) */
+.nav-button.active stop:first-child {
+  stop-color: #FFFFFF;
+}
+
+.nav-button.active stop:last-child {
+  stop-color: #9A9A9A;
+}
+
+/* Smooth transition for gradient changes */
+.nav-button stop {
+  transition: stop-color 0.3s ease;
+}

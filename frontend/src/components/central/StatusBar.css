@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'TT Commons Pro';
+  font-weight: 600;
+  font-style: normal;
+  src: local('TT Commons Pro DemiBold'), local('TTCommonsPro-DemiBold');
+}
+
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  z-index: 100;
+}
+
+/* Left Section - User Profile */
+.status-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-name {
+  font-family: 'TT Commons Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #9B9B9B;
+  letter-spacing: 0.02em;
+}
+
+/* Right Section - Weather & Time */
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.weather-text,
+.time-text {
+  font-family: 'TT Commons Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: #9B9B9B;
+  letter-spacing: 0.02em;
+}
+
+/* SVG icons styling */
+.status-bar svg {
+  display: block;
+  flex-shrink: 0;
+}

@@ -1,0 +1,246 @@
+.vehicle-info-app {
+  padding: 2rem;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.vehicle-info-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.vehicle-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(33, 150, 243, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2196F3;
+  margin-bottom: 0.5rem;
+}
+
+.stat-detail {
+  font-size: 0.8rem;
+  color: #9e9e9e;
+}
+
+.stat-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+
+.stat-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2196F3, #21CBF3);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.speed-simulator {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  margin-bottom: 2rem;
+}
+
+.simulator-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.simulator-icon {
+  font-size: 2rem;
+}
+
+.simulator-label {
+  font-size: 1.2rem;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.simulator-description {
+  font-size: 0.85rem;
+  color: #9e9e9e;
+}
+
+.speed-slider {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(33, 150, 243, 0.7);
+}
+
+.speed-display {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2196F3;
+  font-weight: bold;
+}
+
+.vehicle-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-button:hover {
+  border-color: #2196F3;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  font-size: 2rem;
+}
+
+.action-label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.vehicle-health {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.health-title {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+}
+
+.health-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.health-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 2px solid rgba(76, 175, 80, 0.3);
+}
+
+.health-item.ok {
+  border-color: rgba(76, 175, 80, 0.3);
+}
+
+.health-item.warning {
+  border-color: rgba(255, 193, 7, 0.3);
+}
+
+.health-item.error {
+  border-color: rgba(244, 67, 54, 0.3);
+}
+
+.health-status {
+  font-size: 1.5rem;
+  color: #4caf50;
+}
+
+.health-name {
+  flex: 1;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.health-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.health-badge.ok {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+}
+
+.health-badge.warning {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.health-badge.error {
+  background: rgba(244, 67, 54, 0.2);
+  color: #f44336;
+}
+
