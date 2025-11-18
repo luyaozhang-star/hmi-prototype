@@ -1,0 +1,217 @@
+.cluster-display {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 100%);
+  color: #ffffff;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cluster-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cluster-header h2 {
+  color: #4CAF50;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.connection-indicator {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.connection-indicator.connected {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.connection-indicator.disconnected {
+  background: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+}
+
+.cluster-content {
+  flex: 1;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Speedometer */
+.speedometer {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.speed-gauge {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.3) 100%);
+  border: 3px solid rgba(76, 175, 80, 0.3);
+  box-shadow: 0 0 40px rgba(76, 175, 80, 0.2), inset 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+.speed-needle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 45%;
+  background: linear-gradient(to top, #4CAF50, #81C784);
+  transform-origin: bottom center;
+  transform: translateX(-50%) rotate(-140deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+}
+
+.speed-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: #4CAF50;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+  z-index: 10;
+}
+
+.speed-markers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.speed-marker {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.speed-marker[data-speed="0"] { top: 75%; left: 8%; }
+.speed-marker[data-speed="40"] { top: 55%; left: 2%; }
+.speed-marker[data-speed="80"] { top: 30%; left: 5%; }
+.speed-marker[data-speed="120"] { top: 10%; left: 20%; }
+.speed-marker[data-speed="160"] { top: 10%; right: 20%; }
+.speed-marker[data-speed="200"] { top: 30%; right: 5%; }
+.speed-marker[data-speed="240"] { top: 55%; right: 2%; }
+
+.speed-digital {
+  position: absolute;
+  bottom: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.speed-value {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #4CAF50;
+  text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.speed-unit {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: -0.5rem;
+}
+
+/* Info Panel */
+.info-panel {
+  flex: 1;
+  max-width: 400px;
+}
+
+.info-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.info-icon {
+  font-size: 2.5rem;
+}
+
+.info-details {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.3rem;
+}
+
+.info-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.media-info {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.media-status {
+  font-size: 1.2rem;
+  color: #4CAF50;
+  margin-bottom: 0.5rem;
+}
+
+.media-track {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.cluster-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.trip-info {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 1200px) {
+  .cluster-content {
+    flex-direction: column;
+  }
+  
+  .speedometer {
+    width: 300px;
+    height: 300px;
+  }
+}
+

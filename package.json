@@ -1,0 +1,25 @@
+{
+  "name": "hmi-multi-display-prototype",
+  "version": "1.0.0",
+  "description": "Multi-display HMI prototype system for user testing",
+  "scripts": {
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "dev:backend": "cd backend && npm start",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "hmi",
+    "multi-display",
+    "prototype",
+    "automotive",
+    "user-testing",
+    "websocket",
+    "react"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

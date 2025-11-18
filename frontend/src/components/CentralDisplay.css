@@ -1,0 +1,464 @@
+.central-display {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  color: #ffffff;
+  padding: 2rem;
+}
+
+.central-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.central-header h2 {
+  color: #2196F3;
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.time {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tab-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  border-radius: 15px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(33, 150, 243, 0.5);
+}
+
+.tab-button.active {
+  background: rgba(33, 150, 243, 0.2);
+  border-color: #2196F3;
+  color: #2196F3;
+}
+
+.central-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Climate Panel */
+.climate-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+.climate-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.temperature-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.temp-button {
+  width: 80px;
+  height: 80px;
+  background: rgba(33, 150, 243, 0.2);
+  border: 2px solid #2196F3;
+  color: #2196F3;
+  font-size: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.temp-button:hover {
+  background: rgba(33, 150, 243, 0.3);
+  transform: scale(1.1);
+}
+
+.temp-button:active {
+  transform: scale(0.95);
+}
+
+.temperature-display {
+  text-align: center;
+}
+
+.temp-value {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #2196F3;
+  text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+}
+
+.temp-label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+}
+
+.fan-control {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.fan-label {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.fan-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.fan-button {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fan-button:hover {
+  border-color: #2196F3;
+  transform: scale(1.1);
+}
+
+.fan-button.active {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: #2196F3;
+  color: #2196F3;
+}
+
+.ac-mode {
+  display: flex;
+  gap: 1rem;
+}
+
+.mode-button {
+  flex: 1;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-button:hover {
+  border-color: #2196F3;
+}
+
+.mode-button.active {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: #2196F3;
+  color: #2196F3;
+}
+
+/* Media Panel */
+.media-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+.now-playing {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  margin-bottom: 2rem;
+}
+
+.album-art {
+  width: 120px;
+  height: 120px;
+  background: rgba(33, 150, 243, 0.2);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.track-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.track-name {
+  font-size: 1.8rem;
+  color: #2196F3;
+  margin-bottom: 0.5rem;
+}
+
+.track-status {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.media-controls {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.media-button {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.media-button:hover {
+  border-color: #2196F3;
+  transform: scale(1.1);
+}
+
+.media-button.play {
+  width: 90px;
+  height: 90px;
+  background: rgba(33, 150, 243, 0.2);
+  border-color: #2196F3;
+  color: #2196F3;
+  font-size: 2.5rem;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  margin-bottom: 2rem;
+}
+
+.volume-button {
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.volume-button:hover {
+  transform: scale(1.2);
+}
+
+.volume-slider-container {
+  flex: 1;
+  text-align: center;
+}
+
+.volume-slider {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+}
+
+.volume-value {
+  margin-top: 0.5rem;
+  color: #2196F3;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.playlist {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.playlist-item {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.playlist-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #2196F3;
+}
+
+/* Vehicle Panel */
+.vehicle-panel {
+  animation: fadeIn 0.3s ease;
+}
+
+.vehicle-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.stat-icon {
+  font-size: 3rem;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.speed-simulator {
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border: 2px solid rgba(33, 150, 243, 0.3);
+  margin-bottom: 2rem;
+}
+
+.simulator-label {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.speed-slider {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+  margin-bottom: 1rem;
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #2196F3;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(33, 150, 243, 0.7);
+}
+
+.speed-display {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #2196F3;
+  font-weight: bold;
+}
+
+.vehicle-settings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.setting-button {
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.setting-button:hover {
+  border-color: #2196F3;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
