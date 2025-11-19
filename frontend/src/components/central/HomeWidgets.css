@@ -15,32 +15,32 @@
 /* Top Left - User Profile */
 .user-widget {
   position: absolute;
-  top: 1.5rem;
-  left: 2rem;
+  top: var(--spacing-24, 24px);
+  left: var(--spacing-32, 32px);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 1rem;
+  gap: var(--spacing-12, 12px);
+  padding: var(--spacing-8, 8px) var(--spacing-16, 16px);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
-  border-radius: 30px;
+  border-radius: var(--borderRadius-24, 24px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .user-avatar-small {
-  width: 32px;
-  height: 32px;
+  width: var(--spacing-32, 32px);
+  height: var(--spacing-32, 32px);
   border-radius: 50%;
   background: rgba(33, 150, 243, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: var(--fontSize-20, 20px);
   border: 2px solid rgba(33, 150, 243, 0.4);
 }
 
 .user-name-small {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #ffffff;
   font-weight: 500;
 }
@@ -48,21 +48,21 @@
 /* Top Right - Status Icons */
 .top-right-status {
   position: absolute;
-  top: 1.5rem;
-  right: 2rem;
+  top: var(--spacing-24, 24px);
+  right: var(--spacing-32, 32px);
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: var(--spacing-16, 16px);
 }
 
 .status-icons {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--spacing-8, 8px);
 }
 
 .status-icon {
-  width: 40px;
-  height: 40px;
+  width: var(--spacing-40, 40px);
+  height: var(--spacing-40, 40px);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
@@ -70,27 +70,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: var(--fontSize-16, 16px);
 }
 
 .quick-weather {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  gap: var(--spacing-8, 8px);
+  padding: var(--spacing-8, 8px) var(--spacing-16, 16px);
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(20px);
-  border-radius: 20px;
+  border-radius: var(--borderRadius-16, 16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .quick-temp {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #ffffff;
 }
 
 .quick-time {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
 }
 
@@ -114,27 +114,27 @@
 }
 
 .clock-ampm {
-  font-size: 2.5rem;
+  font-size: var(--fontSize-40, 40px);
   color: #ffffff;
   font-weight: 300;
-  margin-top: -1rem;
+  margin-top: calc(-1 * var(--spacing-16, 16px));
 }
 
 .clock-date-large {
-  font-size: 1.25rem;
+  font-size: var(--fontSize-20, 20px);
   color: #9e9e9e;
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-8, 8px);
   letter-spacing: 0.5px;
 }
 
 /* Right Side Widgets */
 .right-widgets {
   position: absolute;
-  top: 10rem;
-  right: 2rem;
+  top: 160px;
+  right: var(--spacing-32, 32px);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: var(--spacing-20, 20px);
   width: 400px;
   max-height: calc(100vh - 250px);
   overflow-y: auto;
@@ -153,7 +153,7 @@
 }
 
 .right-widgets::-webkit-scrollbar {
-  width: 4px;
+  width: var(--spacing-4, 4px);
 }
 
 .right-widgets::-webkit-scrollbar-track {
@@ -162,33 +162,33 @@
 
 .right-widgets::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
+  border-radius: var(--borderRadius-4, 4px);
 }
 
 .widget {
   background: rgba(26, 26, 26, 0.85);
   backdrop-filter: blur(30px);
-  border-radius: 24px;
+  border-radius: var(--borderRadius-24, 24px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
+  padding: var(--spacing-24, 24px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* Media Widget */
 .media-widget {
-  padding: 1.25rem;
+  padding: var(--spacing-20, 20px);
 }
 
 .media-widget-content {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: var(--spacing-16, 16px);
+  margin-bottom: var(--spacing-16, 16px);
 }
 
 .album-art-small {
   width: 80px;
   height: 80px;
-  border-radius: 12px;
+  border-radius: var(--borderRadius-8, 8px);
   overflow: hidden;
   flex-shrink: 0;
 }
@@ -207,29 +207,29 @@
 }
 
 .media-title {
-  font-size: 1.25rem;
+  font-size: var(--fontSize-20, 20px);
   color: #ffffff;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--spacing-4, 4px);
 }
 
 .media-artist {
-  font-size: 1rem;
+  font-size: var(--fontSize-16, 16px);
   color: #9e9e9e;
 }
 
 .media-progress-bar {
-  height: 4px;
+  height: var(--spacing-4, 4px);
   background: rgba(255, 255, 255, 0.15);
-  border-radius: 2px;
-  margin-bottom: 1rem;
+  border-radius: var(--borderRadius-4, 4px);
+  margin-bottom: var(--spacing-16, 16px);
   overflow: hidden;
 }
 
 .progress-fill-widget {
   height: 100%;
   background: #ffffff;
-  border-radius: 2px;
+  border-radius: var(--borderRadius-4, 4px);
   transition: width 0.3s ease;
 }
 
@@ -240,13 +240,13 @@
 }
 
 .media-btn-widget {
-  width: 48px;
-  height: 48px;
+  width: var(--spacing-48, 48px);
+  height: var(--spacing-48, 48px);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: none;
   color: #ffffff;
-  font-size: 1.25rem;
+  font-size: var(--fontSize-20, 20px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -262,18 +262,18 @@
 .media-btn-widget.play-widget {
   background: #ffffff;
   color: #000000;
-  font-size: 1.5rem;
+  font-size: var(--fontSize-24, 24px);
 }
 
 /* Calendar Widget */
 .calendar-widget {
-  padding: 1.25rem;
+  padding: var(--spacing-20, 20px);
 }
 
 .calendar-header {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  gap: var(--spacing-16, 16px);
+  margin-bottom: var(--spacing-24, 24px);
   align-items: center;
 }
 
@@ -290,30 +290,30 @@
 }
 
 .calendar-month-name {
-  font-size: 1.1rem;
+  font-size: var(--fontSize-16, 16px);
   color: #ffffff;
   font-weight: 500;
 }
 
 .calendar-day-name {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
 }
 
 .calendar-grid {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-16, 16px);
 }
 
 .calendar-weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  gap: var(--spacing-8, 8px);
+  margin-bottom: var(--spacing-12, 12px);
 }
 
 .calendar-weekday {
   text-align: center;
-  font-size: 0.75rem;
+  font-size: var(--fontSize-12, 12px);
   color: #9e9e9e;
   font-weight: 600;
 }
@@ -321,7 +321,7 @@
 .calendar-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0.5rem;
+  gap: var(--spacing-8, 8px);
 }
 
 .calendar-day {
@@ -329,9 +329,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.85rem;
+  font-size: var(--fontSize-14, 14px);
   color: #ffffff;
-  border-radius: 8px;
+  border-radius: var(--borderRadius-8, 8px);
   transition: all 0.2s ease;
 }
 
@@ -350,23 +350,23 @@
 }
 
 .calendar-event {
-  font-size: 0.85rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
   text-align: center;
-  padding-top: 0.75rem;
+  padding-top: var(--spacing-12, 12px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Weather Widget */
 .weather-widget {
-  padding: 1.25rem;
+  padding: var(--spacing-20, 20px);
 }
 
 .weather-main {
   display: flex;
   align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  gap: var(--spacing-8, 8px);
+  margin-bottom: var(--spacing-8, 8px);
 }
 
 .weather-temp-large {
@@ -377,36 +377,36 @@
 }
 
 .weather-location {
-  font-size: 1rem;
+  font-size: var(--fontSize-16, 16px);
   color: #9e9e9e;
 }
 
 .weather-condition {
-  margin-bottom: 1.25rem;
+  margin-bottom: var(--spacing-20, 20px);
 }
 
 .weather-condition-text {
-  font-size: 1.1rem;
+  font-size: var(--fontSize-16, 16px);
   color: #ffffff;
   font-weight: 500;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--spacing-4, 4px);
 }
 
 .weather-high-low {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
 }
 
 .weather-hourly {
   display: flex;
-  gap: 0.75rem;
-  padding-top: 1rem;
+  gap: var(--spacing-12, 12px);
+  padding-top: var(--spacing-16, 16px);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   overflow-x: auto;
 }
 
 .weather-hourly::-webkit-scrollbar {
-  height: 4px;
+  height: var(--spacing-4, 4px);
 }
 
 .weather-hourly::-webkit-scrollbar-track {
@@ -415,23 +415,23 @@
 
 .weather-hourly::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
+  border-radius: var(--borderRadius-4, 4px);
 }
 
 .hourly-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-8, 8px);
   min-width: 50px;
 }
 
 .hourly-icon {
-  font-size: 1.5rem;
+  font-size: var(--fontSize-24, 24px);
 }
 
 .hourly-time {
-  font-size: 0.75rem;
+  font-size: var(--fontSize-12, 12px);
   color: #9e9e9e;
   white-space: nowrap;
 }
@@ -454,11 +454,11 @@
 @media (max-width: 1200px) {
   .right-widgets {
     width: 320px;
-    top: 8rem;
+    top: 128px;
   }
 
   .clock-time-large {
-    font-size: 5rem;
+    font-size: 80px;
   }
 
   .center-clock {

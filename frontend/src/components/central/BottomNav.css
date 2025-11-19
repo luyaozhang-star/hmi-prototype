@@ -3,10 +3,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 100px;
+  height: var(--spacing-100, 100px);
   display: flex;
   align-items: center;
-  padding: 0 30px;
+  padding: 0 var(--spacing-24, 24px);
   z-index: 100;
 }
 
@@ -27,13 +27,13 @@
 
 .nav-buttons-group {
   display: flex;
-  gap: 30px;
+  gap: var(--spacing-32, 32px);
   align-items: center;
 }
 
 .nav-button {
-  width: 64px;
-  height: 64px;
+  width: var(--spacing-64, 64px);
+  height: var(--spacing-64, 64px);
   background: transparent;
   border: none;
   cursor: pointer;
@@ -49,8 +49,8 @@
 }
 
 .nav-button svg {
-  width: 64px;
-  height: 64px;
+  width: var(--spacing-64, 64px);
+  height: var(--spacing-64, 64px);
   display: block;
 }
 

@@ -1,0 +1,202 @@
+{
+  "typographyScale": {
+    "scaleFactor": {
+      "value": 1.15,
+      "type": "number"
+    }
+  },
+  "fontSize": {
+    "body": {
+      "tiny": {
+        "value": "18px",
+        "type": "fontSizes"
+      },
+      "small": {
+        "value": "23px",
+        "type": "fontSizes"
+      },
+      "medium": {
+        "value": "28px",
+        "type": "fontSizes"
+      },
+      "large": {
+        "value": "41px",
+        "type": "fontSizes"
+      }
+    },
+    "headline": {
+      "small": {
+        "value": "28px",
+        "type": "fontSizes"
+      },
+      "medium": {
+        "value": "37px",
+        "type": "fontSizes"
+      },
+      "large": {
+        "value": "46px",
+        "type": "fontSizes"
+      }
+    },
+    "label": {
+      "small": {
+        "value": "23px",
+        "type": "fontSizes"
+      },
+      "medium": {
+        "value": "28px",
+        "type": "fontSizes"
+      },
+      "large": {
+        "value": "37px",
+        "type": "fontSizes"
+      }
+    },
+    "display": {
+      "small": {
+        "value": "55px",
+        "type": "fontSizes"
+      },
+      "medium": {
+        "value": "74px",
+        "type": "fontSizes"
+      },
+      "large": {
+        "value": "92px",
+        "type": "fontSizes"
+      },
+      "xlarge": {
+        "value": "161px",
+        "type": "fontSizes"
+      },
+      "xxlarge": {
+        "value": "207px",
+        "type": "fontSizes"
+      }
+    }
+  },
+  "spacing": {
+    "spacious-2": {
+      "value": "2px",
+      "type": "dimension"
+    },
+    "spacious-3": {
+      "value": "3px",
+      "type": "dimension"
+    },
+    "spacious-4": {
+      "value": "5px",
+      "type": "dimension"
+    },
+    "spacious-5": {
+      "value": "6px",
+      "type": "dimension"
+    },
+    "spacious-6": {
+      "value": "7px",
+      "type": "dimension"
+    },
+    "spacious-7": {
+      "value": "8px",
+      "type": "dimension"
+    },
+    "spacious-8": {
+      "value": "9px",
+      "type": "dimension"
+    },
+    "spacious-10": {
+      "value": "12px",
+      "type": "dimension"
+    },
+    "spacious-12": {
+      "value": "14px",
+      "type": "dimension"
+    },
+    "spacious-14": {
+      "value": "16px",
+      "type": "dimension"
+    },
+    "spacious-16": {
+      "value": "18px",
+      "type": "dimension"
+    },
+    "spacious-18": {
+      "value": "21px",
+      "type": "dimension"
+    },
+    "spacious-20": {
+      "value": "23px",
+      "type": "dimension"
+    },
+    "spacious-22": {
+      "value": "25px",
+      "type": "dimension"
+    },
+    "spacious-24": {
+      "value": "28px",
+      "type": "dimension"
+    },
+    "spacious-28": {
+      "value": "32px",
+      "type": "dimension"
+    },
+    "spacious-32": {
+      "value": "37px",
+      "type": "dimension"
+    },
+    "spacious-36": {
+      "value": "41px",
+      "type": "dimension"
+    },
+    "spacious-40": {
+      "value": "46px",
+      "type": "dimension"
+    },
+    "spacious-44": {
+      "value": "51px",
+      "type": "dimension"
+    },
+    "spacious-48": {
+      "value": "55px",
+      "type": "dimension"
+    },
+    "spacious-56": {
+      "value": "64px",
+      "type": "dimension"
+    },
+    "spacious-64": {
+      "value": "74px",
+      "type": "dimension"
+    }
+  },
+  "radius": {
+    "spacious-small": {
+      "value": "5px",
+      "type": "borderRadius"
+    },
+    "spacious-medium": {
+      "value": "9px",
+      "type": "borderRadius"
+    },
+    "spacious-large": {
+      "value": "18px",
+      "type": "borderRadius"
+    }
+  },
+  "lineHeight": {
+    "body": {
+      "tiny": {
+        "value": "28px",
+        "type": "lineHeights"
+      },
+      "small": {
+        "value": "32px",
+        "type": "lineHeights"
+      },
+      "medium": {
+        "value": "37px",
+        "type": "lineHeights"
+      }
+    }
+  }
+}

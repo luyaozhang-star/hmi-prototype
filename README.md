@@ -7,6 +7,8 @@ A scalable web-based HMI (Human-Machine Interface) prototype system for user tes
 - **Real-time Multi-Display Sync**: Changes on one display instantly reflect across all connected displays
 - **WebSocket Communication**: Fast, bi-directional communication between displays
 - **Modern UI**: Beautiful, responsive interface built with React
+- **Design Token System**: Comprehensive design tokens for consistent styling and theming
+- **Dark/Light Theme Support**: Built-in theme switching capability
 - **Scalable Architecture**: Easy to extend with new features and displays
 - **User Testing Ready**: Perfect for prototyping and gathering user feedback
 
@@ -44,6 +46,13 @@ A scalable web-based HMI (Human-Machine Interface) prototype system for user tes
 - Vite
 - React Router
 - Socket.IO Client
+- Design Token System (JSON-based)
+
+### Design System
+- 450+ Design Tokens
+- Typography, Colors, Spacing, Effects
+- Dark/Light Theme Support
+- Figma Variable Integration
 
 ## 📋 Prerequisites
 
@@ -64,6 +73,9 @@ npm install
 ```bash
 cd frontend
 npm install
+
+# Generate design tokens (CSS variables from JSON tokens)
+npm run tokens:generate
 ```
 
 ### 2. Start the Backend Server
@@ -128,10 +140,17 @@ Combine both approaches for maximum flexibility!
 
 ```
 hmi-prototype/
+├── Design Tokens/         # Design token definitions (JSON)
+│   ├── _Base/            # Primitive values
+│   ├── 01_Brand/         # Brand tokens
+│   ├── 02_Global.json    # Typography & spacing
+│   └── 03_Semantics/     # Theme tokens (Dark/Light)
 ├── backend/
 │   ├── server.js          # WebSocket server & state management
 │   └── package.json
 ├── frontend/
+│   ├── scripts/
+│   │   └── transformTokens.js  # Token transformation script
 │   ├── src/
 │   │   ├── components/    # Display components
 │   │   │   ├── Home.jsx
@@ -140,15 +159,70 @@ hmi-prototype/
 │   │   │   └── PassengerDisplay.jsx
 │   │   ├── contexts/      # React Context for state management
 │   │   │   └── HMIContext.jsx
-│   │   ├── styles/        # Global styles
+│   │   ├── hooks/         # Custom React hooks
+│   │   │   └── useDesignTokens.js
+│   │   ├── styles/        # Styles
+│   │   │   ├── tokens/   # Generated token CSS
 │   │   │   └── global.css
+│   │   ├── tokens/        # Generated token JS
 │   │   ├── App.jsx
 │   │   └── main.jsx
 │   ├── index.html
 │   ├── vite.config.js
 │   └── package.json
+├── DESIGN_TOKENS_GUIDE.md      # Design token documentation
+├── COMPONENT_UPDATE_EXAMPLE.md  # How to use tokens
 └── README.md
 ```
+
+## 🎨 Design Tokens
+
+This project uses a comprehensive **Design Token System** for consistent styling across all displays and themes.
+
+### Quick Start with Design Tokens
+
+```jsx
+// Use CSS variables in your styles
+.my-component {
+  color: var(--onSurface-onSurface-enabled);
+  background: var(--surface-primary-enabled);
+  padding: var(--spacing-16);
+}
+
+// Or use typography classes
+<h1 className="typography-headline-large">Title</h1>
+
+// Or use the React hook
+import { useDesignTokens } from './hooks/useDesignTokens';
+
+function MyComponent() {
+  const tokens = useDesignTokens();
+  const primaryColor = tokens.getCSSVar('surface-primary-enabled');
+  
+  return <div style={{ background: primaryColor }}>Content</div>;
+}
+```
+
+### Design Token Categories
+
+- **Colors**: 200+ tokens for backgrounds, surfaces, text, and functional colors
+- **Typography**: 17 predefined text styles (Display, Headline, Body, Label)
+- **Spacing**: Consistent scale from 2px to 64px
+- **Effects**: Opacity, blur, backdrop filters, gradients
+
+### Regenerating Tokens
+
+When you modify tokens in the `Design Tokens/` directory:
+
+```bash
+cd frontend
+npm run tokens:generate
+```
+
+📚 **Full Documentation**: See [DESIGN_TOKENS_GUIDE.md](./DESIGN_TOKENS_GUIDE.md)  
+📝 **Usage Examples**: See [COMPONENT_UPDATE_EXAMPLE.md](./COMPONENT_UPDATE_EXAMPLE.md)
+
+---
 
 ## 🔧 Customization
 

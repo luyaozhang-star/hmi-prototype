@@ -1,0 +1,184 @@
+{
+  "interaction": {
+    "hover": {
+      "opacity": {
+        "value": 0.88,
+        "type": "opacity",
+        "description": "Hover state opacity"
+      },
+      "color-modifier": {
+        "value": "darken-10%",
+        "type": "string"
+      },
+      "cursor": {
+        "value": "pointer",
+        "type": "string"
+      },
+      "transition": {
+        "value": "{motion.transition.fast-smooth}",
+        "type": "string"
+      }
+    },
+    "active": {
+      "opacity": {
+        "value": 1.0,
+        "type": "opacity",
+        "description": "Active state - full opacity"
+      },
+      "color-modifier": {
+        "value": "darken-20%",
+        "type": "string"
+      },
+      "border-style": {
+        "value": "solid",
+        "type": "string"
+      },
+      "transition": {
+        "value": "{motion.transition.fast-smooth}",
+        "type": "string"
+      }
+    },
+    "focus": {
+      "outline": {
+        "value": "2px solid {accessibility.focus-indicator}",
+        "type": "string",
+        "description": "Focus indicator for keyboard navigation"
+      },
+      "outline-offset": {
+        "value": "2px",
+        "type": "dimension"
+      },
+      "outline-width": {
+        "value": "2px",
+        "type": "dimension"
+      }
+    },
+    "disabled": {
+      "opacity": {
+        "value": 0.5,
+        "type": "opacity",
+        "description": "Disabled state opacity"
+      },
+      "cursor": {
+        "value": "not-allowed",
+        "type": "string"
+      },
+      "color-modifier": {
+        "value": "desaturate-50%",
+        "type": "string"
+      }
+    },
+    "error": {
+      "color": {
+        "value": "{color.functional-warning}",
+        "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.red-100}",
+        "type": "color"
+      },
+      "backgroundColor": {
+        "value": "{color.red-10}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.red-100}",
+        "type": "color"
+      }
+    },
+    "success": {
+      "color": {
+        "value": "{color.functional-positive}",
+        "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.green-80}",
+        "type": "color"
+      },
+      "backgroundColor": {
+        "value": "{color.green-10}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.green-80}",
+        "type": "color"
+      }
+    },
+    "warning": {
+      "color": {
+        "value": "{color.functional-caution}",
+        "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.amber-80}",
+        "type": "color"
+      },
+      "backgroundColor": {
+        "value": "{color.amber-10}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.amber-80}",
+        "type": "color"
+      }
+    },
+    "loading": {
+      "opacity": {
+        "value": 0.6,
+        "type": "opacity",
+        "description": "Loading state opacity"
+      },
+      "cursor": {
+        "value": "wait",
+        "type": "string"
+      }
+    },
+    "readonly": {
+      "opacity": {
+        "value": 0.6,
+        "type": "opacity"
+      },
+      "backgroundColor": {
+        "value": "{color.black-10}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.black-60-inactive}",
+        "type": "color"
+      },
+      "cursor": {
+        "value": "default",
+        "type": "string"
+      }
+    },
+    "selected": {
+      "backgroundColor": {
+        "value": "{color.active-light-secondary}",
+        "type": "color"
+      },
+      "textColor": {
+        "value": "{color.active-dark-primary}",
+        "type": "color"
+      },
+      "borderColor": {
+        "value": "{color.active-light-primary}",
+        "type": "color"
+      }
+    },
+    "dragging": {
+      "opacity": {
+        "value": 0.75,
+        "type": "opacity"
+      },
+      "cursor": {
+        "value": "grabbing",
+        "type": "string"
+      },
+      "boxShadow": {
+        "value": "0 8px 16px rgba(0, 0, 0, 0.2)",
+        "type": "string"
+      }
+    }
+  }
+}
+

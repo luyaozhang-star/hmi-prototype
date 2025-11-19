@@ -1,0 +1,42 @@
+/* Auto-generated from Design Tokens - light theme */
+.theme-light {
+  --onSurface-onSurface-disabled: #0000004d;
+  --onSurface-onSurface-enabled: #000000e6;
+  --onSurface-onSurface-selected: #000000e6;
+  --onSurface-onSurface-primary-enabled: #ffffffe6;
+  --onSurface-onSurface-primary-pressed: #ffffffe6;
+  --onSurface-onSurface-primary-disabled: {color.white-30-disabled};
+  --onSurface-onSurface-primary-selected: #ffffffe6;
+  --onSurface-onSurface-pressed: #000000e6;
+  --onSurface-onSurface-inactive: #00000099;
+  --onSurface-onSurface-primary-inactive: #ffffff99;
+  --onSurface-onSurface-functional-warning: #f04438;
+  --onSurface-onSurface-functional-caution: #f79009;
+  --onSurface-onSurface-functional-positive: #12b76a;
+  --background-background-ui-primary: {color.background-light-primary};
+  --background-background-page: #ffffff1a;
+  --surface-surface-secondary-inactive: #0000000d;
+  --surface-surface-secondary-selected: #0000001a;
+  --surface-surface-secondary-pressed: #0000001a;
+  --surface-surface-secondary-enabled: #0000000d;
+  --surface-surface-secondary-disabled: {color.black-3};
+  --surface-surface-primary-enabled: #6b747e;
+  --surface-surface-primary-pressed: #8a9199;
+  --surface-surface-primary-disabled: {color.active-light-disabled};
+  --surface-surface-primary-selected: #8a9199;
+  --surface-surface-destructive-enabled: #fee4e2;
+  --surface-surface-destructive-pressed: #fda29b;
+  --surface-surface-destructive-disabled: #d92d20;
+  --surface-surface-tertiary-inactive: {color.black-3};
+  --surface-surface-tertiary-pressed: #0000000d;
+  --surface-surface-tertiary-selected: #0000000d;
+  --surface-surface-tertiary-disabled: {color.black-1};
+  --surface-surface-tertiary-enabled: {color.black-1};
+  --surface-surface-functional-positive: #12b76a;
+  --surface-surface-functional-caution: #f79009;
+  --surface-surface-functional-informational: #6b747e;
+  --surface-surface-functional-warning: #f04438;
+  --elements-divider: #0000000d;
+  --radius-radius-component: 8px;
+  --radius-radius-container: 16px;
+}

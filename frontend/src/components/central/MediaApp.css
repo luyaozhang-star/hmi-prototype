@@ -1,5 +1,5 @@
 .media-app {
-  padding: 2rem;
+  padding: var(--spacing-32, 32px);
   height: 100%;
   overflow-y: auto;
 }
@@ -11,23 +11,23 @@
 
 .now-playing {
   display: flex;
-  gap: 2rem;
-  padding: 2rem;
+  gap: var(--spacing-32, 32px);
+  padding: var(--spacing-32, 32px);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
+  border-radius: var(--borderRadius-16, 16px);
   border: 2px solid rgba(33, 150, 243, 0.3);
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-32, 32px);
 }
 
 .album-art {
   width: 150px;
   height: 150px;
   background: rgba(33, 150, 243, 0.2);
-  border-radius: 15px;
+  border-radius: var(--borderRadius-16, 16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 5rem;
+  font-size: 80px;
   flex-shrink: 0;
 }
 
@@ -36,45 +36,45 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--spacing-8, 8px);
 }
 
 .track-name {
-  font-size: 2rem;
+  font-size: var(--fontSize-32, 32px);
   color: #ffffff;
   font-weight: 600;
 }
 
 .artist-name {
-  font-size: 1.25rem;
+  font-size: var(--fontSize-20, 20px);
   color: #2196F3;
 }
 
 .track-status {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: rgba(255, 255, 255, 0.6);
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-8, 8px);
 }
 
 .playback-progress {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
+  gap: var(--spacing-16, 16px);
+  margin-bottom: var(--spacing-32, 32px);
+  padding: 0 var(--spacing-16, 16px);
 }
 
 .progress-time {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
-  min-width: 40px;
+  min-width: var(--spacing-40, 40px);
 }
 
 .progress-bar {
   flex: 1;
-  height: 6px;
+  height: var(--spacing-6, 6px);
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
+  border-radius: var(--borderRadius-4, 4px);
   overflow: hidden;
   cursor: pointer;
 }
@@ -82,15 +82,15 @@
 .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, #2196F3, #21CBF3);
-  border-radius: 3px;
+  border-radius: var(--borderRadius-4, 4px);
   transition: width 0.3s ease;
 }
 
 .media-controls {
   display: flex;
-  gap: 2rem;
+  gap: var(--spacing-32, 32px);
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-32, 32px);
 }
 
 .media-button {
@@ -99,7 +99,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid rgba(255, 255, 255, 0.2);
   color: rgba(255, 255, 255, 0.7);
-  font-size: 2rem;
+  font-size: var(--fontSize-32, 32px);
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -116,24 +116,24 @@
   background: rgba(33, 150, 243, 0.2);
   border-color: #2196F3;
   color: #2196F3;
-  font-size: 2.5rem;
+  font-size: var(--fontSize-40, 40px);
 }
 
 .media-button.secondary {
-  width: 60px;
-  height: 60px;
-  font-size: 1.5rem;
+  width: var(--spacing-60, 60px);
+  height: var(--spacing-60, 60px);
+  font-size: var(--fontSize-24, 24px);
 }
 
 .volume-control {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  padding: 2rem;
+  gap: var(--spacing-24, 24px);
+  padding: var(--spacing-32, 32px);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
+  border-radius: var(--borderRadius-16, 16px);
   border: 2px solid rgba(33, 150, 243, 0.3);
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-32, 32px);
 }
 
 .volume-button {
@@ -141,7 +141,7 @@
   height: 50px;
   background: transparent;
   border: none;
-  font-size: 2rem;
+  font-size: var(--fontSize-32, 32px);
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -157,9 +157,9 @@
 
 .volume-slider {
   width: 100%;
-  height: 8px;
+  height: var(--spacing-8, 8px);
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: var(--borderRadius-8, 8px);
   outline: none;
   -webkit-appearance: none;
   cursor: pointer;
@@ -167,8 +167,8 @@
 
 .volume-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
+  width: var(--spacing-20, 20px);
+  height: var(--spacing-20, 20px);
   background: #2196F3;
   border-radius: 50%;
   cursor: pointer;
@@ -176,39 +176,39 @@
 }
 
 .volume-value {
-  margin-top: 0.5rem;
+  margin-top: var(--spacing-8, 8px);
   color: #2196F3;
-  font-size: 1.2rem;
+  font-size: var(--fontSize-20, 20px);
   font-weight: bold;
 }
 
 .playlist-section {
-  padding: 1.5rem;
+  padding: var(--spacing-24, 24px);
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
+  border-radius: var(--borderRadius-16, 16px);
   border: 2px solid rgba(33, 150, 243, 0.3);
 }
 
 .playlist-title {
-  font-size: 1.25rem;
+  font-size: var(--fontSize-20, 20px);
   color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 1rem;
-  padding-left: 0.5rem;
+  margin-bottom: var(--spacing-16, 16px);
+  padding-left: var(--spacing-8, 8px);
 }
 
 .playlist {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--spacing-8, 8px);
 }
 
 .playlist-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: var(--spacing-16, 16px);
+  padding: var(--spacing-16, 16px);
   background: rgba(255, 255, 255, 0.03);
-  border-radius: 10px;
+  border-radius: var(--borderRadius-8, 8px);
   color: rgba(255, 255, 255, 0.7);
   transition: all 0.3s ease;
   cursor: pointer;
@@ -226,7 +226,7 @@
 }
 
 .playlist-icon {
-  font-size: 1.5rem;
+  font-size: var(--fontSize-24, 24px);
 }
 
 .playlist-info {
@@ -234,18 +234,18 @@
 }
 
 .playlist-track {
-  font-size: 1rem;
+  font-size: var(--fontSize-16, 16px);
   color: #ffffff;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--spacing-4, 4px);
 }
 
 .playlist-artist {
-  font-size: 0.85rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
 }
 
 .playlist-duration {
-  font-size: 0.9rem;
+  font-size: var(--fontSize-14, 14px);
   color: #9e9e9e;
 }
 

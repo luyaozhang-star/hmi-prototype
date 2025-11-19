@@ -1,0 +1,168 @@
+{
+  "onSurface": {
+    "onSurface-disabled": {
+      "value": "{color.black-30-disabled}",
+      "type": "color"
+    },
+    "onSurface-enabled": {
+      "value": "{color.black-90-default}",
+      "type": "color"
+    },
+    "onSurface-selected": {
+      "value": "{color.black-90-default}",
+      "type": "color"
+    },
+    "onSurface-primary-enabled": {
+      "value": "{color.white-90-default}",
+      "type": "color"
+    },
+    "onSurface-primary-pressed": {
+      "value": "{color.white-90-default}",
+      "type": "color"
+    },
+    "onSurface-primary-disabled": {
+      "value": "{color.white-30-disabled}",
+      "type": "color"
+    },
+    "onSurface-primary-selected": {
+      "value": "{color.white-90-default}",
+      "type": "color"
+    },
+    "onSurface-pressed": {
+      "value": "{color.black-90-default}",
+      "type": "color"
+    },
+    "onSurface-inactive": {
+      "value": "{color.black-60-inactive}",
+      "type": "color"
+    },
+    "onSurface-primary-inactive": {
+      "value": "{color.white-60-inactive}",
+      "type": "color"
+    },
+    "onSurface-functional-warning": {
+      "value": "{color.functional-warning}",
+      "type": "color"
+    },
+    "onSurface-functional-caution": {
+      "value": "{color.functional-caution}",
+      "type": "color"
+    },
+    "onSurface-functional-positive": {
+      "value": "{color.functional-positive}",
+      "type": "color"
+    }
+  },
+  "background": {
+    "background-ui-primary": {
+      "value": "{color.background-light-primary}",
+      "type": "color"
+    },
+    "background-page": {
+      "value": "{color.white-10}",
+      "type": "color"
+    }
+  },
+  "surface": {
+    "surface-secondary-inactive": {
+      "value": "{color.black-5}",
+      "type": "color"
+    },
+    "surface-secondary-selected": {
+      "value": "{color.black-10}",
+      "type": "color"
+    },
+    "surface-secondary-pressed": {
+      "value": "{color.black-10}",
+      "type": "color"
+    },
+    "surface-secondary-enabled": {
+      "value": "{color.black-5}",
+      "type": "color"
+    },
+    "surface-secondary-disabled": {
+      "value": "{color.black-3}",
+      "type": "color"
+    },
+    "surface-primary-enabled": {
+      "value": "{color.active-light-primary}",
+      "type": "color"
+    },
+    "surface-primary-pressed": {
+      "value": "{color.active-light-secondary}",
+      "type": "color"
+    },
+    "surface-primary-disabled": {
+      "value": "{color.active-light-disabled}",
+      "type": "color"
+    },
+    "surface-primary-selected": {
+      "value": "{color.active-light-secondary}",
+      "type": "color"
+    },
+    "surface-destructive-enabled": {
+      "value": "{color.red-100}",
+      "type": "color"
+    },
+    "surface-destructive-pressed": {
+      "value": "{color.red-70}",
+      "type": "color"
+    },
+    "surface-destructive-disabled": {
+      "value": "{color.red-30}",
+      "type": "color"
+    },
+    "surface-tertiary-inactive": {
+      "value": "{color.black-3}",
+      "type": "color"
+    },
+    "surface-tertiary-pressed": {
+      "value": "{color.black-5}",
+      "type": "color"
+    },
+    "surface-tertiary-selected": {
+      "value": "{color.black-5}",
+      "type": "color"
+    },
+    "surface-tertiary-disabled": {
+      "value": "{color.black-1}",
+      "type": "color"
+    },
+    "surface-tertiary-enabled": {
+      "value": "{color.black-1}",
+      "type": "color"
+    },
+    "surface-functional-positive": {
+      "value": "{color.functional-positive}",
+      "type": "color"
+    },
+    "surface-functional-caution": {
+      "value": "{color.functional-caution}",
+      "type": "color"
+    },
+    "surface-functional-informational": {
+      "value": "{color.functional-informative}",
+      "type": "color"
+    },
+    "surface-functional-warning": {
+      "value": "{color.functional-warning}",
+      "type": "color"
+    }
+  },
+  "elements": {
+    "divider": {
+      "value": "{color.black-5}",
+      "type": "color"
+    }
+  },
+  "radius": {
+    "radius-component": {
+      "value": "{borderRadius.8}",
+      "type": "number"
+    },
+    "radius-container": {
+      "value": "{borderRadius.16}",
+      "type": "number"
+    }
+  }
+}
