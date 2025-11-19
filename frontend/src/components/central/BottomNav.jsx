@@ -1,16 +1,49 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './BottomNav.css';
+import { useHMI } from '../../contexts/HMIContext';
 
 function BottomNav({ activeView, setActiveView }) {
-  const [driverTemp, setDriverTemp] = useState(70);
-  const [passengerTemp, setPassengerTemp] = useState(70);
+  const { state, dispatchAction } = useHMI();
+  const [localDriverTemp, setLocalDriverTemp] = useState(state.driverTemp || 70);
+  const [localPassengerTemp, setLocalPassengerTemp] = useState(state.passengerTemp || 70);
+  const isUpdatingDriver = useRef(false);
+  const isUpdatingPassenger = useRef(false);
+
+  // Sync local state when backend state changes (from other displays)
+  useEffect(() => {
+    if (state.driverTemp !== undefined && !isUpdatingDriver.current) {
+      setLocalDriverTemp(state.driverTemp);
+    }
+    isUpdatingDriver.current = false;
+  }, [state.driverTemp]);
+
+  useEffect(() => {
+    if (state.passengerTemp !== undefined && !isUpdatingPassenger.current) {
+      setLocalPassengerTemp(state.passengerTemp);
+    }
+    isUpdatingPassenger.current = false;
+  }, [state.passengerTemp]);
 
   const handleTempChange = (zone, direction) => {
+    const currentTemp = zone === 'driver' ? localDriverTemp : localPassengerTemp;
+    const newTemp = direction === 'up' 
+      ? Math.min(currentTemp + 1, 85) 
+      : Math.max(currentTemp - 1, 60);
+    
+    // Mark that we're updating this temperature
     if (zone === 'driver') {
-      setDriverTemp(prev => direction === 'up' ? Math.min(prev + 1, 85) : Math.max(prev - 1, 60));
+      isUpdatingDriver.current = true;
+      setLocalDriverTemp(newTemp);
     } else {
-      setPassengerTemp(prev => direction === 'up' ? Math.min(prev + 1, 85) : Math.max(prev - 1, 60));
+      isUpdatingPassenger.current = true;
+      setLocalPassengerTemp(newTemp);
     }
+    
+    // Dispatch to backend for sync across displays
+    dispatchAction({
+      type: zone === 'driver' ? 'SET_DRIVER_TEMP' : 'SET_PASSENGER_TEMP',
+      payload: newTemp
+    });
   };
 
   const homeButton = {
@@ -115,7 +148,7 @@ function BottomNav({ activeView, setActiveView }) {
               <path d="M7 12C7 12.2525 7.10332 12.4821 7.28699 12.6772L14.3814 19.7246C14.5536 19.9082 14.7946 20 15.0587 20C15.5982 20 16 19.5983 16 19.0589C16 18.7949 15.8967 18.5653 15.7245 18.3817L9.31888 12L15.7245 5.61836C15.8967 5.43472 16 5.19369 16 4.94118C16 4.40172 15.5982 4 15.0587 4C14.7946 4 14.5536 4.09182 14.3814 4.27547L7.28699 11.3228C7.10332 11.518 7 11.7475 7 12Z" fill="white" fillOpacity="0.9"/>
             </svg>
           </button>
-          <div className="temp-display">{driverTemp}°</div>
+          <div className="temp-display">{localDriverTemp}°</div>
           <button 
             className="temp-button"
             onClick={() => handleTempChange('driver', 'up')}
@@ -141,7 +174,7 @@ function BottomNav({ activeView, setActiveView }) {
               <path d="M7 12C7 12.2525 7.10332 12.4821 7.28699 12.6772L14.3814 19.7246C14.5536 19.9082 14.7946 20 15.0587 20C15.5982 20 16 19.5983 16 19.0589C16 18.7949 15.8967 18.5653 15.7245 18.3817L9.31888 12L15.7245 5.61836C15.8967 5.43472 16 5.19369 16 4.94118C16 4.40172 15.5982 4 15.0587 4C14.7946 4 14.5536 4.09182 14.3814 4.27547L7.28699 11.3228C7.10332 11.518 7 11.7475 7 12Z" fill="white" fillOpacity="0.9"/>
             </svg>
           </button>
-          <div className="temp-display">{passengerTemp}°</div>
+          <div className="temp-display">{localPassengerTemp}°</div>
           <button 
             className="temp-button"
             onClick={() => handleTempChange('passenger', 'up')}

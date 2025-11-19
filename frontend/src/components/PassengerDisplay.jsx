@@ -109,12 +109,18 @@ function PassengerDisplay() {
             <div className="comfort-card large">
               <div className="comfort-header">
                 <div className="comfort-icon">🌡️</div>
-                <div className="comfort-title">Climate Control</div>
+                <div className="comfort-title">Climate Control - Dual Zone</div>
               </div>
               <div className="comfort-content">
-                <div className="climate-display">
-                  <div className="climate-value">{state.temperature}°C</div>
-                  <div className="climate-label">Current Temperature</div>
+                <div className="climate-zones">
+                  <div className="climate-zone">
+                    <div className="climate-value">{state.driverTemp}°F</div>
+                    <div className="climate-label">Driver</div>
+                  </div>
+                  <div className="climate-zone">
+                    <div className="climate-value">{state.passengerTemp}°F</div>
+                    <div className="climate-label">Passenger</div>
+                  </div>
                 </div>
                 <div className="climate-info">
                   <div className="info-row">

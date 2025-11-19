@@ -64,15 +64,32 @@ function ClusterDisplay() {
             <div className="info-item">
               <div className="info-icon">🌡️</div>
               <div className="info-details">
-                <div className="info-label">Temperature</div>
-                <div className="info-value">{state.temperature}°C</div>
+                <div className="info-label">Driver Temp</div>
+                <div className="info-value">{state.driverTemp}°F</div>
               </div>
             </div>
+            <div className="info-item">
+              <div className="info-icon">🌡️</div>
+              <div className="info-details">
+                <div className="info-label">Passenger</div>
+                <div className="info-value">{state.passengerTemp}°F</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="info-row">
             <div className="info-item">
               <div className="info-icon">🔊</div>
               <div className="info-details">
                 <div className="info-label">Volume</div>
                 <div className="info-value">{state.volume}%</div>
+              </div>
+            </div>
+            <div className="info-item">
+              <div className="info-icon">💨</div>
+              <div className="info-details">
+                <div className="info-label">Fan Speed</div>
+                <div className="info-value">{state.fanSpeed}</div>
               </div>
             </div>
           </div>

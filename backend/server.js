@@ -19,6 +19,8 @@ app.use(express.json());
 const hmiState = {
   // Climate Control
   temperature: 22,
+  driverTemp: 70,
+  passengerTemp: 70,
   fanSpeed: 2,
   acMode: 'auto',
   
@@ -115,6 +117,12 @@ function handleAction(action) {
       break;
     case 'DECREMENT_TEMP':
       hmiState.temperature = Math.max(16, hmiState.temperature - 0.5);
+      break;
+    case 'SET_DRIVER_TEMP':
+      hmiState.driverTemp = Math.max(60, Math.min(85, action.payload));
+      break;
+    case 'SET_PASSENGER_TEMP':
+      hmiState.passengerTemp = Math.max(60, Math.min(85, action.payload));
       break;
     case 'SET_FAN_SPEED':
       hmiState.fanSpeed = action.payload;

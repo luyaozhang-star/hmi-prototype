@@ -16,6 +16,8 @@ export const HMIProvider = ({ children }) => {
   const [connected, setConnected] = useState(false);
   const [state, setState] = useState({
     temperature: 22,
+    driverTemp: 70,
+    passengerTemp: 70,
     fanSpeed: 2,
     acMode: 'auto',
     mediaPlaying: false,

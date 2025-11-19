@@ -255,6 +255,18 @@
   text-align: center;
 }
 
+.climate-zones {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.climate-zone {
+  text-align: center;
+  flex: 1;
+}
+
 .climate-value {
   font-size: 4rem;
   font-weight: bold;
@@ -266,6 +278,8 @@
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.6);
   margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .climate-info {
