@@ -3,6 +3,7 @@ import { useHMI } from '../contexts/HMIContext';
 import StatusBar from './central/StatusBar';
 import BottomNav from './central/BottomNav';
 import NavigationApp from './central/NavigationApp';
+import CameraApp from './central/CameraApp';
 import './CentralDisplay.css';
 import './central/NavigationApp.css';
 
@@ -33,6 +34,9 @@ function CentralDisplay() {
       
       {/* Navigation App */}
       {activeView === 'navigation' && <NavigationApp key="navigation-map" />}
+      
+      {/* Camera App */}
+      {activeView === 'camera' && <CameraApp />}
       
       <BottomNav activeView={activeView} setActiveView={setActiveView} />
     </div>

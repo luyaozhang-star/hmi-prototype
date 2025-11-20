@@ -160,7 +160,8 @@ function NavigationApp() {
           center: center,
           zoom: 16,
           pitch: 0,
-          bearing: 0
+          bearing: 0,
+          attributionControl: false // Hide attribution control
         });
 
         // Store in both ref and global

@@ -1,0 +1,158 @@
+.camera-app {
+  position: absolute;
+  top: var(--spacing-64, 60px);
+  bottom: var(--spacing-100, 100px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg-primary, #000000);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.camera-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl, 32px);
+  padding: var(--spacing-xl, 32px);
+  height: 100%;
+}
+
+.camera-feed {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  border-radius: var(--border-radius-lg, 16px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-border-subtle, rgba(255, 255, 255, 0.1));
+}
+
+.camera-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md, 16px);
+  opacity: 0.6;
+}
+
+.camera-label {
+  font-size: var(--font-size-2xl, 28px);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--color-text-primary, rgba(255, 255, 255, 0.9));
+  margin: 0;
+}
+
+.camera-status {
+  font-size: var(--font-size-md, 16px);
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.6));
+  margin: 0;
+}
+
+/* Parking Guidelines Overlay */
+.parking-guidelines {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  pointer-events: none;
+}
+
+.guideline-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Camera Controls */
+.camera-controls {
+  display: flex;
+  gap: var(--spacing-md, 16px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.camera-button {
+  padding: var(--spacing-md, 16px) var(--spacing-xl, 32px);
+  background: var(--color-bg-secondary, rgba(255, 255, 255, 0.05));
+  border: 2px solid var(--color-border-subtle, rgba(255, 255, 255, 0.1));
+  border-radius: var(--border-radius-md, 12px);
+  color: var(--color-text-primary, rgba(255, 255, 255, 0.9));
+  font-size: var(--font-size-lg, 18px);
+  font-weight: var(--font-weight-medium, 500);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 140px;
+}
+
+.camera-button:hover {
+  background: var(--color-bg-tertiary, rgba(255, 255, 255, 0.1));
+  border-color: var(--color-border-primary, rgba(255, 255, 255, 0.3));
+  transform: translateY(-2px);
+}
+
+.camera-button:active {
+  transform: translateY(0);
+}
+
+.camera-button.active {
+  background: var(--color-primary, #ffffff);
+  color: var(--color-bg-primary, #000000);
+  border-color: var(--color-primary, #ffffff);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .camera-content {
+    padding: var(--spacing-lg, 24px);
+    gap: var(--spacing-lg, 24px);
+  }
+
+  .camera-button {
+    padding: var(--spacing-sm, 12px) var(--spacing-lg, 24px);
+    font-size: var(--font-size-md, 16px);
+    min-width: 120px;
+  }
+
+  .camera-label {
+    font-size: var(--font-size-xl, 24px);
+  }
+
+  .camera-status {
+    font-size: var(--font-size-sm, 14px);
+  }
+}
+
+/* Dark Theme Specific */
+[data-theme="dark"] .camera-feed {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+/* Light Theme Specific */
+[data-theme="light"] .camera-feed {
+  background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+}
+
+[data-theme="light"] .camera-button {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+[data-theme="light"] .camera-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .camera-button.active {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
