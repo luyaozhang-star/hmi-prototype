@@ -223,7 +223,7 @@
 
 .recent-name {
   color: var(--color-white-90-default);
-  font-size: var(--fontSize-18);
+  font-size: var(--fontSize-16);
   font-weight: var(--fontWeight-semibold);
   letter-spacing: var(--letterSpacing-body-small);
   margin-bottom: var(--spacing-4);
@@ -234,7 +234,7 @@
 
 .recent-address {
   color: var(--color-white-60-inactive);
-  font-size: var(--fontSize-14);
+  font-size: var(--fontSize-16);
   font-weight: var(--fontWeight-regular);
   letter-spacing: var(--letterSpacing-body-tiny);
   overflow: hidden;

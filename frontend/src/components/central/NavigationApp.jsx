@@ -106,31 +106,53 @@ function NavigationApp() {
         
         const mapInstance = new maplibregl.Map({
           container: mapContainer.current,
-          // Using OpenStreetMap tiles with a dark style
-          // This is completely free and doesn't require an API key
+          // Satellite imagery from ESRI World Imagery
           style: {
             version: 8,
             sources: {
-              'carto-dark': {
+              'satellite': {
                 type: 'raster',
                 tiles: [
-                  // CartoDB Dark Matter with labels (includes restaurants, shops, POIs)
-                  'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-                  'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-                  'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-                  'https://d.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'
+                  'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
                 ],
                 tileSize: 256,
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+              },
+              'labels': {
+                type: 'raster',
+                tiles: [
+                  'https://a.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png',
+                  'https://b.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png',
+                  'https://c.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png',
+                  'https://d.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png'
+                ],
+                tileSize: 256
+              },
+              'openmaptiles': {
+                type: 'vector',
+                tiles: ['https://tiles.openfreemap.org/planet/{z}/{x}/{y}.pbf'],
+                attribution: '© OpenMapTiles © OpenStreetMap'
               }
             },
             layers: [
+     
               {
-                id: 'carto-dark-layer',
+                id: 'satellite-layer',
                 type: 'raster',
-                source: 'carto-dark',
+                source: 'satellite',
                 minzoom: 0,
-                maxzoom: 22
+                maxzoom: 22,
+                paint: {
+                  'raster-opacity': 0.3
+                }
+              },
+              {
+                id: 'labels-layer',
+                type: 'raster',
+                source: 'labels',
+                paint: {
+                  'raster-opacity': 1
+                }
               }
             ],
             glyphs: 'https://fonts.openmaptiles.org/{fontstack}/{range}.pbf'

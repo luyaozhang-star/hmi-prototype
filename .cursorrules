@@ -1,0 +1,108 @@
+# HMI Prototype - Cursor AI Rules
+
+## Project Overview
+This is a vehicle Human-Machine Interface (HMI) prototype with multiple displays (Cluster, Central, Passenger) built with React and Vite.
+
+## Core Documentation
+- Follow coding standards in CODING_STANDARDS.md
+- Follow architecture patterns in ARCHITECTURE.md
+- Use design tokens according to DESIGN_TOKENS_GUIDE.md
+- Reference FONT_CONFIGURATION.md for typography decisions
+
+## React & JavaScript Standards
+- Always use functional React components with hooks, never class components
+- Use arrow functions for component definitions
+- Prefer `const` over `let`, avoid `var`
+- Use destructuring for props and state
+- Keep components small and focused (single responsibility)
+- Use PropTypes or TypeScript for type checking when applicable
+
+## Component Structure
+- Maintain consistency with existing component structure in `src/components/`
+- Every component should have a corresponding `.css` file (no inline styles)
+- Component files should be PascalCase (e.g., `NavigationApp.jsx`)
+- CSS files should match component names (e.g., `NavigationApp.css`)
+- Group related components in subdirectories (e.g., `components/central/`)
+
+## Design Tokens & Styling
+- Always use design tokens from `src/tokens/designTokens.js`
+- Reference CSS custom properties from `src/styles/tokens/` directory
+- Never hardcode colors, spacing, or typography values
+- Use semantic token names (e.g., `--color-bg-primary` not `--color-blue-500`)
+- Support both light and dark themes
+- Consider responsive breakpoints (compact vs spacious layouts)
+
+## State Management
+- Use the HMI context from `contexts/HMIContext.jsx` for shared state
+- Use local state for component-specific data
+- Keep state as close to where it's used as possible
+- Avoid prop drilling by using context when needed
+
+## File Organization
+- Components go in `src/components/`
+- Display-specific components in `src/components/central/`, `src/components/cluster/`, etc.
+- Shared utilities in `src/hooks/` or `src/utils/`
+- Styles in corresponding `.css` files
+- Global styles in `src/styles/global.css`
+
+## Naming Conventions
+- Components: PascalCase (e.g., `ClimateApp`, `StatusBar`)
+- Files: Match component names exactly
+- Functions: camelCase (e.g., `handleClick`, `fetchData`)
+- Constants: UPPER_SNAKE_CASE (e.g., `API_URL`, `MAX_SPEED`)
+- CSS classes: kebab-case (e.g., `nav-button`, `status-bar`)
+
+## Accessibility
+- Use semantic HTML elements (nav, main, header, button, etc.)
+- Include ARIA labels where needed for screen readers
+- Ensure keyboard navigation works for all interactive elements
+- Maintain sufficient color contrast ratios
+- Consider touch targets for automotive use (minimum 44x44px)
+
+## HMI-Specific Guidelines
+- Consider the three display types: Cluster (driver), Central (main), Passenger
+- Design for glanceability (driver safety first)
+- Use appropriate font sizes for automotive displays (reference FONT_CONFIGURATION.md)
+- Consider both day and night driving modes (theme support)
+- Minimize driver distraction with clear, simple interfaces
+- Test responsive behavior across different display sizes
+
+## Performance
+- Lazy load components when appropriate
+- Optimize images and assets
+- Avoid unnecessary re-renders
+- Use React.memo() for expensive components
+- Keep bundle size minimal
+
+## Code Quality
+- Write clean, readable, self-documenting code
+- Add comments for complex logic only
+- Keep functions small and focused
+- Avoid deep nesting (max 3 levels)
+- Handle errors gracefully
+- No console.logs in production code
+
+## Testing & Development
+- Test components in all three display contexts
+- Verify dark and light theme support
+- Test responsive layouts (compact and spacious)
+- Ensure smooth animations and transitions
+- Verify touch/click interactions work properly
+
+## Git & Commits
+- Write clear, descriptive commit messages
+- Keep commits focused and atomic
+- Don't commit node_modules or build artifacts
+- Follow existing git workflow
+
+## Design Token Updates
+- When updating design tokens, run `npm run transform-tokens` in frontend directory
+- Never manually edit generated token files in `src/styles/tokens/`
+- Source of truth is in `Design Tokens/` directory
+
+## Backend Integration
+- Backend server runs on port 3001 by default
+- Frontend dev server on port 5173
+- Use WebSocket for real-time vehicle data updates
+- API endpoints should be documented and consistent
+
