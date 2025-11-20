@@ -1,0 +1,217 @@
+.climate-app {
+  padding: var(--spacing-32, 32px);
+  height: 100%;
+  overflow-y: auto;
+}
+
+.app-header {
+  margin-bottom: var(--spacing-32, 32px);
+  text-align: center;
+}
+
+.app-header h2 {
+  color: #2196F3;
+  font-size: var(--fontSize-32, 32px);
+  margin-bottom: var(--spacing-8, 8px);
+}
+
+.app-subtitle {
+  color: #9e9e9e;
+  font-size: var(--fontSize-16, 16px);
+}
+
+.climate-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32, 32px);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.temperature-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-48, 48px);
+  padding: var(--spacing-48, 48px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--borderRadius-16, 16px);
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.temp-button {
+  width: 80px;
+  height: 80px;
+  background: rgba(33, 150, 243, 0.2);
+  border: 2px solid #2196F3;
+  color: #2196F3;
+  font-size: var(--fontSize-48, 48px);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.temp-button:hover {
+  background: rgba(33, 150, 243, 0.3);
+  transform: scale(1.1);
+}
+
+.temp-button:active {
+  transform: scale(0.95);
+}
+
+.temperature-display {
+  text-align: center;
+}
+
+.temp-value {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #2196F3;
+  text-shadow: 0 0 20px rgba(33, 150, 243, 0.5);
+}
+
+.temp-label {
+  font-size: var(--fontSize-16, 16px);
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: var(--spacing-8, 8px);
+}
+
+.fan-control {
+  padding: var(--spacing-32, 32px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--borderRadius-16, 16px);
+  border: 2px solid rgba(33, 150, 243, 0.3);
+}
+
+.fan-label {
+  font-size: var(--fontSize-20, 20px);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--spacing-24, 24px);
+  text-align: center;
+}
+
+.fan-buttons {
+  display: flex;
+  gap: var(--spacing-16, 16px);
+  justify-content: center;
+}
+
+.fan-button {
+  width: var(--spacing-60, 60px);
+  height: var(--spacing-60, 60px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--fontSize-24, 24px);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.fan-button:hover {
+  border-color: #2196F3;
+  transform: scale(1.1);
+}
+
+.fan-button.active {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: #2196F3;
+  color: #2196F3;
+}
+
+.ac-mode {
+  display: flex;
+  gap: var(--spacing-16, 16px);
+}
+
+.mode-button {
+  flex: 1;
+  padding: var(--spacing-24, 24px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--fontSize-20, 20px);
+  border-radius: var(--borderRadius-16, 16px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mode-button:hover {
+  border-color: #2196F3;
+}
+
+.mode-button.active {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: #2196F3;
+  color: #2196F3;
+}
+
+.climate-zones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--spacing-16, 16px);
+}
+
+.zone-card {
+  padding: var(--spacing-24, 24px);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--borderRadius-16, 16px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.zone-card:hover {
+  border-color: rgba(33, 150, 243, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.zone-icon {
+  font-size: var(--fontSize-40, 40px);
+  margin-bottom: var(--spacing-8, 8px);
+}
+
+.zone-label {
+  font-size: var(--fontSize-14, 14px);
+  color: #9e9e9e;
+  margin-bottom: var(--spacing-8, 8px);
+}
+
+.zone-temp {
+  font-size: var(--fontSize-24, 24px);
+  color: #2196F3;
+  font-weight: 600;
+}
+
+
+/* Compact view for cluster display */
+.climate-app--compact {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.climate-compact {
+  text-align: center;
+  color: white;
+}
+
+.compact-temp {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.compact-label {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.compact-mode {
+  font-size: 0.75rem;
+  opacity: 0.6;
+  text-transform: uppercase;
+}

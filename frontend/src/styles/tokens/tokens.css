@@ -38,6 +38,8 @@
   --color-green-80: #a6f4c5;
   --color-amber-10: #7a2e0e;
   --color-amber-80: #fedf89;
+  --fontFamily-hmi: "TT Commons Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --fontFamily-cluster: "TT Commons Pro Mono", 'Courier New', 'Courier', monospace;
   --fontWeight-light: 300;
   --fontWeight-regular: 400;
   --fontWeight-medium: 500;

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useHMI } from '../contexts/HMIContext';
 import StatusBar from './central/StatusBar';
 import BottomNav from './central/BottomNav';
+import NavigationApp from './central/NavigationApp';
 import './CentralDisplay.css';
+import './central/NavigationApp.css';
 
 function CentralDisplay() {
   const { registerDisplay } = useHMI();
@@ -28,6 +30,9 @@ function CentralDisplay() {
           </div>
         </div>
       )}
+      
+      {/* Navigation App */}
+      {activeView === 'navigation' && <NavigationApp key="navigation-map" />}
       
       <BottomNav activeView={activeView} setActiveView={setActiveView} />
     </div>

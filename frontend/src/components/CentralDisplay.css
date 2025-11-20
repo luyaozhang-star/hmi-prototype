@@ -1,24 +1,9 @@
 .central-display {
   width: 100vw;
   height: 100vh;
-  background-image: url('/images/background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: var(--color-primitives-Black-Black, #000000);
   position: relative;
   overflow: hidden;
-}
-
-/* Fallback if image doesn't load */
-.central-display::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-  z-index: -1;
 }
 
 /* Home Vehicle View */
@@ -32,6 +17,11 @@
   align-items: center;
   justify-content: flex-start;
   z-index: 1;
+  background-image: url('/images/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #0a0a0a;
 }
 
 .home-vehicle-container {
@@ -44,6 +34,7 @@
   margin-left: 10%;
   margin-top: var(--spacing-40, 40px);
   animation: fadeInVehicle 1s ease;
+  z-index: 2;
 }
 
 @keyframes fadeInVehicle {

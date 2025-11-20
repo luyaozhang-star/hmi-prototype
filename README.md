@@ -221,7 +221,7 @@ npm run tokens:generate
 ```
 
 📚 **Full Documentation**: See [DESIGN_TOKENS_GUIDE.md](./DESIGN_TOKENS_GUIDE.md)  
-📝 **Usage Examples**: See [COMPONENT_UPDATE_EXAMPLE.md](./COMPONENT_UPDATE_EXAMPLE.md)  
+📝 **Usage Examples**: See [COMPONENT_UPDATE_EXAMPLE.md](./COMPONENT_UPDATE_EXAMPLE.md)
 ⚡ **Coding Standards**: See [CODING_STANDARDS.md](./CODING_STANDARDS.md)
 
 ---

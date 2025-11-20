@@ -130,7 +130,7 @@ function BottomNav({ activeView, setActiveView }) {
       {/* Left: Home Button and Driver Temp */}
       <div className="nav-left">
         <button
-          className={`nav-button ${activeView === homeButton.id ? 'active' : ''}`}
+          className={`nav-button home-button ${activeView === homeButton.id ? 'active' : ''}`}
           onClick={() => setActiveView(homeButton.id)}
           title={homeButton.label}
         >

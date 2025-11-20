@@ -1,0 +1,182 @@
+.navigation-app {
+  position: absolute;
+  top: var(--spacing-64, 60px);
+  bottom: var(--spacing-100, 100px);
+  left: 0;
+  right: 0;
+  background-color: #000000;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Search Button */
+.search-button {
+  position: absolute;
+  top: var(--spacing-20);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--borderRadius-24);
+  padding: var(--spacing-14) var(--spacing-24);
+  color: var(--color-white-90-default);
+  font-size: var(--fontSize-16);
+  font-weight: var(--fontWeight-medium);
+  cursor: pointer;
+  z-index: 500;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateX(-50%) translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.search-button:active {
+  transform: translateX(-50%) translateY(0);
+}
+
+.search-button svg {
+  color: var(--color-white-60-inactive);
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Loading indicator */
+.map-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  z-index: 10;
+}
+
+.loading-text {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 500;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Location status indicator */
+.location-status {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 12px 24px;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.location-status.error {
+  background-color: rgba(139, 69, 19, 0.85);
+  border-color: rgba(255, 165, 0, 0.5);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-indicator svg {
+  flex-shrink: 0;
+}
+
+.status-indicator span {
+  white-space: nowrap;
+}
+
+/* Custom car marker */
+.car-marker {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  transition: transform 0.3s ease-out;
+}
+
+.car-marker svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
+}
+
+/* Customize MapLibre controls for dark theme */
+.navigation-app .maplibregl-ctrl-group {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6) !important;
+  backdrop-filter: blur(10px);
+}
+
+.navigation-app .maplibregl-ctrl-group button {
+  background-color: transparent !important;
+}
+
+.navigation-app .maplibregl-ctrl-group button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.navigation-app .maplibregl-ctrl button.maplibregl-ctrl-geolocate .maplibregl-ctrl-icon {
+  filter: invert(1) brightness(1.2);
+}
+
+.navigation-app .maplibregl-ctrl button.maplibregl-ctrl-zoom-in .maplibregl-ctrl-icon,
+.navigation-app .maplibregl-ctrl button.maplibregl-ctrl-zoom-out .maplibregl-ctrl-icon,
+.navigation-app .maplibregl-ctrl button.maplibregl-ctrl-compass .maplibregl-ctrl-icon {
+  filter: invert(1) brightness(1.2);
+}
+
+/* MapLibre canvas should fill container */
+.navigation-app .maplibregl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Attribution */
+.navigation-app .maplibregl-ctrl-attrib {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.navigation-app .maplibregl-ctrl-attrib a {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
