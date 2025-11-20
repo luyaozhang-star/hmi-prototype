@@ -224,12 +224,15 @@ function NavigationApp() {
             
             console.log('Car marker added at:', userLocation);
             
-            // Trigger geolocation tracking
+            // ===== REAL-TIME LOCATION TRACKING (COMMENTED OUT) =====
+            // Uncomment below to enable real-time location tracking
+            /*
             setTimeout(() => {
               if (geolocateControl.current) {
                 geolocateControl.current.trigger();
               }
             }, 100);
+            */
           }
         });
 
@@ -244,7 +247,20 @@ function NavigationApp() {
       }
     };
 
-    // Request user location before initializing map
+    // ===== PRESET FAKE LOCATION =====
+    // Using a preset location instead of real geolocation
+    // San Mateo Downtown, CA coordinates
+    const FAKE_CURRENT_LOCATION = {
+      latitude: 37.5630,
+      longitude: -122.3255
+    };
+    
+    console.log('Using preset fake location:', FAKE_CURRENT_LOCATION);
+    initializeMap(FAKE_CURRENT_LOCATION);
+    
+    // ===== REAL GEOLOCATION CODE (COMMENTED OUT FOR FUTURE USE) =====
+    // Uncomment the code below to use real device location instead of fake location
+    /*
     if ('geolocation' in navigator) {
       console.log('Requesting your location...');
       navigator.geolocation.getCurrentPosition(
@@ -271,6 +287,7 @@ function NavigationApp() {
       setLocationStatus('error');
       initializeMap(null);
     }
+    */
 
     return () => {
       // Cleanup function - only run when component truly unmounts
