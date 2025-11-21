@@ -13,6 +13,48 @@
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  touch-action: pan-y; /* Allow vertical scrolling but capture horizontal */
+  will-change: transform; /* Optimize for animation */
+}
+
+/* Disable transition during dragging for immediate feedback */
+.map-search-overlay.dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+/* Drag Handle */
+.drag-handle {
+  padding: var(--spacing-12) var(--spacing-24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.drag-handle-indicator {
+  width: 48px;
+  height: 4px;
+  background-color: var(--color-white-30);
+  border-radius: 2px;
+  transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.drag-handle:hover .drag-handle-indicator {
+  background-color: var(--color-white-40);
+  width: 64px;
+}
+
+.drag-handle:active .drag-handle-indicator {
+  background-color: var(--color-white-50);
 }
 
 .search-overlay-content {

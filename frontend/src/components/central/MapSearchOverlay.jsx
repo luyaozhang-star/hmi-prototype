@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './MapSearchOverlay.css';
 
 function MapSearchOverlay({ isOpen, onClose, onSearch }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [panelSide, setPanelSide] = useState('left'); // 'left' or 'right'
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  
+  const dragStartX = useRef(0);
+  const dragStartTime = useRef(0);
+  const panelRef = useRef(null);
   
   const shortcuts = [
     { 
@@ -125,10 +132,123 @@ function MapSearchOverlay({ isOpen, onClose, onSearch }) {
     // Keep overlay open
   };
 
+  // Drag handlers
+  const handleDragStart = (clientX) => {
+    setIsDragging(true);
+    dragStartX.current = clientX;
+    dragStartTime.current = Date.now();
+    setDragOffset(0);
+  };
+
+  const handleDragMove = (clientX) => {
+    if (!isDragging) return;
+    
+    const offset = clientX - dragStartX.current;
+    setDragOffset(offset);
+  };
+
+  const handleDragEnd = (clientX) => {
+    if (!isDragging) return;
+    
+    const endOffset = clientX - dragStartX.current;
+    const dragDuration = Date.now() - dragStartTime.current;
+    const velocity = endOffset / dragDuration; // pixels per millisecond
+    
+    // Determine if we should snap to the other side
+    // Snap if dragged more than 30% of screen width OR fast swipe (velocity > 0.5)
+    const threshold = window.innerWidth * 0.3;
+    const shouldSnapToOtherSide = Math.abs(endOffset) > threshold || Math.abs(velocity) > 0.5;
+    
+    if (shouldSnapToOtherSide) {
+      // Snap to opposite side
+      if (panelSide === 'left' && endOffset > 0) {
+        setPanelSide('right');
+      } else if (panelSide === 'right' && endOffset < 0) {
+        setPanelSide('left');
+      }
+    }
+    
+    // Reset drag state
+    setIsDragging(false);
+    setDragOffset(0);
+  };
+
+  // Mouse events
+  const handleMouseDown = (e) => {
+    // Only start drag from the drag handle area (top part of panel)
+    if (e.target.closest('.drag-handle')) {
+      handleDragStart(e.clientX);
+    }
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      e.preventDefault();
+      handleDragMove(e.clientX);
+    }
+  };
+
+  const handleMouseUp = (e) => {
+    if (isDragging) {
+      handleDragEnd(e.clientX);
+    }
+  };
+
+  // Touch events
+  const handleTouchStart = (e) => {
+    if (e.target.closest('.drag-handle')) {
+      handleDragStart(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDragging) {
+      handleDragMove(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = (e) => {
+    if (isDragging) {
+      handleDragEnd(e.changedTouches[0].clientX);
+    }
+  };
+
   if (!isOpen) return null;
 
+  // Calculate transform for drag effect and position
+  const getTransform = () => {
+    // Calculate the target X position based on panel side
+    // Right side = window width - panel width - margin * 2
+    const rightPosition = window.innerWidth - 420 - 16; // width + margins
+    const targetX = panelSide === 'right' ? rightPosition : 0;
+    
+    if (isDragging) {
+      // During drag, add offset to current target position
+      return `translateX(${targetX + dragOffset}px)`;
+    }
+    
+    // When not dragging, smoothly transition to target position
+    return `translateX(${targetX}px)`;
+  };
+
   return (
-    <div className="map-search-overlay">
+    <div 
+      ref={panelRef}
+      className={`map-search-overlay ${isDragging ? 'dragging' : ''}`}
+      style={{ transform: getTransform() }}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* Drag Handle */}
+      <div className="drag-handle">
+        <div className="drag-handle-indicator"></div>
+      </div>
+      
       <div className="search-overlay-content">
         {/* Search Bar */}
         <form onSubmit={handleSearch} className="search-form">
