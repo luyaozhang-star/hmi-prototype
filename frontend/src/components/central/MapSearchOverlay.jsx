@@ -142,7 +142,6 @@ function MapSearchOverlay({ isOpen, onClose, onSearch }) {
               placeholder="Search maps"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              autoFocus
             />
             <button type="button" className="close-button" onClick={() => setSearchQuery('')}>
               ✕

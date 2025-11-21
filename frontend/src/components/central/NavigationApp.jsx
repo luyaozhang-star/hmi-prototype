@@ -61,7 +61,7 @@ function NavigationApp() {
       const el = document.createElement('div');
       el.className = 'car-marker';
       el.innerHTML = `
-        <svg width="140" height="140" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="98" height="98" viewBox="0 0 98 98" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g filter="url(#filter0_d_5753_109516)">
             <path d="M46.3208 14.5407L17.2586 73.3893C16.0454 75.846 19.4325 78.0679 21.7988 76.3675L47.1469 58.1535C48.2256 57.3783 49.7822 57.3783 50.861 58.1535L76.209 76.3675C78.5753 78.0679 81.9624 75.8461 80.7492 73.3893L51.6871 14.5407C50.6725 12.4864 47.3353 12.4864 46.3208 14.5407Z" fill="url(#paint0_linear_5753_109516)"/>
             <path d="M46.3208 14.5407L17.2586 73.3893C16.0454 75.846 19.4325 78.0679 21.7988 76.3675L47.1469 58.1535C48.2256 57.3783 49.7822 57.3783 50.861 58.1535L76.209 76.3675C78.5753 78.0679 81.9624 75.8461 80.7492 73.3893L51.6871 14.5407C50.6725 12.4864 47.3353 12.4864 46.3208 14.5407Z" stroke="#F0F4F8" stroke-width="2"/>
@@ -143,7 +143,7 @@ function NavigationApp() {
                 minzoom: 0,
                 maxzoom: 22,
                 paint: {
-                  'raster-opacity': 0.3
+                  'raster-opacity': 0.5
                 }
               },
               {
@@ -168,6 +168,9 @@ function NavigationApp() {
         map.current = mapInstance;
         globalMapInstance = mapInstance;
 
+        // Map controls hidden for cleaner interface
+        // Uncomment below to show navigation and geolocation controls
+        /*
         // Add navigation controls
         mapInstance.addControl(new maplibregl.NavigationControl(), 'top-right');
 
@@ -226,6 +229,7 @@ function NavigationApp() {
           console.log('Started tracking user location');
           setLocationStatus('tracking');
         });
+        */
 
         // Wait for map to load before adding car marker and triggering geolocation
         mapInstance.on('load', () => {
