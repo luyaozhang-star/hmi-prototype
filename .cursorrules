@@ -28,8 +28,16 @@ This is a vehicle Human-Machine Interface (HMI) prototype with multiple displays
 - Always use design tokens from `src/tokens/designTokens.js`
 - Reference CSS custom properties from `src/styles/tokens/` directory
 - Never hardcode colors, spacing, or typography values
-- Use semantic token names (e.g., `--color-bg-primary` not `--color-blue-500`)
-- Support both light and dark themes
+- Use semantic token names (e.g., `--surface-primary-enabled` not `--color-blue-500`)
+- **Dark theme is the default** for HMI systems (automotive standard for night driving safety)
+- The dark theme is automatically applied via the `theme-dark` class on the body element
+- Use proper semantic tokens that work across both themes:
+  - `--surface-primary-enabled` for primary interactive surfaces
+  - `--onSurface-enabled` for text on surfaces
+  - `--background-page` for page backgrounds
+  - `--background-ui-primary` for UI component backgrounds
+- Token hierarchy: _Base → 01_Brand → 03_Semantics (never reference primitives directly)
+- Support both light and dark themes (dark is default, light is alternative)
 - Consider responsive breakpoints (compact vs spacious layouts)
 
 ## State Management
@@ -97,9 +105,13 @@ This is a vehicle Human-Machine Interface (HMI) prototype with multiple displays
 - Always use `required_permissions: ['all']` when running `git push` to bypass sandbox restrictions
 
 ## Design Token Updates
-- When updating design tokens, run `npm run transform-tokens` in frontend directory
+- When updating design tokens, run `npm run tokens:generate` in frontend directory
 - Never manually edit generated token files in `src/styles/tokens/`
 - Source of truth is in `Design Tokens/` directory
+- Token layering: `_Base` (primitives) → `01_Brand/Default.json` (brand colors) → `02_Global` (typography/spacing) → `03_Semantics` (semantic tokens)
+- Only `Default.json` brand variant is loaded (HighContrast and Minimal are alternatives)
+- Typography and spacing tokens come from `02_Global.json` only (04_Responsive is skipped)
+- Dark theme tokens are generated as the default, light theme as an alternative
 
 ## Backend Integration
 - Backend server runs on port 3001 by default

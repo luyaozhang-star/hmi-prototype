@@ -37,6 +37,15 @@ function Home() {
             <h2>Passenger Display</h2>
             <p>Entertainment and info</p>
           </button>
+
+          <button 
+            className="display-card design-system"
+            onClick={() => navigate('/design-system')}
+          >
+            <div className="card-icon">🎨</div>
+            <h2>Design System</h2>
+            <p>Component library showcase</p>
+          </button>
         </div>
 
         <div className="instructions">

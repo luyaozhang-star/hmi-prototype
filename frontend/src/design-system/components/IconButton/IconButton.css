@@ -1,0 +1,100 @@
+/* IconButton Component Styles */
+
+.ds-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 200ms ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: var(--borderRadius-16, 16px);
+  color: var(--onSurface-enabled, #ffffffe6);
+  position: relative;
+  overflow: hidden;
+}
+
+.ds-icon-button:hover:not(:disabled) {
+  background: var(--surface-tertiary-pressed, rgba(255, 255, 255, 0.05));
+}
+
+.ds-icon-button:active:not(:disabled) {
+  transform: scale(0.95);
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
+}
+
+.ds-icon-button:focus-visible {
+  outline: 2px solid var(--surface-primary-enabled, #335fff);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.ds-icon-button--small {
+  width: 64px;
+  height: 64px;
+  padding: var(--spacing-12, 12px);
+}
+
+.ds-icon-button--small .ds-icon-button__icon {
+  width: var(--spacing-32, 32px);
+  height: var(--spacing-32, 32px);
+}
+
+.ds-icon-button--large {
+  width: 96px;
+  height: 96px;
+  padding: var(--spacing-16, 16px);
+}
+
+.ds-icon-button--large .ds-icon-button__icon {
+  width: var(--spacing-48, 48px);
+  height: var(--spacing-48, 48px);
+}
+
+/* Active State */
+.ds-icon-button--active {
+  background: var(--surface-secondary-selected, rgba(255, 255, 255, 0.15));
+  color: var(--onSurface-selected, #ffffffe6);
+}
+
+.ds-icon-button--active:hover:not(:disabled) {
+  background: var(--surface-secondary-pressed, rgba(255, 255, 255, 0.15));
+}
+
+.ds-icon-button--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: var(--spacing-3, 3px);
+  background: currentColor;
+  border-radius: var(--borderRadius-4, 4px) var(--borderRadius-4, 4px) 0 0;
+}
+
+/* Disabled State */
+.ds-icon-button--disabled,
+.ds-icon-button:disabled {
+  opacity: var(--opacity-disabled, 0.5);
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Icon */
+.ds-icon-button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ds-icon-button__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+

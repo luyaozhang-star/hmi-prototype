@@ -1,0 +1,101 @@
+/* Card Component Styles */
+
+.ds-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white-5, rgba(255, 255, 255, 0.05));
+  backdrop-filter: var(--backdropFilter-backdrop-medium, blur(8px));
+  border-radius: var(--borderRadius-16, 16px);
+  padding: var(--spacing-24, 24px);
+  transition: all var(--motion-duration-medium, 200ms) var(--motion-easing-standard, ease);
+  text-align: left;
+  width: 100%;
+}
+
+/* Variants */
+.ds-card--default {
+  border: var(--borderWidth-1, 1px) solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+}
+
+.ds-card--elevated {
+  border: var(--borderWidth-1, 1px) solid var(--color-white-15, rgba(255, 255, 255, 0.15));
+  box-shadow: var(--elevation-2, 0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.ds-card--interactive {
+  cursor: pointer;
+  border: var(--borderWidth-1, 1px) solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+}
+
+.ds-card--interactive:hover {
+  background: var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border-color: var(--color-white-20, rgba(255, 255, 255, 0.2));
+  transform: translateY(calc(var(--spacing-2, 2px) * -1));
+  box-shadow: var(--elevation-3, 0 8px 16px rgba(0, 0, 0, 0.2));
+}
+
+.ds-card--interactive:active {
+  transform: translateY(0);
+  box-shadow: var(--elevation-1, 0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.ds-card--interactive:focus-visible {
+  outline: var(--borderWidth-2, 2px) solid var(--surface-primary-enabled, #6b747e);
+  outline-offset: var(--spacing-2, 2px);
+}
+
+/* Size Variants */
+.ds-card--compact {
+  padding: var(--spacing-12, 12px);
+  border-radius: var(--borderRadius-8, 8px);
+}
+
+.ds-card--large {
+  padding: var(--spacing-32, 32px);
+  border-radius: var(--borderRadius-24, 24px);
+}
+
+/* Header, Body, Footer */
+.ds-card__header {
+  padding-bottom: var(--spacing-16, 16px);
+  border-bottom: var(--borderWidth-1, 1px) solid var(--elements-divider, rgba(0, 0, 0, 0.05));
+  margin-bottom: var(--spacing-16, 16px);
+}
+
+.ds-card--compact .ds-card__header {
+  padding-bottom: var(--spacing-8, 8px);
+  margin-bottom: var(--spacing-8, 8px);
+}
+
+.ds-card--large .ds-card__header {
+  padding-bottom: var(--spacing-20, 20px);
+  margin-bottom: var(--spacing-20, 20px);
+}
+
+.ds-card__body {
+  flex: 1;
+}
+
+.ds-card__footer {
+  padding-top: var(--spacing-16, 16px);
+  border-top: var(--borderWidth-1, 1px) solid var(--elements-divider, rgba(0, 0, 0, 0.05));
+  margin-top: var(--spacing-16, 16px);
+}
+
+.ds-card--compact .ds-card__footer {
+  padding-top: var(--spacing-8, 8px);
+  margin-top: var(--spacing-8, 8px);
+}
+
+.ds-card--large .ds-card__footer {
+  padding-top: var(--spacing-20, 20px);
+  margin-top: var(--spacing-20, 20px);
+}
+
+/* Button reset for interactive cards */
+.ds-card[type="button"] {
+  border: var(--borderWidth-1, 1px) solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+  font: inherit;
+  color: inherit;
+}
+

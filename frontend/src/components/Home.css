@@ -64,6 +64,11 @@
   box-shadow: 0 10px 30px rgba(255, 152, 0, 0.3);
 }
 
+.display-card.design-system:hover {
+  border-color: #9C27B0;
+  box-shadow: 0 10px 30px rgba(156, 39, 176, 0.3);
+}
+
 .card-icon {
   font-size: 4rem;
   margin-bottom: 1rem;

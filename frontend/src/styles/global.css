@@ -11,8 +11,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  background: var(--background-background-page, #0a0a0a);
-  color: var(--color-white-90-default, #ffffff);
+  background: var(--background-page, #000000);
+  color: var(--onSurface-enabled, #ffffffe6);
 }
 
 button {
@@ -48,16 +48,16 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-white-5, rgba(255, 255, 255, 0.05));
+  background: var(--surface-tertiary-enabled, rgba(255, 255, 255, 0.05));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-primary-enabled, rgba(33, 150, 243, 0.3));
-  border-radius: var(--borderRadius-8, 5px);
+  background: var(--surface-primary-enabled, #335fff);
+  border-radius: var(--borderRadius-component, 8px);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--surface-primary-pressed, rgba(33, 150, 243, 0.5));
+  background: var(--surface-primary-pressed, #6383f8);
 }
 
 /* Disable text selection for UI elements */
@@ -69,21 +69,21 @@ button, .card-icon, .display-card {
 
 /* Glassmorphism utilities */
 .glass {
-  background: var(--color-white-5, rgba(255, 255, 255, 0.05));
+  background: var(--surface-tertiary-enabled, rgba(255, 255, 255, 0.03));
   backdrop-filter: var(--backdropFilter-backdrop-medium, blur(10px));
-  border: 1px solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
 }
 
 .glass-strong {
-  background: var(--color-white-10, rgba(255, 255, 255, 0.08));
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
   backdrop-filter: var(--backdropFilter-backdrop-heavy, blur(20px));
-  border: 1px solid var(--color-white-15, rgba(255, 255, 255, 0.15));
+  border: 1px solid var(--surface-secondary-pressed, rgba(255, 255, 255, 0.15));
 }
 
 /* Focus styles for accessibility */
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--surface-primary-enabled, #2196F3);
+  outline: 2px solid var(--surface-primary-enabled, #335fff);
   outline-offset: 2px;
 }
 

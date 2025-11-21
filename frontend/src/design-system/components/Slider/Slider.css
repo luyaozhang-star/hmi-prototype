@@ -1,0 +1,111 @@
+/* Slider Component Styles */
+
+.ds-slider {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12, 12px);
+  width: 100%;
+}
+
+.ds-slider__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-12, 12px);
+}
+
+.ds-slider__label {
+  font-size: var(--fontSize-24, 24px);
+  line-height: var(--lineHeight-32, 32px);
+  font-weight: var(--fontWeight-medium, 500);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+  color: var(--color-white-90-default, #ffffffe6);
+}
+
+.ds-slider__value {
+  font-size: var(--fontSize-24, 24px);
+  line-height: var(--lineHeight-32, 32px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+  color: var(--color-white-100-primary, #ffffff);
+  min-width: var(--spacing-64, 64px);
+  text-align: right;
+}
+
+.ds-slider__track-container {
+  position: relative;
+  width: 100%;
+  height: var(--spacing-44, 44px);
+  display: flex;
+  align-items: center;
+}
+
+.ds-slider__track {
+  position: absolute;
+  width: 100%;
+  height: var(--spacing-6, 6px);
+  background: var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border-radius: var(--borderRadius-4, 4px);
+  overflow: hidden;
+}
+
+.ds-slider__track-fill {
+  height: 100%;
+  background: var(--surface-primary-enabled, #6b747e);
+  border-radius: var(--borderRadius-4, 4px);
+  transition: width 0.1s ease;
+}
+
+.ds-slider__thumb {
+  position: absolute;
+  width: var(--spacing-24, 24px);
+  height: var(--spacing-24, 24px);
+  background: var(--color-white-100-primary, #ffffff);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: var(--elevation-2, 0 4px 8px rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+  transition: left 0.1s ease;
+}
+
+.ds-slider__input {
+  position: absolute;
+  width: 100%;
+  height: var(--spacing-44, 44px);
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.ds-slider__input:disabled {
+  cursor: not-allowed;
+}
+
+.ds-slider__input:hover:not(:disabled) ~ .ds-slider__track .ds-slider__track-fill {
+  background: var(--surface-primary-pressed, #8a9199);
+}
+
+.ds-slider__input:active:not(:disabled) ~ .ds-slider__thumb {
+  transform: translateX(-50%) scale(1.2);
+}
+
+.ds-slider__input:focus-visible ~ .ds-slider__thumb {
+  outline: 2px solid var(--surface-primary-enabled, #6b747e);
+  outline-offset: 2px;
+}
+
+/* Disabled State */
+.ds-slider--disabled {
+  opacity: var(--opacity-disabled, 0.5);
+}
+
+.ds-slider--disabled .ds-slider__track-fill {
+  background: var(--color-white-20, rgba(255, 255, 255, 0.2));
+}
+
+.ds-slider--disabled .ds-slider__thumb {
+  background: var(--color-white-50, rgba(255, 255, 255, 0.5));
+}
+

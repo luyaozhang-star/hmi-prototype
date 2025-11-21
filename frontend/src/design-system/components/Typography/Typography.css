@@ -1,0 +1,143 @@
+/* Typography Component Styles */
+
+.ds-typography {
+  margin: 0;
+  padding: 0;
+  color: var(--color-white-90-default, #ffffffe6);
+  font-family: var(--fontFamily-hmi, inherit);
+}
+
+/* Display Variants */
+.ds-typography--display-xxlarge {
+  font-family: var(--fontFamily-cluster, inherit);
+  font-size: var(--fontSize-180, 180px);
+  line-height: var(--lineHeight-116, 116px);
+  font-weight: var(--fontWeight-regular, 400);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--display-xlarge {
+  font-family: var(--fontFamily-cluster, inherit);
+  font-size: var(--fontSize-140, 140px);
+  line-height: var(--lineHeight-116, 116px);
+  font-weight: var(--fontWeight-regular, 400);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--display-large {
+  font-family: var(--fontFamily-cluster, inherit);
+  font-size: var(--fontSize-48, 48px);
+  line-height: var(--lineHeight-106, 106px);
+  font-weight: var(--fontWeight-regular, 400);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--display-medium {
+  font-family: var(--fontFamily-cluster, inherit);
+  font-size: var(--fontSize-40, 40px);
+  line-height: var(--lineHeight-72, 72px);
+  font-weight: var(--fontWeight-regular, 400);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--display-small {
+  font-family: var(--fontFamily-cluster, inherit);
+  font-size: var(--fontSize-32, 32px);
+  line-height: var(--lineHeight-56, 56px);
+  font-weight: var(--fontWeight-regular, 400);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+/* Headline Variants */
+.ds-typography--headline-large {
+  font-size: var(--fontSize-40, 40px);
+  line-height: var(--lineHeight-48, 48px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--headline-medium {
+  font-size: var(--fontSize-32, 32px);
+  line-height: var(--lineHeight-36, 36px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--headline-small {
+  font-size: var(--fontSize-24, 24px);
+  line-height: var(--lineHeight-28, 28px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+/* Body Variants */
+.ds-typography--body-large {
+  font-size: var(--fontSize-36, 36px);
+  line-height: var(--lineHeight-44, 44px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--body-medium {
+  font-size: var(--fontSize-24, 24px);
+  line-height: var(--lineHeight-32, 32px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+}
+
+.ds-typography--body-small {
+  font-size: var(--fontSize-20, 20px);
+  line-height: var(--lineHeight-28, 28px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+}
+
+.ds-typography--body-tiny {
+  font-size: var(--fontSize-16, 16px);
+  line-height: var(--lineHeight-24, 24px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+/* Label Variants */
+.ds-typography--label-large {
+  font-size: var(--fontSize-32, 32px);
+  line-height: var(--lineHeight-40, 40px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+}
+
+.ds-typography--label-medium {
+  font-size: var(--fontSize-24, 24px);
+  line-height: var(--lineHeight-32, 32px);
+  font-weight: var(--fontWeight-medium, 500);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+}
+
+.ds-typography--label-small {
+  font-size: var(--fontSize-20, 20px);
+  line-height: var(--lineHeight-28, 28px);
+  font-weight: var(--fontWeight-semibold, 600);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+}
+
+/* Alignment */
+.ds-typography--align-left {
+  text-align: left;
+}
+
+.ds-typography--align-center {
+  text-align: center;
+}
+
+.ds-typography--align-right {
+  text-align: right;
+}
+
+/* Truncation */
+.ds-typography--truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
