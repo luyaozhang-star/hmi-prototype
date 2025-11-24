@@ -3,7 +3,7 @@
 .ds-typography {
   margin: 0;
   padding: 0;
-  color: var(--color-white-90-default, #ffffffe6);
+  color: var(--onSurface-enabled, #ffffffe6);
   font-family: var(--fontFamily-hmi, inherit);
 }
 

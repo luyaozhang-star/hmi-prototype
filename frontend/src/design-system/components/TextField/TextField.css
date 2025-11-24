@@ -12,7 +12,7 @@
   line-height: var(--lineHeight-32, 32px);
   font-weight: var(--fontWeight-medium, 500);
   letter-spacing: var(--letterSpacing-normal, 0px);
-  color: var(--color-white-90-default, #ffffffe6);
+  color: var(--onSurface-enabled, #ffffffe6);
 }
 
 .ds-textfield__input {
@@ -22,33 +22,33 @@
   line-height: var(--lineHeight-32, 32px);
   letter-spacing: var(--letterSpacing-normal, 0px);
   font-family: var(--fontFamily-hmi, inherit);
-  color: var(--color-white-90-default, #ffffffe6);
-  background: var(--color-white-5, rgba(255, 255, 255, 0.05));
-  border: 1px solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+  color: var(--onSurface-enabled, #ffffffe6);
+  background: var(--surface-tertiary-enabled, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--elements-divider, rgba(255, 255, 255, 0.1));
   border-radius: var(--borderRadius-8, 8px);
   transition: all var(--motion-duration-medium, 200ms) var(--motion-easing-standard, ease);
   outline: none;
 }
 
 .ds-textfield__input::placeholder {
-  color: var(--color-white-50, rgba(255, 255, 255, 0.5));
+  color: var(--onSurface-inactive, rgba(255, 255, 255, 0.5));
 }
 
 .ds-textfield__input:hover:not(:disabled):not(:read-only) {
-  border-color: var(--color-white-20, rgba(255, 255, 255, 0.2));
-  background: var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border-color: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.2));
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
 }
 
 .ds-textfield__input:focus {
   border-color: var(--surface-primary-enabled, #6b747e);
-  background: var(--color-white-10, rgba(255, 255, 255, 0.1));
-  box-shadow: 0 0 0 var(--spacing-3, 3px) var(--color-white-10, rgba(255, 255, 255, 0.1));
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
+  box-shadow: 0 0 0 var(--spacing-3, 3px) var(--surface-secondary-pressed, rgba(255, 255, 255, 0.1));
 }
 
 /* Error State */
 .ds-textfield--error .ds-textfield__input {
-  border-color: var(--color-functional-warning, #f04438);
-  background: var(--color-red-10, #7a271a);
+  border-color: var(--surface-functional-warning, #f04438);
+  background: var(--surface-tertiary-enabled, #7a271a);
 }
 
 .ds-textfield--error .ds-textfield__input:focus {
@@ -59,14 +59,14 @@
   font-size: var(--fontSize-20, 20px);
   line-height: var(--lineHeight-28, 28px);
   letter-spacing: var(--letterSpacing-normal, 0px);
-  color: var(--color-red-100, #fee4e2);
+  color: var(--onSurface-functional-warning, #fee4e2);
   font-weight: var(--fontWeight-medium, 500);
 }
 
 /* Success State */
 .ds-textfield--success .ds-textfield__input {
-  border-color: var(--color-functional-positive, #12b76a);
-  background: var(--color-green-10, #054f31);
+  border-color: var(--surface-functional-positive, #12b76a);
+  background: var(--surface-tertiary-enabled, #054f31);
 }
 
 .ds-textfield--success .ds-textfield__input:focus {
@@ -78,7 +78,7 @@
   font-size: var(--fontSize-20, 20px);
   line-height: var(--lineHeight-28, 28px);
   letter-spacing: var(--letterSpacing-normal, 0px);
-  color: var(--color-white-60-inactive, rgba(255, 255, 255, 0.6));
+  color: var(--onSurface-inactive, rgba(255, 255, 255, 0.6));
 }
 
 /* Disabled State */
@@ -88,13 +88,13 @@
 
 .ds-textfield--disabled .ds-textfield__input {
   cursor: not-allowed;
-  background: var(--color-black-5, rgba(0, 0, 0, 0.05));
-  border-color: var(--color-black-10, rgba(0, 0, 0, 0.1));
+  background: var(--surface-tertiary-disabled, rgba(0, 0, 0, 0.05));
+  border-color: var(--surface-secondary-disabled, rgba(0, 0, 0, 0.1));
 }
 
 /* Readonly State */
 .ds-textfield--readonly .ds-textfield__input {
-  background: var(--color-black-10, rgba(0, 0, 0, 0.1));
+  background: var(--surface-secondary-enabled, rgba(0, 0, 0, 0.1));
   border-style: dashed;
   cursor: default;
 }

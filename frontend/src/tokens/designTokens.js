@@ -2016,9 +2016,9 @@ export const designTokens = {
     "original": "{color.background-light-primary}"
   },
   "background-page": {
-    "value": "#ffffff1a",
+    "value": "#ffffff",
     "type": "color",
-    "original": "{color.white-10}"
+    "original": "{color.white-100-primary}"
   },
   "surface-secondary-inactive": {
     "value": "#0000000d",

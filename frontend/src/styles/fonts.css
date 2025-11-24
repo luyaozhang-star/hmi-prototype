@@ -1,0 +1,46 @@
+/* TT Commons Pro Font Family */
+
+/* Regular (400) */
+@font-face {
+  font-family: 'TT Commons Pro';
+  src: url('/fonts/TT-Commons-Pro-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium (500) */
+@font-face {
+  font-family: 'TT Commons Pro';
+  src: url('/fonts/TT-Commons-Pro-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* DemiBold/SemiBold (600) */
+@font-face {
+  font-family: 'TT Commons Pro';
+  src: url('/fonts/TT-Commons-Pro-DemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* TT Commons Pro Mono (for cluster display) */
+@font-face {
+  font-family: 'TT Commons Pro Mono';
+  src: url('/fonts/TT-Commons-Pro-Mono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Commons Pro Mono';
+  src: url('/fonts/TT-Commons-Pro-Mono-DemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+

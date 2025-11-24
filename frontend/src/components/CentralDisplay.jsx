@@ -4,6 +4,7 @@ import StatusBar from './central/StatusBar';
 import BottomNav from './central/BottomNav';
 import NavigationApp from './central/NavigationApp';
 import CameraApp from './central/CameraApp';
+import WidgetsContainer from './central/WidgetsContainer';
 import './CentralDisplay.css';
 import './central/NavigationApp.css';
 
@@ -19,7 +20,7 @@ function CentralDisplay() {
     <div className="central-display">
       <StatusBar />
       
-      {/* Home View - Vehicle Image */}
+      {/* Home View - Vehicle Image and Widgets */}
       {activeView === 'home' && (
         <div className="home-vehicle-view">
           <div className="home-vehicle-container">
@@ -29,6 +30,7 @@ function CentralDisplay() {
               className="home-vehicle-image"
             />
           </div>
+          <WidgetsContainer />
         </div>
       )}
       

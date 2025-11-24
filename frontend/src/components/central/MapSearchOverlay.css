@@ -41,20 +41,19 @@
 }
 
 .drag-handle-indicator {
-  width: 48px;
+  width: 64px;
   height: 4px;
-  background-color: var(--color-white-30);
+  background-color: var(--color-white-40);
   border-radius: 2px;
   transition: background-color 0.2s ease, width 0.2s ease;
 }
 
 .drag-handle:hover .drag-handle-indicator {
-  background-color: var(--color-white-40);
-  width: 64px;
+  background-color: var(--color-white-50);
 }
 
 .drag-handle:active .drag-handle-indicator {
-  background-color: var(--color-white-50);
+  background-color: var(--color-white-60-inactive);
 }
 
 .search-overlay-content {
@@ -284,7 +283,7 @@
   white-space: nowrap;
 }
 
-/* Custom scrollbar for dark theme */
+/* Custom scrollbar using semantic tokens */
 .search-overlay-content::-webkit-scrollbar {
   width: 8px;
 }
@@ -294,12 +293,12 @@
 }
 
 .search-overlay-content::-webkit-scrollbar-thumb {
-  background: var(--color-white-20);
+  background: var(--surface-secondary-inactive);
   border-radius: 4px;
 }
 
 .search-overlay-content::-webkit-scrollbar-thumb:hover {
-  background: var(--color-white-30);
+  background: var(--surface-secondary-enabled);
 }
 
 /* Responsive adjustments */

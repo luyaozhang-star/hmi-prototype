@@ -1,10 +1,3 @@
-@font-face {
-  font-family: 'TT Commons Pro';
-  font-weight: 600;
-  font-style: normal;
-  src: local('TT Commons Pro DemiBold'), local('TTCommonsPro-DemiBold');
-}
-
 .status-bar {
   position: absolute;
   top: 0;

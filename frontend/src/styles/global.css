@@ -1,3 +1,6 @@
+/* Import fonts */
+@import './fonts.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -41,23 +44,23 @@ a {
   color: inherit;
 }
 
-/* Scrollbar styling - Dark theme with blue accent */
+/* Scrollbar styling - Using semantic tokens */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface-tertiary-enabled, rgba(255, 255, 255, 0.05));
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-primary-enabled, #335fff);
+  background: var(--surface-secondary-inactive, rgba(255, 255, 255, 0.05));
   border-radius: var(--borderRadius-component, 8px);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--surface-primary-pressed, #6383f8);
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
 }
 
 /* Disable text selection for UI elements */

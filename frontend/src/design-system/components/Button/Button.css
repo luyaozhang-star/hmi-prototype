@@ -90,7 +90,7 @@
 /* Danger Variant */
 .ds-button--danger {
   background: var(--surface-destructive-enabled, #912018);
-  color: var(--onSurface-enabled, #ffffffe6);
+  color: var(--onSurface-primary-enabled, #ffffff);
 }
 
 .ds-button--danger:hover:not(:disabled) {

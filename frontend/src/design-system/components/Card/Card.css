@@ -3,7 +3,7 @@
 .ds-card {
   display: flex;
   flex-direction: column;
-  background: var(--color-white-5, rgba(255, 255, 255, 0.05));
+  background: var(--surface-secondary-inactive, rgba(255, 255, 255, 0.05));
   backdrop-filter: var(--backdropFilter-backdrop-medium, blur(8px));
   border-radius: var(--borderRadius-16, 16px);
   padding: var(--spacing-24, 24px);
@@ -14,22 +14,22 @@
 
 /* Variants */
 .ds-card--default {
-  border: var(--borderWidth-1, 1px) solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border: var(--borderWidth-1, 1px) solid var(--elements-divider, rgba(255, 255, 255, 0.1));
 }
 
 .ds-card--elevated {
-  border: var(--borderWidth-1, 1px) solid var(--color-white-15, rgba(255, 255, 255, 0.15));
+  border: var(--borderWidth-1, 1px) solid var(--surface-secondary-pressed, rgba(255, 255, 255, 0.15));
   box-shadow: var(--elevation-2, 0 4px 8px rgba(0, 0, 0, 0.15));
 }
 
 .ds-card--interactive {
   cursor: pointer;
-  border: var(--borderWidth-1, 1px) solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border: var(--borderWidth-1, 1px) solid var(--elements-divider, rgba(255, 255, 255, 0.1));
 }
 
 .ds-card--interactive:hover {
-  background: var(--color-white-10, rgba(255, 255, 255, 0.1));
-  border-color: var(--color-white-20, rgba(255, 255, 255, 0.2));
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
+  border-color: var(--surface-secondary-pressed, rgba(255, 255, 255, 0.2));
   transform: translateY(calc(var(--spacing-2, 2px) * -1));
   box-shadow: var(--elevation-3, 0 8px 16px rgba(0, 0, 0, 0.2));
 }
@@ -94,7 +94,7 @@
 
 /* Button reset for interactive cards */
 .ds-card[type="button"] {
-  border: var(--borderWidth-1, 1px) solid var(--color-white-10, rgba(255, 255, 255, 0.1));
+  border: var(--borderWidth-1, 1px) solid var(--elements-divider, rgba(255, 255, 255, 0.1));
   font: inherit;
   color: inherit;
 }

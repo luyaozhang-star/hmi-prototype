@@ -13,6 +13,15 @@ const DesignSystemShowcase = () => {
   const [textValue, setTextValue] = useState('');
   const [sliderValue, setSliderValue] = useState(70);
   const [errorText, setErrorText] = useState('');
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+
+  // Theme toggle handler
+  const toggleTheme = () => {
+    const newTheme = !isDarkTheme;
+    setIsDarkTheme(newTheme);
+    document.body.classList.remove('theme-dark', 'theme-light');
+    document.body.classList.add(newTheme ? 'theme-dark' : 'theme-light');
+  };
 
   // Sample icon for demonstrations
   const SampleIcon = () => (
@@ -26,6 +35,18 @@ const DesignSystemShowcase = () => {
   const HomeIcon = () => (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
       <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  );
+
+  const SunIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z"/>
+    </svg>
+  );
+
+  const MoonIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z"/>
     </svg>
   );
 
@@ -47,6 +68,17 @@ const DesignSystemShowcase = () => {
               <Typography variant="body-small" className="ds-showcase__subtitle">
                 Reusable component library for automotive interfaces
               </Typography>
+            </div>
+          </div>
+          
+          <div className="ds-showcase__header-right">
+            {/* Theme Toggle */}
+            <div className="ds-showcase__theme-toggle" onClick={toggleTheme}>
+              <div className={`ds-showcase__theme-toggle-track ${isDarkTheme ? 'dark' : 'light'}`}>
+                <div className="ds-showcase__theme-toggle-thumb">
+                  {isDarkTheme ? <MoonIcon /> : <SunIcon />}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -162,57 +194,59 @@ const DesignSystemShowcase = () => {
             Buttons
           </Typography>
           
-          {/* Button Variants */}
-          <Card>
-            <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
-              Variants
-            </Typography>
-            <div className="ds-showcase__button-grid">
-              <Button variant="primary">Primary</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="tertiary">Tertiary</Button>
-              <Button variant="danger">Danger</Button>
-            </div>
-          </Card>
+          <div className="ds-showcase__card-container">
+            {/* Button Variants */}
+            <Card>
+              <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
+                Variants
+              </Typography>
+              <div className="ds-showcase__button-grid">
+                <Button variant="primary">Primary</Button>
+                <Button variant="secondary">Secondary</Button>
+                <Button variant="tertiary">Tertiary</Button>
+                <Button variant="danger">Danger</Button>
+              </div>
+            </Card>
 
-          {/* Button Sizes */}
-          <Card>
-            <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
-              Sizes
-            </Typography>
-            <div className="ds-showcase__button-grid">
-              <Button size="small">Regular (64px)</Button>
-              <Button size="large">Large (96px)</Button>
-            </div>
-          </Card>
+            {/* Button Sizes */}
+            <Card>
+              <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
+                Sizes
+              </Typography>
+              <div className="ds-showcase__button-grid">
+                <Button size="small">Regular (64px)</Button>
+                <Button size="large">Large (96px)</Button>
+              </div>
+            </Card>
 
-          {/* Button States */}
-          <Card>
-            <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
-              States
-            </Typography>
-            <div className="ds-showcase__button-grid">
-              <Button>Default</Button>
-              <Button disabled>Disabled</Button>
-              <Button loading>Loading</Button>
-            </div>
-          </Card>
+            {/* Button States */}
+            <Card>
+              <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
+                States
+              </Typography>
+              <div className="ds-showcase__button-grid">
+                <Button>Default</Button>
+                <Button disabled>Disabled</Button>
+                <Button loading>Loading</Button>
+              </div>
+            </Card>
 
-          {/* Buttons with Icons */}
-          <Card>
-            <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
-              With Icons
-            </Typography>
-            <div className="ds-showcase__button-grid">
-              <Button icon={<SampleIcon />} iconPosition="left">
-                Icon Left
-              </Button>
-              <Button icon={<SampleIcon />} iconPosition="right">
-                Icon Right
-              </Button>
-              <Button icon={<SampleIcon />} />
-            </div>
-          </Card>
+            {/* Buttons with Icons */}
+            <Card>
+              <Typography variant="headline-small" as="h3" className="ds-showcase__subsection-title">
+                With Icons
+              </Typography>
+              <div className="ds-showcase__button-grid">
+                <Button icon={<SampleIcon />} iconPosition="left">
+                  Icon Left
+                </Button>
+                <Button icon={<SampleIcon />} iconPosition="right">
+                  Icon Right
+                </Button>
+                <Button icon={<SampleIcon />} />
+              </div>
+            </Card>
+          </div>
         </section>
 
         {/* IconButton Section */}

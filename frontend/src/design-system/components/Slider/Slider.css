@@ -19,7 +19,7 @@
   line-height: var(--lineHeight-32, 32px);
   font-weight: var(--fontWeight-medium, 500);
   letter-spacing: var(--letterSpacing-normal, 0px);
-  color: var(--color-white-90-default, #ffffffe6);
+  color: var(--onSurface-enabled, #ffffffe6);
 }
 
 .ds-slider__value {
@@ -27,7 +27,7 @@
   line-height: var(--lineHeight-32, 32px);
   font-weight: var(--fontWeight-semibold, 600);
   letter-spacing: var(--letterSpacing-normal, 0px);
-  color: var(--color-white-100-primary, #ffffff);
+  color: var(--onSurface-enabled, #ffffff);
   min-width: var(--spacing-64, 64px);
   text-align: right;
 }
@@ -44,7 +44,7 @@
   position: absolute;
   width: 100%;
   height: var(--spacing-6, 6px);
-  background: var(--color-white-10, rgba(255, 255, 255, 0.1));
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
   border-radius: var(--borderRadius-4, 4px);
   overflow: hidden;
 }
@@ -60,7 +60,7 @@
   position: absolute;
   width: var(--spacing-24, 24px);
   height: var(--spacing-24, 24px);
-  background: var(--color-white-100-primary, #ffffff);
+  background: var(--onSurface-enabled, #ffffff);
   border-radius: 50%;
   transform: translateX(-50%);
   box-shadow: var(--elevation-2, 0 4px 8px rgba(0, 0, 0, 0.15));
@@ -102,10 +102,10 @@
 }
 
 .ds-slider--disabled .ds-slider__track-fill {
-  background: var(--color-white-20, rgba(255, 255, 255, 0.2));
+  background: var(--surface-primary-disabled, rgba(255, 255, 255, 0.2));
 }
 
 .ds-slider--disabled .ds-slider__thumb {
-  background: var(--color-white-50, rgba(255, 255, 255, 0.5));
+  background: var(--onSurface-disabled, rgba(255, 255, 255, 0.5));
 }
 

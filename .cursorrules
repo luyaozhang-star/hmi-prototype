@@ -28,16 +28,26 @@ This is a vehicle Human-Machine Interface (HMI) prototype with multiple displays
 - Always use design tokens from `src/tokens/designTokens.js`
 - Reference CSS custom properties from `src/styles/tokens/` directory
 - Never hardcode colors, spacing, or typography values
+- **CRITICAL: Always use SEMANTIC tokens (from 03_Semantics) for ALL colors in components**
+- **NEVER use brand tokens (--color-white-XX, --color-black-XX) or primitive tokens directly**
 - Use semantic token names (e.g., `--surface-primary-enabled` not `--color-blue-500`)
 - **Dark theme is the default** for HMI systems (automotive standard for night driving safety)
 - The dark theme is automatically applied via the `theme-dark` class on the body element
 - Use proper semantic tokens that work across both themes:
+  - `--onSurface-enabled` for ALL text/typography (replaces --color-white-90-default)
+  - `--onSurface-inactive` for inactive/secondary text (replaces --color-white-60-inactive)
+  - `--onSurface-disabled` for disabled text (replaces --color-white-30-disabled)
   - `--surface-primary-enabled` for primary interactive surfaces
-  - `--onSurface-enabled` for text on surfaces
+  - `--surface-secondary-enabled` for secondary surfaces (replaces --color-white-10)
+  - `--surface-tertiary-enabled` for tertiary backgrounds (replaces --color-white-5)
   - `--background-page` for page backgrounds
   - `--background-ui-primary` for UI component backgrounds
-- Token hierarchy: _Base → 01_Brand → 03_Semantics (never reference primitives directly)
+  - `--elements-divider` for borders and dividers (replaces --color-white-10)
+  - `--surface-functional-warning`, `--surface-functional-positive`, etc. for functional colors
+  - `--onSurface-functional-warning`, `--onSurface-functional-positive`, etc. for functional text
+- Token hierarchy: _Base → 01_Brand → 03_Semantics (never reference primitives or brand tokens directly)
 - Support both light and dark themes (dark is default, light is alternative)
+- Semantic tokens automatically adapt to the active theme
 - Consider responsive breakpoints (compact vs spacious layouts)
 
 ## State Management
