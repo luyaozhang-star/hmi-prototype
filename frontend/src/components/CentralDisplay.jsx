@@ -5,6 +5,7 @@ import BottomNav from './central/BottomNav';
 import NavigationApp from './central/NavigationApp';
 import CameraApp from './central/CameraApp';
 import WidgetsContainer from './central/WidgetsContainer';
+import Vehicle3D from './central/Vehicle3D';
 import './CentralDisplay.css';
 import './central/NavigationApp.css';
 
@@ -24,11 +25,7 @@ function CentralDisplay() {
       {activeView === 'home' && (
         <div className="home-vehicle-view">
           <div className="home-vehicle-container">
-            <img 
-              src="/images/vehicle.png" 
-              alt="Porsche Vehicle" 
-              className="home-vehicle-image"
-            />
+            <Vehicle3D />
           </div>
           <WidgetsContainer setActiveView={setActiveView} />
         </div>
