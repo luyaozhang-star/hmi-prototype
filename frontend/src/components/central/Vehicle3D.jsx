@@ -1,6 +1,6 @@
-import React, { Suspense, useRef, useState, useEffect } from 'react';
+import React, { Suspense, useRef, useState, useEffect, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Environment, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 import './Vehicle3D.css';
 
@@ -11,6 +11,40 @@ function VehicleModelWithFile({ modelPath = '/models/vehicle.glb' }) {
   
   // Load the 3D model
   const { scene } = useGLTF(modelPath);
+
+  // Memoize the cloned scene and apply enhanced shading
+  // This prevents the model from jumping when parent components re-render
+  const clonedScene = useMemo(() => {
+    const cloned = scene.clone();
+    
+    // Traverse the scene and apply black metallic material
+    cloned.traverse((child) => {
+      if (child.isMesh && child.material) {
+        // Create black metallic material with blue and purple shine
+        const blackMetallicMaterial = new THREE.MeshPhysicalMaterial({
+          color: '#444', // Much lighter color for maximum brightness
+          metalness: 1, // High metalness for metallic appearance
+          roughness: 0.4, // Lower roughness for more reflectivity and brightness
+          envMapIntensity: 0.7, // Reduced to minimize warm tones from environment map
+          sheen: 0.5, // Enable sheen for additional reflectivity
+          sheenColor: '#fff', //  Tint for the reflective shine (blue-purple)
+          sheenRoughness: 0.35, // Smoother sheen for more brightness
+          iridescence: 0, // No iridescence effect
+        });
+        
+        // Replace all materials with black metallic material
+        child.material = Array.isArray(child.material)
+          ? child.material.map(() => blackMetallicMaterial.clone())
+          : blackMetallicMaterial;
+        
+        // Ensure shadows are enabled
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+    
+    return cloned;
+  }, [scene]);
 
   // Center and scale the model using useFrame to ensure it runs after render
   useFrame(() => {
@@ -37,7 +71,7 @@ function VehicleModelWithFile({ modelPath = '/models/vehicle.glb' }) {
 
   return (
     <primitive 
-      object={scene.clone()} 
+      object={clonedScene} 
       ref={meshRef}
       scale={1}
       position={[0, 0, 0]}
@@ -189,19 +223,47 @@ function Vehicle3D() {
           fov: 60, // Increased FOV to see more of the model and prevent cropping
         }}
         gl={{ antialias: true, alpha: true }}
+        shadows
         onCreated={(state) => {
           state.gl.setClearColor('#000000', 0);
           // Look at offset position to match model shift
           state.camera.lookAt(MODEL_X_OFFSET, 0, 0);
         }}
       >
-        {/* Lighting */}
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} castShadow />
-        <pointLight position={[-5, 5, -5]} intensity={0.5} />
-
-        {/* Environment for reflections */}
-        <Environment preset="city" />
+        {/* Enhanced Lighting Setup - Much Brighter */}
+        <ambientLight intensity={2.0} />
+        
+        {/* Main directional light (sun) - blue */}
+        <directionalLight 
+          position={[5, 8, 5]} 
+          intensity={3.0}
+          color="#D2DCFF" // Blue color
+          castShadow
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-camera-far={50}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
+        />
+        
+        {/* Fill light from opposite side - blue */}
+        <directionalLight position={[-5, 3, -5]} intensity={2.0} color="#EBEFFF" />
+        
+        {/* Rim light for edge definition with blue */}
+        <pointLight position={[0, 5, -8]} intensity={3.0} color="#F3EAF9" />
+        
+        {/* Accent light from above with blue */}
+        <pointLight position={[0, 10, 0]} intensity={2.5} color="#fff" />
+        
+        {/* Additional blue fill light */}
+        <pointLight position={[-3, 4, 3]} intensity={2.0} color="#3a80d2" />
+        
+        {/* Blue accent light */}
+        <pointLight position={[3, 4, 3]} intensity={1.8} color="#F3EAF9" />
+        
+        {/* Environment removed to prevent warm yellow/orange reflections - using only blue lights for cool tones */}
 
         {/* Vehicle Model */}
         <VehicleModel />
