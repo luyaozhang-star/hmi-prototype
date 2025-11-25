@@ -41,17 +41,17 @@ const QUALITY_PRESETS = {
 // Adjust the targetSize and position offsets for each model to get the perfect fit
 const MODEL_SCALE_CONFIG = {
   '/models/vehicle.glb': {
-    targetSize: 4.0, // Original default vehicle - smaller size
+    targetSize: 3.8, // Original default vehicle - smaller size
     positionOffset: { x: 0, y: 0, z: 0 }, // No offset
     rotation: { x: 0, y: 0, z: 0 }, // No rotation
   },
   '/models/dodge.glb': {
-    targetSize: 4.5, // Dodge model - larger to be visible
+    targetSize: 4.3, // Dodge model - larger to be visible
     positionOffset: { x: 0, y: -0.7, z: 0 }, // Adjust these values to reposition
     rotation: { x: 0, y: 0, z: 0 }, // Default rotation, update as needed
   },
   '/models/tpz-fuchs.glb': {
-    targetSize: 4.5, // Military vehicle - armored transport
+    targetSize: 4.1, // Military vehicle - armored transport
     positionOffset: { x: 0, y: 1.9, z: 0 },
     rotation: { x: 0, y: -90, z: 0 }, // Example: rotated 180 degrees on Y
   },
