@@ -488,19 +488,19 @@ function Vehicle3D() {
         />
         
         {/* Fill light from opposite side - blue */}
-        <directionalLight position={[-5, 3, -5]} intensity={5.0} color="rgb(87, 96, 131)" />
+        <directionalLight position={[-5, 3, -5]} intensity={17.0} color="rgb(87, 96, 131)" />
         
         {/* Rim light for edge definition with blue */}
-        <pointLight position={[0, 5, -8]} intensity={3.0} color="#F3EAF9" />
+        <pointLight position={[0, 5, -8]} intensity={10} color="#F3EAF9" />
         
         {/* Accent light from above with blue */}
-        <pointLight position={[0, 10, 0]} intensity={2.5} color="#F3EAF9" />
+        <pointLight position={[0, 10, 0]} intensity={12} color="#F3EAF9" />
         
         {/* Additional blue fill light */}
-        <pointLight position={[-3, 4, 3]} intensity={2.0} color="#3a80d2" />
+        <pointLight position={[-3, 4, 3]} intensity={12.0} color="#3a80d2" />
         
         {/* Blue accent light */}
-        <pointLight position={[3, 4, 3]} intensity={1.8} color="#F3EAF9" />
+        <pointLight position={[3, 4, 3]} intensity={11.8} color="#F3EAF9" />
         
         {/* Environment removed to prevent warm yellow/orange reflections - using only blue lights for cool tones */}
 
