@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useHMI } from '../contexts/HMIContext';
+import SettingsApp from './central/SettingsApp';
 import './PassengerDisplay.css';
 
 function PassengerDisplay() {
@@ -48,6 +49,12 @@ function PassengerDisplay() {
           onClick={() => setActiveSection('info')}
         >
           ℹ️ Info
+        </button>
+        <button
+          className={`section-button ${activeSection === 'settings' ? 'active' : ''}`}
+          onClick={() => setActiveSection('settings')}
+        >
+          ⚙️ Settings
         </button>
       </div>
 
@@ -275,6 +282,12 @@ function PassengerDisplay() {
                 All changes made on any display are synchronized across all connected displays in real-time
               </div>
             </div>
+          </div>
+        )}
+
+        {activeSection === 'settings' && (
+          <div className="settings-section">
+            <SettingsApp />
           </div>
         )}
       </div>

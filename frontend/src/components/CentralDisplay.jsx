@@ -4,6 +4,7 @@ import StatusBar from './central/StatusBar';
 import BottomNav from './central/BottomNav';
 import NavigationApp from './central/NavigationApp';
 import CameraApp from './central/CameraApp';
+import SettingsApp from './central/SettingsApp';
 import WidgetsContainer from './central/WidgetsContainer';
 import Vehicle3D from './central/Vehicle3D';
 import './CentralDisplay.css';
@@ -36,6 +37,9 @@ function CentralDisplay() {
       
       {/* Camera App */}
       {activeView === 'camera' && <CameraApp />}
+      
+      {/* Settings App */}
+      {activeView === 'settings' && <SettingsApp />}
       
       <BottomNav activeView={activeView} setActiveView={setActiveView} />
     </div>

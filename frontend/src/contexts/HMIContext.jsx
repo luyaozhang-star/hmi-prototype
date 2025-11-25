@@ -30,7 +30,8 @@ export const HMIProvider = ({ children }) => {
     range: 450,
     tripDistance: 0,
     brightness: 80,
-    theme: 'dark'
+    theme: 'dark',
+    graphicsQuality: 'medium' // low, medium, high
   });
 
   useEffect(() => {
