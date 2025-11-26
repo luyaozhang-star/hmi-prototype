@@ -1,6 +1,6 @@
 import React, { Suspense, useRef, useState, useEffect, useMemo, memo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, useGLTF } from '@react-three/drei';
+import { OrbitControls, useGLTF, Environment, MeshReflectorMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 import Button from '../../design-system/components/Button/Button';
 import { useHMI } from '../../contexts/HMIContext';
@@ -58,38 +58,49 @@ const GROUND_SETTINGS = {
   texture: {
     enabled: true,                      // Enable/disable texture (false = solid color)
     path: '/images/marble_2.png',     // Path to texture image
-    repeat: { x: 4, y: 4 },            // Texture tiling (higher = more repetitions)
-    rotation: 0,                        // Texture rotation in radians (0 = no rotation)
-    opacity: 1.0,                       // Texture opacity (0.0 = invisible, 1.0 = fully visible)
+    repeat: { x: 6, y: 1 },            // Texture tiling (higher = more repetitions)
+    rotation: 15,                        // Texture rotation in radians (0 = no rotation)
+    opacity: 1,                       // Texture opacity (0.0 = invisible, 1.0 = fully visible)
   },
   
   // Material Properties
   material: {
-    color: 'rgb(39, 40, 44)',      // Base color (white = shows texture as-is)
-    roughness: 0.8,        // Surface roughness (0 = smooth/shiny, 1 = rough/matte)
-    metalness: 0.1,        // Metallic property (0 = non-metal, 1 = full metal)
+    color: 'rgb(107, 110, 125)',      // Base color (white = shows texture as-is)
+    roughness: 0.7,        // Surface roughness (0 = smooth/shiny, 1 = rough/matte) - controls reflection clarity
+    metalness: 0.2,        // Metallic property (0 = non-metal, 1 = full metal)
+  },
+  
+  // Reflection Properties
+  reflection: {
+    enabled: true,         // Enable/disable ground reflections
+    intensity: 1.0,        // Reflection intensity (0 = no reflection, 1 = full reflection)
+    blur: [200, 200],     // Reflection blur [horizontal, vertical] (0 = sharp, higher = more blur)
+    mixBlur: 1.25,           // How much blur mixes with distance
+    mixStrength: 5,     // Strength of the reflection mix (0 = no reflection, higher = stronger reflection)
+    mirror: 0.2,          // Mirror-like quality (0 = realistic, 1 = perfect mirror)
+    offset: -0.5,          // Reflection vertical offset (0 = at ground level, higher = further below ground)
   },
   
   // Geometry & Shape
   geometry: {
-    size: 60,              // Ground plane size (width/height in units)
-    bumpiness: 0.12,        // Height variation for bumpy surface (0 = flat)
+    size: 100,              // Ground plane size (width/height in units)
+    bumpiness: 0.1,        // Height variation for bumpy surface (0 = flat)
     enableBumps: true,     // Toggle bumpy displacement on/off
     
     // Texture-based displacement settings
     textureDisplacement: {
       enabled: true,            // Enable texture-based height displacement
-      path: '/images/marble.png',  // Path to displacement/heightmap image (can be different from texture)
-      strength: 4,           // Displacement intensity (how much texture affects height)
-      repeat: { x: 0.01, y: 0.03 },  // Displacement texture tiling (independent from visual texture)
-      offset: { x: 0.043, y: -0.0027 },  // Displacement texture offset (0-1 range, shifts the pattern)
+      path: '/images/marble_displace.png',  // Path to displacement/heightmap image (can be different from texture)
+      strength: 1,           // Displacement intensity (how much texture affects height)
+      repeat: { x: 1, y: 1.3 },  // Displacement texture tiling (independent from visual texture)
+      offset: { x: 0, y: 0 },  // Displacement texture offset (0-1 range, shifts the pattern)
     },
   },
   
   // Position
   position: {
-    xOffset: 0,            // Horizontal position (left/right from center)
-    yOffset: -0.6,        // Vertical position (height from origin)
+    xOffset: 3,            // Horizontal position (left/right from center)
+    yOffset: -0.26,        // Vertical position (height from origin)
   },
 };
 
@@ -179,10 +190,14 @@ function GroundPlane({ quality }) {
   
   // State to track when displacement texture is loaded
   const [displacementLoaded, setDisplacementLoaded] = useState(false);
+  const [displacementTexture, setDisplacementTexture] = useState(null);
   
   // Load texture for displacement mapping
-  const displacementTexture = useMemo(() => {
-    if (!GROUND_SETTINGS.geometry.textureDisplacement.enabled) return null;
+  useEffect(() => {
+    if (!GROUND_SETTINGS.geometry.textureDisplacement.enabled) {
+      setDisplacementTexture(null);
+      return;
+    }
     
     setDisplacementLoaded(false);
     const loader = new THREE.TextureLoader();
@@ -200,7 +215,7 @@ function GroundPlane({ quality }) {
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.RepeatWrapping;
     
-    return tex;
+    setDisplacementTexture(tex);
   }, []);
   
   // Create bumpy geometry using useMemo
@@ -331,14 +346,33 @@ function GroundPlane({ quality }) {
       receiveShadow={preset.enableShadows}
       geometry={bumpyGeometry}
     >
-      <meshStandardMaterial 
-        map={texture}
-        color={GROUND_SETTINGS.material.color}
-        roughness={GROUND_SETTINGS.material.roughness}
-        metalness={GROUND_SETTINGS.material.metalness}
-        transparent={GROUND_SETTINGS.texture.opacity < 1.0}
-        opacity={GROUND_SETTINGS.texture.opacity}
-      />
+      {GROUND_SETTINGS.reflection.enabled ? (
+        <MeshReflectorMaterial
+          map={texture}
+          color={GROUND_SETTINGS.material.color}
+          roughness={GROUND_SETTINGS.material.roughness}
+          metalness={GROUND_SETTINGS.material.metalness}
+          blur={GROUND_SETTINGS.reflection.blur}
+          mixBlur={GROUND_SETTINGS.reflection.mixBlur}
+          mixStrength={GROUND_SETTINGS.reflection.mixStrength}
+          mirror={GROUND_SETTINGS.reflection.mirror}
+          resolution={1024}
+          depthScale={0}
+          minDepthThreshold={0.9}
+          maxDepthThreshold={1}
+          depthToBlurRatioBias={0.25}
+          reflectorOffset={GROUND_SETTINGS.reflection.offset}
+        />
+      ) : (
+        <meshStandardMaterial 
+          map={texture}
+          color={GROUND_SETTINGS.material.color}
+          roughness={GROUND_SETTINGS.material.roughness}
+          metalness={GROUND_SETTINGS.material.metalness}
+          transparent={GROUND_SETTINGS.texture.opacity < 1.0}
+          opacity={GROUND_SETTINGS.texture.opacity}
+        />
+      )}
     </mesh>
   );
 }
@@ -984,6 +1018,9 @@ const Vehicle3D = memo(function Vehicle3D() {
           }
         }}
       >
+        {/* Environment for reflections */}
+        <Environment preset="city" />
+        
         {/* Lighting based on quality */}
         <SceneLighting quality={quality} />
 
