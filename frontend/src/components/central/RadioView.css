@@ -124,10 +124,11 @@
 }
 
 .radio-now-playing .ds-card__body {
-  padding: var(--spacing-24, 24px) !important;
+  padding: 0 !important;
   flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   position: relative;
   z-index: 2;
 }
@@ -142,20 +143,22 @@
   background-image: var(--station-bg-image);
   background-size: cover;
   background-position: center;
-  filter: blur(40px);
   opacity: 0.4;
   transform: scale(1.2);
   z-index: 1;
   transition: opacity 300ms ease;
+  /* Gradient mask: visible at top, fading to transparent at bottom */
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 90%);
 }
 
 /* Background opacity based on playback state */
 .radio-now-playing-bg.is-playing {
-  opacity: 0.4; /* 100% intensity when playing */
+  opacity: 1; /* 100% intensity when playing */
 }
 
 .radio-now-playing-bg.is-paused {
-  opacity: 0.2; /* 50% of playing opacity when paused */
+  opacity: 0.5; /* 50% of playing opacity when paused */
 }
 
 /* Gradient overlay for better text readability */
@@ -179,7 +182,6 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-20, 20px);
-  flex: 1;
   position: relative;
   z-index: 2;
 }
@@ -313,8 +315,6 @@
 }
 
 .radio-control-btn {
-  width: 64px;
-  height: 64px;
   color: var(--onSurface-inactive);
   background: var(--surface-secondary-enabled);
   border-radius: 50%;
@@ -332,8 +332,6 @@
 }
 
 .radio-control-play {
-  width: 80px;
-  height: 80px;
   background: var(--surface-primary-enabled);
   color: var(--onSurface-primary-enabled);
 }

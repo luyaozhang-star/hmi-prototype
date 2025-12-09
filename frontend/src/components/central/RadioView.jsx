@@ -213,13 +213,6 @@ const RadioView = () => {
             <div className={`radio-now-playing-bg ${isPlaying ? 'is-playing' : 'is-paused'}`} />
           )}
           <div className="radio-now-playing-content">
-            <div className="radio-station-logo">
-              <img
-                src={currentStation?.favicon || FALLBACK_LOGO}
-                alt={currentStation?.name || 'Radio'}
-                onError={(e) => { e.target.src = FALLBACK_LOGO; }}
-              />
-            </div>
             <div className="radio-station-info">
               <Typography variant="headline-medium" className="radio-station-name">
                 {currentStation?.name || 'Select a Station'}
@@ -275,6 +268,7 @@ const RadioView = () => {
               </svg>
             }
             label="Previous station"
+            size="large"
             className="radio-control-btn"
             onClick={prevStation}
             disabled={!currentStation || stations.length === 0}
@@ -293,6 +287,7 @@ const RadioView = () => {
               )
             }
             label={isPlaying ? 'Pause' : 'Play'}
+            size="large"
             className="radio-control-btn radio-control-play"
             onClick={togglePlayback}
             disabled={!currentStation}
@@ -305,6 +300,7 @@ const RadioView = () => {
               </svg>
             }
             label="Next station"
+            size="large"
             className="radio-control-btn"
             onClick={nextStation}
             disabled={!currentStation || stations.length === 0}
