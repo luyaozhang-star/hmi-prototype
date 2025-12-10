@@ -394,6 +394,7 @@
 }
 
 .radio-list-header {
+  display: none; /* Hidden for now */
   color: var(--onSurface-inactive);
   margin: 0;
   flex-shrink: 0;
