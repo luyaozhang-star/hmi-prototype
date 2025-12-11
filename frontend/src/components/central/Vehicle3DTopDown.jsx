@@ -21,6 +21,11 @@ const MODEL_SCALE_CONFIG = {
     positionOffset: { x: 0.15, y: 1.9, z: 0 },
     rotation: { x: 0, y: -90, z: 0 },
   },
+  '/models/macan.glb': {
+    targetSize: 4.5,
+    positionOffset: { x: 0.17, y: 0, z: 0.2 },
+    rotation: { x: 0, y: 0, z: 0 },
+  },
 };
 
 const DEFAULT_TARGET_SIZE = 5.0;
