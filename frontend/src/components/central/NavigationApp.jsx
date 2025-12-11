@@ -148,6 +148,7 @@ function NavigationApp() {
   const [locationStatus, setLocationStatus] = useState('requesting');
   const [isSearchOpen, setIsSearchOpen] = useState(true); // Show by default
   const [searchDestination, setSearchDestination] = useState(null);
+  const [destinationCoords, setDestinationCoords] = useState(null); // Store destination coordinates for map shifting
   const [activeRoute, setActiveRoute] = useState(null);
   const [isLoadingRoute, setIsLoadingRoute] = useState(false);
   const [overlayPanelSide, setOverlayPanelSide] = useState('left'); // Track which side the overlay is on
@@ -698,6 +699,9 @@ function NavigationApp() {
       return;
     }
 
+    // Store destination coordinates for map shifting
+    setDestinationCoords({ latitude: destination.latitude, longitude: destination.longitude });
+
     // Show loading state
     setIsLoadingRoute(true);
 
@@ -881,6 +885,7 @@ function NavigationApp() {
     setActiveCategory(null);
     
     setSearchDestination(result.name);
+    setDestinationCoords({ latitude: result.latitude, longitude: result.longitude });
     setIsLoadingRoute(true);
 
     // Get current car position
@@ -965,6 +970,7 @@ function NavigationApp() {
     // Clear active route state
     setActiveRoute(null);
     setSearchDestination(null);
+    setDestinationCoords(null);
     
     // Reset map view to current location
     if (map.current && mapLoaded) {
@@ -990,20 +996,17 @@ function NavigationApp() {
       ? { top: 100, bottom: 100, left: overlayPadding, right: 100 }
       : { top: 100, bottom: 100, left: 100, right: overlayPadding };
     
-    // Re-center the map if there's an active route
-    if (activeRoute) {
-      const destination = DESTINATIONS[activeRoute];
-      if (destination) {
-        const currentLocation = FAKE_CURRENT_LOCATION;
-        const bounds = new maplibregl.LngLatBounds();
-        bounds.extend([currentLocation.longitude, currentLocation.latitude]);
-        bounds.extend([destination.longitude, destination.latitude]);
-        
-        map.current.fitBounds(bounds, {
-          padding,
-          duration: 800
-        });
-      }
+    // Re-center the map if there's an active route (either predefined or from search)
+    if (activeRoute && destinationCoords) {
+      const currentLocation = FAKE_CURRENT_LOCATION;
+      const bounds = new maplibregl.LngLatBounds();
+      bounds.extend([currentLocation.longitude, currentLocation.latitude]);
+      bounds.extend([destinationCoords.longitude, destinationCoords.latitude]);
+      
+      map.current.fitBounds(bounds, {
+        padding,
+        duration: 800
+      });
     }
     // Re-center the map if there are search results displayed
     else if (searchResults.length > 0) {
