@@ -223,8 +223,24 @@ function CentralDisplay() {
         </div>
       )}
       
-      {/* Navigation App */}
-      {activeView === 'navigation' && <NavigationApp key="navigation-map" initialDestination={pendingDestination} onDestinationHandled={() => setPendingDestination(null)} />}
+      {/* Navigation App - Always mounted, hidden when not active to preserve state */}
+      <div 
+        className="app-container"
+        style={{ 
+          visibility: activeView === 'navigation' ? 'visible' : 'hidden',
+          position: activeView === 'navigation' ? 'relative' : 'absolute',
+          pointerEvents: activeView === 'navigation' ? 'auto' : 'none',
+          zIndex: activeView === 'navigation' ? 1 : -1,
+          width: '100%',
+          height: '100%'
+        }}
+      >
+        <NavigationApp 
+          key="navigation-map" 
+          initialDestination={pendingDestination} 
+          onDestinationHandled={() => setPendingDestination(null)} 
+        />
+      </div>
       
       {/* Camera App */}
       {activeView === 'camera' && <CameraApp />}
