@@ -3,6 +3,7 @@ import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import './NavigationApp.css';
 import MapSearchOverlay from './MapSearchOverlay';
+import Button from '../../design-system/components/Button/Button';
 
 // Module-level variable to track initialization globally
 let globalMapInstance = null;
@@ -1096,6 +1097,31 @@ function NavigationApp({ initialDestination, onDestinationHandled }) {
     console.log('Route cleared');
   };
 
+  // Go to current location
+  const goToCurrentLocation = useCallback(() => {
+    if (!map.current || !mapLoaded) return;
+    
+    map.current.flyTo({
+      center: [currentLocation.current.longitude, currentLocation.current.latitude],
+      zoom: 16,
+      duration: 1000
+    });
+    
+    console.log('Flying to current location:', currentLocation.current);
+  }, [mapLoaded]);
+
+  // Zoom in
+  const zoomIn = useCallback(() => {
+    if (!map.current || !mapLoaded) return;
+    map.current.zoomIn({ duration: 300 });
+  }, [mapLoaded]);
+
+  // Zoom out
+  const zoomOut = useCallback(() => {
+    if (!map.current || !mapLoaded) return;
+    map.current.zoomOut({ duration: 300 });
+  }, [mapLoaded]);
+
   // Handle overlay panel side change
   const handlePanelSideChange = (newSide) => {
     console.log('Overlay panel moved to:', newSide);
@@ -1249,6 +1275,51 @@ function NavigationApp({ initialDestination, onDestinationHandled }) {
         onClearRoute={clearRoute}
         isLoadingRoute={isLoadingRoute}
       />
+
+      {/* Map Controls Container - Switches sides based on overlay position */}
+      <div className={`map-controls-container ${overlayPanelSide === 'left' ? 'right' : 'left'}`}>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={goToCurrentLocation}
+          aria-label="Go to current location"
+          icon={
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+              <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2"/>
+              <line x1="12" y1="2" x2="12" y2="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <line x1="12" y1="20" x2="12" y2="22" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <line x1="2" y1="12" x2="4" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <line x1="20" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          }
+        />
+        <div className="map-controls-divider" />
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={zoomIn}
+          aria-label="Zoom in"
+          icon={
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          }
+        />
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={zoomOut}
+          aria-label="Zoom out"
+          icon={
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          }
+        />
+      </div>
+
       {mapLoaded && locationStatus === 'requesting' && (
         <div className="location-status">
           <div className="status-indicator">

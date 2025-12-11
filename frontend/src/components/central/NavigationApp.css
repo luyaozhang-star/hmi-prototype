@@ -279,3 +279,38 @@
   color: rgba(255, 255, 255, 0.7) !important;
 }
 
+/* Map Controls Container - Card-like container for map control buttons */
+.map-controls-container {
+  position: absolute;
+  top: var(--spacing-8, 8px);
+  z-index: 100;
+  background-color: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
+  backdrop-filter: blur(20px);
+  border-radius: var(--borderRadius-16, 16px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  padding: var(--spacing-8, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8, 8px);
+  transition: left 0.5s var(--motion-easing-standard, ease), 
+              right 0.5s var(--motion-easing-standard, ease);
+}
+
+/* Position on right side (when overlay is on left) */
+.map-controls-container.right {
+  right: var(--spacing-8, 8px);
+  left: auto;
+}
+
+/* Position on left side (when overlay is on right) */
+.map-controls-container.left {
+  left: var(--spacing-8, 8px);
+  right: auto;
+}
+
+.map-controls-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--elements-divider, rgba(255, 255, 255, 0.05));
+}
+
