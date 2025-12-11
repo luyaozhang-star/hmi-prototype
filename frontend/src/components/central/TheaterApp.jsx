@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from '../../design-system';
+import { Button, Tabs } from '../../design-system';
 import './TheaterApp.css';
 
 const streamingServices = [
@@ -79,12 +79,18 @@ function TheaterApp() {
           </Button>
         </div>
         {/* Search Icon */}
-        <button className="theater-search-btn" aria-label="Search">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="8"/>
-            <path d="M21 21l-4.35-4.35"/>
-          </svg>
-        </button>
+        <Button
+          variant="secondary"
+          size="regular"
+          className="theater-search-btn"
+          aria-label="Search"
+          icon={
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="M21 21l-4.35-4.35"/>
+            </svg>
+          }
+        />
         {/* Carousel Indicators */}
         <div className="theater-banner-indicators">
           <span className="indicator active" />
@@ -95,19 +101,13 @@ function TheaterApp() {
       </div>
 
       {/* Navigation Tabs */}
-      <nav className="theater-tabs">
-        {tabs.map((tab) => (
-          <Button
-            key={tab.id}
-            variant={activeTab === tab.id ? 'primary' : 'tertiary'}
-            size="regular"
-            className="theater-tab"
-            onClick={() => setActiveTab(tab.id)}
-          >
-            {tab.label}
-          </Button>
-        ))}
-      </nav>
+      <Tabs
+        tabs={tabs}
+        activeTab={activeTab}
+        onChange={setActiveTab}
+        variant="pill"
+        className="theater-tabs"
+      />
 
       {/* Streaming Services */}
       <section className="theater-services">

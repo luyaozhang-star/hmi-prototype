@@ -12,6 +12,7 @@ export { IconButton } from './components/IconButton';
 export { Typography } from './components/Typography';
 export { TextField } from './components/TextField';
 export { Slider } from './components/Slider';
+export { Tabs } from './components/Tabs';
 
 // Utilities
 export { classNames } from './utils/classNames';

@@ -1,0 +1,161 @@
+/* Tabs Component Styles */
+
+.ds-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4, 4px);
+  font-family: var(--fontFamily-hmi, 'TT Commons Pro', -apple-system, BlinkMacSystemFont, sans-serif);
+}
+
+.ds-tabs--full-width {
+  display: flex;
+  width: 100%;
+}
+
+.ds-tabs--full-width .ds-tabs__tab {
+  flex: 1;
+}
+
+/* Tab Button Base */
+.ds-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8, 8px);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--fontWeight-semibold, 600);
+  transition: all 150ms var(--motion-easing-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.ds-tabs__tab:focus-visible {
+  outline: 2px solid var(--surface-primary-enabled, #335fff);
+  outline-offset: 2px;
+}
+
+.ds-tabs__tab:active {
+  transform: scale(0.98);
+}
+
+/* ======================
+   PILL VARIANT
+   ====================== */
+.ds-tabs--pill {
+  padding: var(--spacing-8, 8px);
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
+  border-radius: var(--borderRadius-16, 16px);
+}
+
+.ds-tabs--pill .ds-tabs__tab {
+  background: transparent;
+  color: var(--onSurface-inactive, rgba(255, 255, 255, 0.6));
+  border-radius: var(--borderRadius-12, 12px);
+}
+
+.ds-tabs--pill .ds-tabs__tab:hover:not(.ds-tabs__tab--active) {
+  color: var(--onSurface-enabled, rgba(255, 255, 255, 0.9));
+  background: var(--surface-tertiary-pressed, rgba(255, 255, 255, 0.05));
+}
+
+.ds-tabs--pill .ds-tabs__tab--active {
+  background: var(--surface-primary-enabled, #335fff);
+  color: var(--onSurface-primary-enabled, rgba(255, 255, 255, 0.9));
+}
+
+/* ======================
+   UNDERLINE VARIANT
+   ====================== */
+.ds-tabs--underline {
+  gap: 0;
+  border-bottom: 1px solid var(--elements-divider, rgba(255, 255, 255, 0.1));
+}
+
+.ds-tabs--underline .ds-tabs__tab {
+  background: transparent;
+  color: var(--onSurface-inactive, rgba(255, 255, 255, 0.6));
+  border-radius: 0;
+  position: relative;
+}
+
+.ds-tabs--underline .ds-tabs__tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: transparent;
+  transition: background-color 150ms var(--motion-easing-smooth, cubic-bezier(0.4, 0, 0.2, 1));
+}
+
+.ds-tabs--underline .ds-tabs__tab:hover:not(.ds-tabs__tab--active) {
+  color: var(--onSurface-enabled, rgba(255, 255, 255, 0.9));
+}
+
+.ds-tabs--underline .ds-tabs__tab--active {
+  color: var(--onSurface-enabled, rgba(255, 255, 255, 0.9));
+}
+
+.ds-tabs--underline .ds-tabs__tab--active::after {
+  background: var(--surface-primary-enabled, #335fff);
+}
+
+/* ======================
+   SIZES
+   ====================== */
+
+/* Regular Size */
+.ds-tabs--regular .ds-tabs__tab {
+  padding: var(--spacing-16, 16px) var(--spacing-24, 24px);
+  font-size: var(--fontSize-20, 20px);
+  line-height: var(--lineHeight-28, 28px);
+  letter-spacing: var(--letterSpacing-normal, 0px);
+  min-height: 64px;
+}
+
+/* Compact Size */
+.ds-tabs--compact .ds-tabs__tab {
+  padding: var(--spacing-12, 12px) var(--spacing-16, 16px);
+  font-size: var(--fontSize-16, 16px);
+  line-height: var(--lineHeight-24, 24px);
+  letter-spacing: var(--letterSpacing-tight, -0.5px);
+  min-height: 48px;
+}
+
+/* Adjust pill container padding for compact size */
+.ds-tabs--pill.ds-tabs--compact {
+  padding: var(--spacing-4, 4px);
+  border-radius: var(--borderRadius-12, 12px);
+}
+
+.ds-tabs--pill.ds-tabs--compact .ds-tabs__tab {
+  border-radius: var(--borderRadius-8, 8px);
+}
+
+/* ======================
+   ICON STYLES
+   ====================== */
+.ds-tabs__tab-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ds-tabs__tab-icon svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+/* ======================
+   LABEL STYLES
+   ====================== */
+.ds-tabs__tab-label {
+  display: inline-flex;
+  align-items: center;
+}
+
