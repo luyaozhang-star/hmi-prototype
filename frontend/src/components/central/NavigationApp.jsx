@@ -1022,20 +1022,7 @@ function NavigationApp() {
         maxZoom: 14
       });
     }
-    // No route or results, just shift the current view
-    else {
-      const currentCenter = map.current.getCenter();
-      const currentZoom = map.current.getZoom();
-      
-      // Calculate offset based on panel side (shift map center away from panel)
-      const offsetLng = newSide === 'left' ? 0.01 : -0.01;
-      
-      map.current.easeTo({
-        center: [currentCenter.lng + offsetLng, currentCenter.lat],
-        zoom: currentZoom,
-        duration: 800
-      });
-    }
+    // No route or results - don't reposition the map
   };
 
   return (
