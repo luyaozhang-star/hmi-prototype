@@ -192,7 +192,7 @@ function CentralDisplay() {
 
   return (
     <div className="central-display">
-      <StatusBar />
+      <StatusBar activeView={activeView} setActiveView={setActiveView} />
       
       {/* Home View - Vehicle Image and Widgets */}
       {activeView === 'home' && (

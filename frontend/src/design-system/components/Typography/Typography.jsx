@@ -11,7 +11,7 @@ import './Typography.css';
  * @param {'display-xxlarge' | 'display-xlarge' | 'display-large' | 'display-medium' | 'display-small' | 
  *         'headline-large' | 'headline-medium' | 'headline-small' | 
  *         'body-large' | 'body-medium' | 'body-small' | 'body-tiny' | 
- *         'label-large' | 'label-medium' | 'label-small'} props.variant - Typography variant
+ *         'label-large' | 'label-medium' | 'label-small' | 'label-tiny'} props.variant - Typography variant
  * @param {'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span' | 'div'} props.as - HTML element to render
  * @param {ReactNode} props.children - Text content
  * @param {string} props.className - Additional CSS classes

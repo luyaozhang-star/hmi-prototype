@@ -285,6 +285,18 @@ export const HMIProvider = ({ children }) => {
     }
   }, [socket]);
 
+  const updateCurrentTrack = useCallback((trackInfo) => {
+    // Update currentTrack with song title only
+    let trackName = 'No Track Playing';
+    if (trackInfo && trackInfo.title) {
+      trackName = trackInfo.title;
+    }
+    setState(prev => ({
+      ...prev,
+      currentTrack: trackName
+    }));
+  }, []);
+
   // Fetch initial state from backend on mount
   useEffect(() => {
     const fetchInitialState = async () => {
@@ -397,7 +409,8 @@ export const HMIProvider = ({ children }) => {
     nextStation,
     prevStation,
     toggleFavorite,
-    setRadioVolume
+    setRadioVolume,
+    updateCurrentTrack
   };
 
   return <HMIContext.Provider value={value}>{children}</HMIContext.Provider>;

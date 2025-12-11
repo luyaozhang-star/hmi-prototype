@@ -1,8 +1,47 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useHMI } from '../../contexts/HMIContext';
+import { Typography } from '../../design-system/components/Typography';
 import './StatusBar.css';
 
-function StatusBar() {
+function StatusBar({ activeView, setActiveView }) {
+  const { state } = useHMI();
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [isVisible, setIsVisible] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const exitTimeoutRef = useRef(null);
+  
+  // Determine if we should show the now playing indicator
+  const { radio } = state;
+  const isPlaying = radio.isPlaying;
+  const currentStation = radio.currentStation;
+  const shouldShow = isPlaying && currentStation;
+  
+  // Handle enter/exit animations
+  useEffect(() => {
+    if (shouldShow && !isVisible) {
+      // Entering: show immediately
+      setIsExiting(false);
+      setIsVisible(true);
+    } else if (!shouldShow && isVisible) {
+      // Exiting: start exit animation, then hide after duration
+      setIsExiting(true);
+      exitTimeoutRef.current = setTimeout(() => {
+        setIsVisible(false);
+        setIsExiting(false);
+      }, 150); // Match --motion-duration-fast
+    }
+    
+    return () => {
+      if (exitTimeoutRef.current) {
+        clearTimeout(exitTimeoutRef.current);
+      }
+    };
+  }, [shouldShow, isVisible]);
+  
+  // Use currentTrack if available and not default, otherwise fall back to station name
+  const displayTrackName = state.currentTrack && state.currentTrack !== 'No Track Playing' 
+    ? state.currentTrack 
+    : currentStation?.name;
 
   // Update time every second
   useEffect(() => {
@@ -42,6 +81,39 @@ function StatusBar() {
         </svg>
         <span className="user-name">Caleb Jones</span>
       </div>
+
+      {/* Now Playing Indicator - shows when music is playing and not on home/media */}
+      {isVisible && (
+        <button 
+          className={`status-now-playing ${isExiting ? 'is-exiting' : ''}`}
+          onClick={() => setActiveView('media')}
+          aria-label="Open media player"
+        >
+          <div className="now-playing-thumbnail">
+            {currentStation.favicon ? (
+              <img 
+                src={currentStation.favicon} 
+                alt={currentStation.name}
+                onError={(e) => {
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+              />
+            ) : null}
+            <div className="now-playing-thumbnail-fallback" style={{ display: currentStation.favicon ? 'none' : 'flex' }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 3V12.26C11.47 12.09 10.9 12 10.3 12C7.58 12 5.3 14.28 5.3 17C5.3 19.72 7.58 22 10.3 22C12.94 22 15.13 19.83 15.29 17.21L15.3 17V6.5H19V3H12Z" fill="currentColor"/>
+              </svg>
+            </div>
+          </div>
+          <Typography variant="label-tiny" as="span" className="now-playing-name" truncate>{displayTrackName}</Typography>
+          <div className="now-playing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      )}
 
       {/* Right: Weather & Time */}
       <div className="status-right">

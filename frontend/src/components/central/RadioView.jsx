@@ -99,7 +99,8 @@ const RadioView = () => {
     prevStation,
     toggleFavorite,
     setRadioVolume,
-    isFavorite
+    isFavorite,
+    updateCurrentTrack
   } = useRadio();
 
   const currentSource = MEDIA_SOURCES.find(s => s.id === selectedSource);
@@ -124,6 +125,7 @@ const RadioView = () => {
     const fetchNowPlaying = async () => {
       if (!currentStation?.url_resolved && !currentStation?.url) {
         setNowPlaying({ artist: null, title: null });
+        updateCurrentTrack(null);
         return;
       }
 
@@ -136,16 +138,20 @@ const RadioView = () => {
         const data = await response.json();
         
         if (data.success && (data.artist || data.title)) {
-          setNowPlaying({
+          const trackInfo = {
             artist: data.artist,
             title: data.title
-          });
+          };
+          setNowPlaying(trackInfo);
+          updateCurrentTrack(trackInfo);
         } else {
           setNowPlaying({ artist: null, title: null });
+          updateCurrentTrack(null);
         }
       } catch (error) {
         console.error('Error fetching now-playing info:', error);
         setNowPlaying({ artist: null, title: null });
+        updateCurrentTrack(null);
       }
     };
 
@@ -155,7 +161,7 @@ const RadioView = () => {
       clearInterval(interval);
       clearTimeout(animationTimer);
     };
-  }, [currentStation]);
+  }, [currentStation, updateCurrentTrack]);
 
   const handleSourceSelect = (sourceId) => {
     const source = MEDIA_SOURCES.find(s => s.id === sourceId);

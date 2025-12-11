@@ -34,7 +34,8 @@ export const useRadio = () => {
     nextStation,
     prevStation,
     toggleFavorite,
-    setRadioVolume
+    setRadioVolume,
+    updateCurrentTrack
   } = useHMI();
 
   // Use default state if radio is not defined
@@ -75,7 +76,8 @@ export const useRadio = () => {
     nextStation,
     prevStation,
     toggleFavorite,
-    setRadioVolume
+    setRadioVolume,
+    updateCurrentTrack
   };
 };
 
