@@ -68,14 +68,14 @@ const calculateDistanceMiles = (lat1, lon1, lat2, lon2) => {
 };
 
 // Search for places using Photon API
-const searchPhoton = async (query, isCategory = false) => {
+const searchPhoton = async (query, isCategory = false, userLocation = FAKE_CURRENT_LOCATION) => {
   try {
     // Request more results to filter by distance, then take top 10 within range
     const params = new URLSearchParams({
       q: isCategory ? query : query,
       limit: 50,
-      lat: FAKE_CURRENT_LOCATION.latitude,
-      lon: FAKE_CURRENT_LOCATION.longitude,
+      lat: userLocation.latitude,
+      lon: userLocation.longitude,
       lang: 'en'
     });
 
@@ -101,8 +101,8 @@ const searchPhoton = async (query, isCategory = false) => {
       const lat = feature.geometry.coordinates[1];
       const lon = feature.geometry.coordinates[0];
       const distance = calculateDistanceMiles(
-        FAKE_CURRENT_LOCATION.latitude,
-        FAKE_CURRENT_LOCATION.longitude,
+        userLocation.latitude,
+        userLocation.longitude,
         lat,
         lon
       );
@@ -135,7 +135,7 @@ const searchPhoton = async (query, isCategory = false) => {
   }
 };
 
-function NavigationApp() {
+function NavigationApp({ initialDestination, onDestinationHandled }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const geolocateControl = useRef(null);
@@ -144,6 +144,7 @@ function NavigationApp() {
   const isInitialized = useRef(false);
   const routeSvgRef = useRef(null);
   const poiMarkers = useRef([]); // Array to track POI markers for cleanup
+  const currentLocation = useRef(FAKE_CURRENT_LOCATION); // Stores current user location (real or fallback)
   const [mapLoaded, setMapLoaded] = useState(false);
   const [locationStatus, setLocationStatus] = useState('requesting');
   const [isSearchOpen, setIsSearchOpen] = useState(true); // Show by default
@@ -225,6 +226,11 @@ function NavigationApp() {
           height: mapContainer.current?.offsetHeight
         });
         
+        // Store the user location for use in routing and search
+        if (userLocation) {
+          currentLocation.current = userLocation;
+        }
+        
         const center = userLocation 
           ? [userLocation.longitude, userLocation.latitude]
           : [-122.4194, 37.7749]; // Fallback to San Francisco
@@ -286,6 +292,7 @@ function NavigationApp() {
           },
           center: center,
           zoom: 16,
+          maxZoom: 18, // Limit maximum zoom to prevent zooming in too close
           pitch: 0,
           bearing: 0,
           attributionControl: false // Hide attribution control
@@ -458,12 +465,8 @@ function NavigationApp() {
       }
     };
     
-    console.log('Using preset fake location:', FAKE_CURRENT_LOCATION);
-    initializeMap(FAKE_CURRENT_LOCATION);
-    
-    // ===== REAL GEOLOCATION CODE (COMMENTED OUT FOR FUTURE USE) =====
-    // Uncomment the code below to use real device location instead of fake location
-    /*
+    // ===== REAL GEOLOCATION CODE =====
+    // Uses real device location for the car marker
     if ('geolocation' in navigator) {
       console.log('Requesting your location...');
       navigator.geolocation.getCurrentPosition(
@@ -477,20 +480,22 @@ function NavigationApp() {
         (error) => {
           console.warn('Could not get location:', error.message);
           setLocationStatus('error');
-          initializeMap(null); // Initialize with default location
+          // Fall back to preset location if geolocation fails
+          console.log('Falling back to preset location:', FAKE_CURRENT_LOCATION);
+          initializeMap(FAKE_CURRENT_LOCATION);
         },
         {
           enableHighAccuracy: true,
-          timeout: 5000,
+          timeout: 10000,
           maximumAge: 0
         }
       );
     } else {
       console.warn('Geolocation not supported');
       setLocationStatus('error');
-      initializeMap(null);
+      // Fall back to preset location if geolocation not supported
+      initializeMap(FAKE_CURRENT_LOCATION);
     }
-    */
 
     return () => {
       // Cleanup function - only run when component truly unmounts
@@ -582,6 +587,9 @@ function NavigationApp() {
       }
     };
   }, [routeCoordinates, updateSvgRoute]);
+
+  // Ref to track if initial destination has been handled
+  const initialDestinationHandled = useRef(false);
 
   // Predefined destinations for simulation
   const DESTINATIONS = {
@@ -705,11 +713,11 @@ function NavigationApp() {
     // Show loading state
     setIsLoadingRoute(true);
 
-    // Get current car position (using fake location)
-    const currentLocation = FAKE_CURRENT_LOCATION;
+    // Get current car position (using real location or fallback)
+    const carLocation = currentLocation.current;
     
     // Fetch actual route geometry from OSRM API with turn-by-turn instructions
-    const fetchedRouteCoordinates = await fetchRouteGeometry(currentLocation, destination, destination.name);
+    const fetchedRouteCoordinates = await fetchRouteGeometry(carLocation, destination, destination.name);
     
     setIsLoadingRoute(false);
     
@@ -762,7 +770,7 @@ function NavigationApp() {
 
     // Fit map to show both start and end points
     const bounds = new maplibregl.LngLatBounds();
-    bounds.extend([currentLocation.longitude, currentLocation.latitude]);
+    bounds.extend([carLocation.longitude, carLocation.latitude]);
     bounds.extend([destination.longitude, destination.latitude]);
     
     // Dynamic padding based on which side the overlay is on
@@ -823,7 +831,7 @@ function NavigationApp() {
     // Fit map to show all markers plus current location
     if (results.length > 0) {
       const bounds = new maplibregl.LngLatBounds();
-      bounds.extend([FAKE_CURRENT_LOCATION.longitude, FAKE_CURRENT_LOCATION.latitude]);
+      bounds.extend([currentLocation.current.longitude, currentLocation.current.latitude]);
       results.forEach(result => {
         bounds.extend([result.longitude, result.latitude]);
       });
@@ -862,7 +870,7 @@ function NavigationApp() {
     setSearchResults([]);
     setActiveCategory(isCategory ? query : null);
     
-    const results = await searchPhoton(query, isCategory);
+    const results = await searchPhoton(query, isCategory, currentLocation.current);
     
     setSearchResults(results);
     setIsSearching(false);
@@ -888,11 +896,11 @@ function NavigationApp() {
     setDestinationCoords({ latitude: result.latitude, longitude: result.longitude });
     setIsLoadingRoute(true);
 
-    // Get current car position
-    const currentLocation = FAKE_CURRENT_LOCATION;
+    // Get current car position (using real location or fallback)
+    const carLocation = currentLocation.current;
     
     // Fetch route geometry
-    const fetchedRouteCoordinates = await fetchRouteGeometry(currentLocation, result, result.name);
+    const fetchedRouteCoordinates = await fetchRouteGeometry(carLocation, result, result.name);
     
     setIsLoadingRoute(false);
     setRouteCoordinates(fetchedRouteCoordinates);
@@ -934,7 +942,7 @@ function NavigationApp() {
 
     // Fit map to show route
     const bounds = new maplibregl.LngLatBounds();
-    bounds.extend([currentLocation.longitude, currentLocation.latitude]);
+    bounds.extend([carLocation.longitude, carLocation.latitude]);
     bounds.extend([result.longitude, result.latitude]);
     
     const overlayPadding = 550;
@@ -975,7 +983,7 @@ function NavigationApp() {
     // Reset map view to current location
     if (map.current && mapLoaded) {
       map.current.easeTo({
-        center: [FAKE_CURRENT_LOCATION.longitude, FAKE_CURRENT_LOCATION.latitude],
+        center: [currentLocation.current.longitude, currentLocation.current.latitude],
         zoom: 16,
         duration: 1000
       });
@@ -998,9 +1006,9 @@ function NavigationApp() {
     
     // Re-center the map if there's an active route (either predefined or from search)
     if (activeRoute && destinationCoords) {
-      const currentLocation = FAKE_CURRENT_LOCATION;
+      const carLocation = currentLocation.current;
       const bounds = new maplibregl.LngLatBounds();
-      bounds.extend([currentLocation.longitude, currentLocation.latitude]);
+      bounds.extend([carLocation.longitude, carLocation.latitude]);
       bounds.extend([destinationCoords.longitude, destinationCoords.latitude]);
       
       map.current.fitBounds(bounds, {
@@ -1011,7 +1019,7 @@ function NavigationApp() {
     // Re-center the map if there are search results displayed
     else if (searchResults.length > 0) {
       const bounds = new maplibregl.LngLatBounds();
-      bounds.extend([FAKE_CURRENT_LOCATION.longitude, FAKE_CURRENT_LOCATION.latitude]);
+      bounds.extend([currentLocation.current.longitude, currentLocation.current.latitude]);
       searchResults.forEach(result => {
         bounds.extend([result.longitude, result.latitude]);
       });
@@ -1024,6 +1032,97 @@ function NavigationApp() {
     }
     // No route or results - don't reposition the map
   };
+
+  // Handle initial destination passed from widget (e.g., restaurant recommendation)
+  useEffect(() => {
+    // Only handle initial destination once when map is loaded
+    if (initialDestination && mapLoaded && !initialDestinationHandled.current) {
+      initialDestinationHandled.current = true;
+      console.log('Navigating to initial destination from widget:', initialDestination);
+      
+      // Use a small delay to ensure map is fully ready
+      const timer = setTimeout(async () => {
+        // Set destination info
+        setSearchDestination(initialDestination.name);
+        setDestinationCoords({ 
+          latitude: initialDestination.latitude, 
+          longitude: initialDestination.longitude 
+        });
+        setIsLoadingRoute(true);
+
+        // Get current car position (using real location or fallback)
+        const carLocation = currentLocation.current;
+        
+        // Fetch route geometry
+        const fetchedRouteCoordinates = await fetchRouteGeometry(
+          carLocation, 
+          initialDestination, 
+          initialDestination.name
+        );
+        
+        setIsLoadingRoute(false);
+        setRouteCoordinates(fetchedRouteCoordinates);
+
+        // Remove existing destination marker if any
+        if (destinationMarker.current) {
+          destinationMarker.current.remove();
+          destinationMarker.current = null;
+        }
+
+        // Create destination marker
+        const destElement = document.createElement('div');
+        destElement.className = 'destination-marker';
+        destElement.innerHTML = `
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <foreignObject x="-70" y="-70" width="188" height="188">
+              <div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(35px);clip-path:url(#bgblur_dest_marker);height:100%;width:100%"></div>
+            </foreignObject>
+            <g data-figma-bg-blur-radius="70">
+              <rect width="48" height="48" rx="24" fill="#335FFF"/>
+              <circle cx="24" cy="24" r="12" fill="#EFF4F9"/>
+            </g>
+            <defs>
+              <clipPath id="bgblur_dest_marker" transform="translate(70 70)">
+                <rect width="48" height="48" rx="24"/>
+              </clipPath>
+            </defs>
+          </svg>
+        `;
+
+        if (map.current) {
+          destinationMarker.current = new maplibregl.Marker({
+            element: destElement,
+            anchor: 'center',
+            rotationAlignment: 'map',
+            pitchAlignment: 'map'
+          })
+            .setLngLat([initialDestination.longitude, initialDestination.latitude])
+            .addTo(map.current);
+
+          // Fit map to show route
+          const bounds = new maplibregl.LngLatBounds();
+          bounds.extend([carLocation.longitude, carLocation.latitude]);
+          bounds.extend([initialDestination.longitude, initialDestination.latitude]);
+          
+          const overlayPadding = 550;
+          const padding = overlayPanelSide === 'left' 
+            ? { top: 100, bottom: 100, left: overlayPadding, right: 100 }
+            : { top: 100, bottom: 100, left: 100, right: overlayPadding };
+          
+          map.current.fitBounds(bounds, { padding, duration: 1000 });
+        }
+
+        setActiveRoute(initialDestination.name);
+        
+        // Clear the pending destination
+        if (onDestinationHandled) {
+          onDestinationHandled();
+        }
+      }, 500);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [initialDestination, mapLoaded, overlayPanelSide, onDestinationHandled]);
 
   return (
     <div className="navigation-app">

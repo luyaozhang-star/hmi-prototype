@@ -3,6 +3,179 @@ import { Card, Button, Typography, IconButton } from '../../design-system';
 import { useRadio } from '../../hooks/useRadio';
 import './WidgetsContainer.css';
 
+// ===== FALLBACK LOCATION (used when geolocation is unavailable) =====
+// San Mateo Downtown, CA coordinates
+const FALLBACK_LOCATION = {
+  latitude: 37.5630,
+  longitude: -122.3255
+};
+
+// Calculate distance between two coordinates using Haversine formula (returns miles)
+const calculateDistanceMiles = (lat1, lon1, lat2, lon2) => {
+  const R = 3958.8; // Earth's radius in miles
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = 
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+};
+
+// Get current location using browser geolocation API
+// Returns a promise that resolves to user's location or fallback
+const getCurrentLocation = () => {
+  return new Promise((resolve) => {
+    if (!('geolocation' in navigator)) {
+      console.log('Geolocation not supported, using fallback location');
+      resolve(FALLBACK_LOCATION);
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log('Got user location for restaurant search:', position.coords);
+        resolve({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      },
+      (error) => {
+        console.warn('Geolocation error, using fallback location:', error.message);
+        resolve(FALLBACK_LOCATION);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 60000 // Cache location for 1 minute
+      }
+    );
+  });
+};
+
+// Estimate driving time in minutes (assuming 25 mph average city speed)
+const estimateDrivingMinutes = (distanceMiles) => {
+  const avgSpeedMph = 25;
+  return Math.ceil((distanceMiles / avgSpeedMph) * 60);
+};
+
+// Format Photon address from properties
+const formatPhotonAddress = (props) => {
+  const parts = [];
+  if (props.housenumber && props.street) {
+    parts.push(`${props.housenumber} ${props.street}`);
+  } else if (props.street) {
+    parts.push(props.street);
+  }
+  if (props.city) parts.push(props.city);
+  return parts.join(', ') || props.name || 'Address unavailable';
+};
+
+// Fetch nearest restaurant using Photon API
+// Uses real geolocation when available, falls back to preset location
+const fetchNearestRestaurant = async () => {
+  try {
+    // Get current location (real or fallback)
+    const currentLocation = await getCurrentLocation();
+    console.log('Fetching restaurants near:', currentLocation);
+
+    const params = new URLSearchParams({
+      q: 'restaurant',
+      limit: 20,
+      lat: currentLocation.latitude,
+      lon: currentLocation.longitude,
+      lang: 'en',
+      osm_tag: 'amenity:restaurant'
+    });
+
+    const url = `https://photon.komoot.io/api/?${params.toString()}`;
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Photon API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    // Map results and calculate distance from current location
+    const resultsWithDistance = data.features
+      .filter(feature => feature.properties.name) // Only include places with names
+      .map((feature) => {
+        const lat = feature.geometry.coordinates[1];
+        const lon = feature.geometry.coordinates[0];
+        const distance = calculateDistanceMiles(
+          currentLocation.latitude,
+          currentLocation.longitude,
+          lat,
+          lon
+        );
+        
+        return {
+          id: feature.properties.osm_id,
+          name: feature.properties.name,
+          address: formatPhotonAddress(feature.properties),
+          latitude: lat,
+          longitude: lon,
+          type: feature.properties.osm_value || 'restaurant',
+          city: feature.properties.city,
+          distance: distance,
+          drivingMinutes: estimateDrivingMinutes(distance)
+        };
+      })
+      .filter(result => result.distance <= 10) // Within 10 miles
+      .sort((a, b) => a.distance - b.distance);
+
+    // Return the nearest restaurant
+    return resultsWithDistance.length > 0 ? resultsWithDistance[0] : null;
+
+  } catch (error) {
+    console.error('Failed to fetch nearest restaurant:', error);
+    return null;
+  }
+};
+
+// Restaurant image URLs based on cuisine/type
+const RESTAURANT_IMAGES = [
+  'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop', // burger
+  'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop', // pizza
+  'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop', // salad
+  'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop', // pancakes
+  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=300&fit=crop', // healthy bowl
+];
+
+// Get a consistent image for a restaurant based on its name
+const getRestaurantImage = (name) => {
+  if (!name) return RESTAURANT_IMAGES[0];
+  // Use name hash to pick consistent image
+  const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return RESTAURANT_IMAGES[hash % RESTAURANT_IMAGES.length];
+};
+
+// Generate a fake rating (consistent per restaurant name)
+const getRestaurantRating = (name) => {
+  if (!name) return 4.5;
+  const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  // Generate rating between 3.5 and 5.0
+  return (3.5 + (hash % 16) / 10).toFixed(1);
+};
+
+// Generate price range (consistent per restaurant name)
+const getPriceRange = (name) => {
+  if (!name) return '$$';
+  const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const ranges = ['$', '$$', '$$$', '$$$$'];
+  return ranges[hash % ranges.length];
+};
+
+// Cuisine types for display
+const getCuisineType = (name, type) => {
+  if (!name) return 'Restaurant';
+  const hash = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const cuisines = ['American', 'Italian', 'Mexican', 'Asian Fusion', 'Mediterranean', 'Seafood', 'Steakhouse', 'Casual Dining'];
+  return cuisines[hash % cuisines.length];
+};
+
 // Fallback image for stations without a logo
 // Uses NeutralGray colors from the design system with music note icon
 const FALLBACK_LOGO = 'data:image/svg+xml,' + encodeURIComponent(`
@@ -14,10 +187,12 @@ const FALLBACK_LOGO = 'data:image/svg+xml,' + encodeURIComponent(`
   </svg>
 `);
 
-const WidgetsContainer = ({ setActiveView }) => {
+const WidgetsContainer = ({ setActiveView, setPendingDestination }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [nowPlaying, setNowPlaying] = useState({ artist: null, title: null });
   const [shouldAnimateNowPlaying, setShouldAnimateNowPlaying] = useState(false);
+  const [nearestRestaurant, setNearestRestaurant] = useState(null);
+  const [isLoadingRestaurant, setIsLoadingRestaurant] = useState(true);
   
   // Radio state and controls
   const {
@@ -39,6 +214,18 @@ const WidgetsContainer = ({ setActiveView }) => {
     }, 1000);
 
     return () => clearInterval(timer);
+  }, []);
+
+  // Fetch nearest restaurant on mount
+  useEffect(() => {
+    const loadNearestRestaurant = async () => {
+      setIsLoadingRestaurant(true);
+      const restaurant = await fetchNearestRestaurant();
+      setNearestRestaurant(restaurant);
+      setIsLoadingRestaurant(false);
+    };
+    
+    loadNearestRestaurant();
   }, []);
 
   // Fetch stations if not loaded (for background playback support)
@@ -324,39 +511,90 @@ const WidgetsContainer = ({ setActiveView }) => {
           <Card variant="default" className="widget-card navigation-widget">
             <div className="navigation-widget-content">
               <div className="navigation-widget-left">
-                <div className="navigation-text-content">
-                  <Typography variant="body-medium" className="navigation-heading">
-                    Feeling hungry?
-                  </Typography>
-                  <Typography variant="body-small" className="navigation-restaurant-name">
-                    Meyhouse
-                  </Typography>
-                  <Typography variant="body-small" className="navigation-details-text">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="navigation-star-icon">
-                      <path d="M6.13723 20.8328C6.53655 21.1323 7.02219 21.0147 7.60497 20.5974L11.9975 17.3988L16.4007 20.5974C16.9727 21.0147 17.4583 21.1323 17.8576 20.8328C18.2461 20.544 18.3217 20.0519 18.0842 19.3886L16.3467 14.2645L20.7823 11.1087C21.3651 10.7129 21.6134 10.2743 21.4515 9.80363C21.3003 9.35434 20.8471 9.12968 20.1348 9.14038L14.6955 9.18318L13.0443 4.02696C12.8284 3.35302 12.4939 3 11.9975 3C11.5118 3 11.1772 3.35302 10.9506 4.02696L9.29937 9.18318L3.86006 9.14038C3.14777 9.12968 2.70529 9.35434 2.5434 9.80363C2.39231 10.2743 2.64053 10.7129 3.21252 11.1087L7.64815 14.2645L5.91059 19.3886C5.67316 20.0519 5.74871 20.544 6.13723 20.8328Z" fill="#335FFF"/>
-                    </svg>
-                    5.0 · $$$ · New American
-                  </Typography>
-                </div>
-                <Button 
-                  variant="primary"
-                  size="small"
-                  className="navigation-eta-button"
-                  onClick={() => setActiveView('navigation')}
-                  icon={
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L4.5 20.5L12 17L19.5 20.5L12 2Z" fill="currentColor"/>
-                    </svg>
-                  }
-                  iconPosition="left"
-                >
-                  12 minutes away
-                </Button>
+                {isLoadingRestaurant ? (
+                  <div className="navigation-loading">
+                    <div className="navigation-loading-dots">
+                      <span className="navigation-loading-dot"></span>
+                      <span className="navigation-loading-dot"></span>
+                      <span className="navigation-loading-dot"></span>
+                    </div>
+                    <Typography variant="body-small" className="navigation-loading-text">
+                      Finding nearby restaurants...
+                    </Typography>
+                  </div>
+                ) : nearestRestaurant ? (
+                  <>
+                    <div className="navigation-text-content">
+                      <Typography variant="body-medium" className="navigation-heading">
+                        Feeling hungry?
+                      </Typography>
+                      <Typography variant="body-small" className="navigation-restaurant-name">
+                        {nearestRestaurant.name}
+                      </Typography>
+                      <Typography variant="body-small" className="navigation-details-text">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="navigation-star-icon">
+                          <path d="M6.13723 20.8328C6.53655 21.1323 7.02219 21.0147 7.60497 20.5974L11.9975 17.3988L16.4007 20.5974C16.9727 21.0147 17.4583 21.1323 17.8576 20.8328C18.2461 20.544 18.3217 20.0519 18.0842 19.3886L16.3467 14.2645L20.7823 11.1087C21.3651 10.7129 21.6134 10.2743 21.4515 9.80363C21.3003 9.35434 20.8471 9.12968 20.1348 9.14038L14.6955 9.18318L13.0443 4.02696C12.8284 3.35302 12.4939 3 11.9975 3C11.5118 3 11.1772 3.35302 10.9506 4.02696L9.29937 9.18318L3.86006 9.14038C3.14777 9.12968 2.70529 9.35434 2.5434 9.80363C2.39231 10.2743 2.64053 10.7129 3.21252 11.1087L7.64815 14.2645L5.91059 19.3886C5.67316 20.0519 5.74871 20.544 6.13723 20.8328Z" fill="#335FFF"/>
+                        </svg>
+                        {getRestaurantRating(nearestRestaurant.name)} · {getPriceRange(nearestRestaurant.name)} · {getCuisineType(nearestRestaurant.name, nearestRestaurant.type)}
+                      </Typography>
+                    </div>
+                    <Button 
+                      variant="primary"
+                      size="small"
+                      className="navigation-eta-button"
+                      onClick={() => {
+                        // Set the destination before navigating
+                        if (setPendingDestination) {
+                          setPendingDestination({
+                            id: nearestRestaurant.id,
+                            name: nearestRestaurant.name,
+                            address: nearestRestaurant.address,
+                            latitude: nearestRestaurant.latitude,
+                            longitude: nearestRestaurant.longitude,
+                            type: 'restaurant'
+                          });
+                        }
+                        setActiveView('navigation');
+                      }}
+                      icon={
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2L4.5 20.5L12 17L19.5 20.5L12 2Z" fill="currentColor"/>
+                        </svg>
+                      }
+                      iconPosition="left"
+                    >
+                      {nearestRestaurant.drivingMinutes} min away
+                    </Button>
+                  </>
+                ) : (
+                  <div className="navigation-text-content">
+                    <Typography variant="body-medium" className="navigation-heading">
+                      Feeling hungry?
+                    </Typography>
+                    <Typography variant="body-small" className="navigation-restaurant-name">
+                      No restaurants found nearby
+                    </Typography>
+                    <Button 
+                      variant="primary"
+                      size="small"
+                      className="navigation-eta-button"
+                      onClick={() => setActiveView('navigation')}
+                      icon={
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2L4.5 20.5L12 17L19.5 20.5L12 2Z" fill="currentColor"/>
+                        </svg>
+                      }
+                      iconPosition="left"
+                    >
+                      Search restaurants
+                    </Button>
+                  </div>
+                )}
               </div>
               <div className="navigation-destination-image">
                 <img 
-                  src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" 
-                  alt="Destination"
+                  src={nearestRestaurant ? getRestaurantImage(nearestRestaurant.name) : RESTAURANT_IMAGES[0]} 
+                  alt={nearestRestaurant?.name || 'Restaurant'}
                   className="destination-image"
                 />
               </div>

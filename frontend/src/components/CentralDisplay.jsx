@@ -14,6 +14,7 @@ import './central/NavigationApp.css';
 function CentralDisplay() {
   const { registerDisplay } = useHMI();
   const [activeView, setActiveView] = useState('home');
+  const [pendingDestination, setPendingDestination] = useState(null);
   const [canvasExpanded, setCanvasExpanded] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [canvasWidth, setCanvasWidth] = useState(null);
@@ -218,12 +219,12 @@ function CentralDisplay() {
             </div>
           </div>
           
-          {!canvasExpanded && <WidgetsContainer setActiveView={setActiveView} />}
+          {!canvasExpanded && <WidgetsContainer setActiveView={setActiveView} setPendingDestination={setPendingDestination} />}
         </div>
       )}
       
       {/* Navigation App */}
-      {activeView === 'navigation' && <NavigationApp key="navigation-map" />}
+      {activeView === 'navigation' && <NavigationApp key="navigation-map" initialDestination={pendingDestination} onDestinationHandled={() => setPendingDestination(null)} />}
       
       {/* Camera App */}
       {activeView === 'camera' && <CameraApp />}
