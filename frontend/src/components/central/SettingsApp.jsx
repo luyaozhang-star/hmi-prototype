@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useHMI } from '../../contexts/HMIContext';
+import { Typography, Card } from '../../design-system';
 import './SettingsApp.css';
 
 function SettingsApp() {
   const { state, updateState } = useHMI();
-  const [activeSubpage, setActiveSubpage] = useState(null); // null = main menu
+  const [activePage, setActivePage] = useState('graphics');
 
   const handleQualityChange = (quality) => {
     updateState({ graphicsQuality: quality });
@@ -17,39 +18,68 @@ function SettingsApp() {
   const settingsCategories = [
     {
       id: 'graphics',
-      title: '3D Scene Settings',
-      description: 'Adjust graphics quality and performance',
-      icon: '🎮',
+      title: '3D Scene',
+      description: 'Graphics & performance',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M3.27 6.96L12 12.01l8.73-5.05" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M12 22.08V12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      ),
     },
     {
       id: 'display',
       title: 'Display',
-      description: 'Screen brightness and appearance',
-      icon: '🖥️',
+      description: 'Brightness & appearance',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="2"/>
+          <path d="M8 21h8M12 17v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      ),
     },
     {
       id: 'audio',
       title: 'Audio',
-      description: 'Volume and sound preferences',
-      icon: '🔊',
+      description: 'Volume & sound',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      ),
     },
     {
       id: 'connectivity',
       title: 'Connectivity',
-      description: 'Bluetooth, Wi-Fi, and network settings',
-      icon: '📡',
+      description: 'Network & Bluetooth',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      ),
     },
     {
       id: 'vehicle',
       title: 'Vehicle',
-      description: 'Vehicle-specific settings and preferences',
-      icon: '🚗',
+      description: 'Vehicle preferences',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 17h.01M17 17h.01M5 10l1.5-4.5a2 2 0 0 1 1.9-1.5h7.2a2 2 0 0 1 1.9 1.5L19 10M5 10h14M5 10a2 2 0 0 0-2 2v4h2a2 2 0 1 0 4 0h6a2 2 0 1 0 4 0h2v-4a2 2 0 0 0-2-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      ),
     },
     {
       id: 'system',
       title: 'System',
-      description: 'System information and updates',
-      icon: '⚙️',
+      description: 'Info & updates',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      ),
     },
   ];
 
@@ -102,7 +132,6 @@ function SettingsApp() {
       label: 'Range Rover',
       description: 'SUV model',
       icon: '🚗',
-      preview: '/models/vehicle.glb'
     },
     {
       id: 'dodge',
@@ -110,7 +139,6 @@ function SettingsApp() {
       label: '1968 Dodge Charger',
       description: 'Mid Engine Hellacious F9',
       icon: '🚙',
-      preview: '/models/dodge.glb'
     },
     {
       id: 'military',
@@ -118,7 +146,6 @@ function SettingsApp() {
       label: 'Military',
       description: 'TPz Fuchs armored vehicle',
       icon: '🪖',
-      preview: '/models/tpz-fuchs.glb'
     },
     {
       id: 'macan',
@@ -126,100 +153,61 @@ function SettingsApp() {
       label: 'Porsche Macan',
       description: 'Compact luxury SUV',
       icon: '🚙',
-      preview: '/models/macan.glb'
     },
     {
       id: 'sports',
       path: '/models/sports-car.glb',
       label: 'Sports Car',
-      description: 'High-performance sports car (coming soon)',
+      description: 'High-performance (coming soon)',
       icon: '🏎️',
-      preview: '/models/sports-car.glb',
       disabled: true
     },
     {
       id: 'truck',
       path: '/models/truck.glb',
       label: 'Pickup Truck',
-      description: 'Large pickup truck (coming soon)',
+      description: 'Large pickup (coming soon)',
       icon: '🛻',
-      preview: '/models/truck.glb',
       disabled: true
     }
   ];
 
-  // Main Menu View
-  const renderMainMenu = () => (
-    <>
-      <div className="settings-header">
-        <h2>Settings</h2>
-        <p className="settings-subtitle">Configure your HMI experience</p>
+  // Graphics Page
+  const renderGraphicsPage = () => (
+    <div className="settings-page">
+      <div className="settings-page-header">
+        <Typography variant="headline-large" as="h2">3D Scene Settings</Typography>
+        <Typography variant="body-medium" className="settings-page-subtitle">
+          Adjust graphics quality and performance
+        </Typography>
       </div>
 
-      <div className="settings-content">
-        <div className="settings-menu">
-          {settingsCategories.map((category) => (
-            <button
-              key={category.id}
-              className="settings-menu-item"
-              onClick={() => setActiveSubpage(category.id)}
-            >
-              <div className="menu-item-icon">{category.icon}</div>
-              <div className="menu-item-content">
-                <div className="menu-item-title">{category.title}</div>
-                <div className="menu-item-description">{category.description}</div>
-              </div>
-              <div className="menu-item-arrow">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-    </>
-  );
-
-  // Graphics Subpage
-  const renderGraphicsSubpage = () => (
-    <>
-      <div className="settings-header">
-        <button className="back-button" onClick={() => setActiveSubpage(null)}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Back
-        </button>
-        <h2>3D Scene Settings</h2>
-        <p className="settings-subtitle">Adjust graphics quality and performance</p>
-      </div>
-
-      <div className="settings-content">
+      <div className="settings-page-content">
         {/* Graphics Quality Section */}
         <section className="settings-section">
           <div className="section-header">
-            <div className="section-icon">🎮</div>
+            <span className="section-icon">🎮</span>
             <div>
-              <h3 className="section-title">Graphics Quality</h3>
-              <p className="section-description">
-                Adjust 3D rendering quality to optimize performance based on your hardware
-              </p>
+              <Typography variant="headline-small" as="h3">Graphics Quality</Typography>
+              <Typography variant="body-small" className="section-description">
+                Adjust 3D rendering quality to optimize performance
+              </Typography>
             </div>
           </div>
 
           <div className="quality-options">
             {qualityOptions.map((option) => (
-              <button
+              <Card
                 key={option.id}
+                variant={state.graphicsQuality === option.id ? 'elevated' : 'default'}
                 className={`quality-option ${state.graphicsQuality === option.id ? 'active' : ''}`}
                 onClick={() => handleQualityChange(option.id)}
               >
                 <div className="quality-option-header">
                   <span className="quality-icon">{option.icon}</span>
                   <div className="quality-info">
-                    <div className="quality-label">{option.label}</div>
-                    <div className="quality-description">{option.description}</div>
+                    <Typography variant="body-large" className="quality-label">{option.label}</Typography>
+                    <Typography variant="body-small" className="quality-description">{option.description}</Typography>
                   </div>
                   <div className="quality-radio">
                     {state.graphicsQuality === option.id && (
@@ -231,53 +219,43 @@ function SettingsApp() {
                   {option.specs.map((spec, index) => (
                     <div key={index} className="spec-item">
                       <span className="spec-dot">•</span>
-                      <span className="spec-text">{spec}</span>
+                      <Typography variant="body-tiny" as="span">{spec}</Typography>
                     </div>
                   ))}
                 </div>
-              </button>
+              </Card>
             ))}
-          </div>
-
-          <div className="quality-note">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V13H11V15ZM11 11H9V5H11V11Z" fill="var(--onSurface-inactive, rgba(255, 255, 255, 0.6))"/>
-            </svg>
-            <p>
-              Quality changes apply immediately to the 3D vehicle view. 
-              Lower settings are recommended for mobile devices or integrated graphics.
-            </p>
           </div>
         </section>
 
         {/* Vehicle Model Section */}
         <section className="settings-section">
           <div className="section-header">
-            <div className="section-icon">🚗</div>
+            <span className="section-icon">🚗</span>
             <div>
-              <h3 className="section-title">Vehicle Model</h3>
-              <p className="section-description">
-                Choose which 3D vehicle model to display in the Vehicle View
-              </p>
+              <Typography variant="headline-small" as="h3">Vehicle Model</Typography>
+              <Typography variant="body-small" className="section-description">
+                Choose which 3D vehicle model to display
+              </Typography>
             </div>
           </div>
 
           <div className="model-options">
             {modelOptions.map((option) => (
-              <button
+              <Card
                 key={option.id}
+                variant={state.selected3DModel === option.path ? 'elevated' : 'default'}
                 className={`model-option ${state.selected3DModel === option.path ? 'active' : ''} ${option.disabled ? 'disabled' : ''}`}
                 onClick={() => !option.disabled && handleModelChange(option.path)}
-                disabled={option.disabled}
               >
                 <div className="model-option-header">
                   <span className="model-icon">{option.icon}</span>
                   <div className="model-info">
-                    <div className="model-label">
-                      {option.label}
-                      {option.disabled && <span className="coming-soon-badge">Coming Soon</span>}
+                    <div className="model-label-row">
+                      <Typography variant="body-large" className="model-label">{option.label}</Typography>
+                      {option.disabled && <span className="coming-soon-badge">Soon</span>}
                     </div>
-                    <div className="model-description">{option.description}</div>
+                    <Typography variant="body-small" className="model-description">{option.description}</Typography>
                   </div>
                   <div className="model-radio">
                     {state.selected3DModel === option.path && !option.disabled && (
@@ -285,104 +263,122 @@ function SettingsApp() {
                     )}
                   </div>
                 </div>
-              </button>
+              </Card>
             ))}
-          </div>
-
-          <div className="quality-note">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM11 15H9V13H11V15ZM11 11H9V5H11V11Z" fill="var(--onSurface-inactive, rgba(255, 255, 255, 0.6))"/>
-            </svg>
-            <p>
-              Model changes apply immediately to the 3D Vehicle View. Additional models will be added in future updates.
-            </p>
           </div>
         </section>
 
-        {/* Performance Info Section */}
+        {/* Performance Info */}
         <section className="settings-section info-section">
           <div className="section-header">
-            <div className="section-icon">📊</div>
+            <span className="section-icon">📊</span>
             <div>
-              <h3 className="section-title">Performance Information</h3>
-              <p className="section-description">
-                Current system performance metrics
-              </p>
+              <Typography variant="headline-small" as="h3">Performance</Typography>
+              <Typography variant="body-small" className="section-description">
+                Current system metrics
+              </Typography>
             </div>
           </div>
 
           <div className="info-grid">
-            <div className="info-card">
-              <div className="info-label">Current Quality</div>
-              <div className="info-value">{state.graphicsQuality.charAt(0).toUpperCase() + state.graphicsQuality.slice(1)}</div>
-            </div>
-            <div className="info-card">
-              <div className="info-label">Display Mode</div>
-              <div className="info-value">Central Display</div>
-            </div>
-            <div className="info-card">
-              <div className="info-label">Connection</div>
-              <div className="info-value">WebSocket Active</div>
-            </div>
-            <div className="info-card">
-              <div className="info-label">Renderer</div>
-              <div className="info-value">WebGL 2.0</div>
-            </div>
+            <Card variant="default" compact className="info-card">
+              <Typography variant="label-small" className="info-label">Quality</Typography>
+              <Typography variant="body-large" className="info-value">
+                {state.graphicsQuality.charAt(0).toUpperCase() + state.graphicsQuality.slice(1)}
+              </Typography>
+            </Card>
+            <Card variant="default" compact className="info-card">
+              <Typography variant="label-small" className="info-label">Display</Typography>
+              <Typography variant="body-large" className="info-value">Central</Typography>
+            </Card>
+            <Card variant="default" compact className="info-card">
+              <Typography variant="label-small" className="info-label">Connection</Typography>
+              <Typography variant="body-large" className="info-value">Active</Typography>
+            </Card>
+            <Card variant="default" compact className="info-card">
+              <Typography variant="label-small" className="info-label">Renderer</Typography>
+              <Typography variant="body-large" className="info-value">WebGL 2</Typography>
+            </Card>
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 
-  // Placeholder for other subpages
-  const renderPlaceholderSubpage = (title, icon) => (
-    <>
-      <div className="settings-header">
-        <button className="back-button" onClick={() => setActiveSubpage(null)}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Back
-        </button>
-        <h2>{icon} {title}</h2>
-        <p className="settings-subtitle">Settings coming soon</p>
+  // Placeholder Pages
+  const renderPlaceholderPage = (title, description, icon) => (
+    <div className="settings-page">
+      <div className="settings-page-header">
+        <Typography variant="headline-large" as="h2">{title}</Typography>
+        <Typography variant="body-medium" className="settings-page-subtitle">
+          {description}
+        </Typography>
       </div>
 
-      <div className="settings-content">
+      <div className="settings-page-content">
         <div className="placeholder-content">
           <div className="placeholder-icon">{icon}</div>
-          <h3>Coming Soon</h3>
-          <p>{title} settings will be available in a future update.</p>
+          <Typography variant="headline-medium" as="h3">Coming Soon</Typography>
+          <Typography variant="body-medium" className="placeholder-text">
+            {title} settings will be available in a future update.
+          </Typography>
         </div>
       </div>
-    </>
+    </div>
   );
 
-  // Render based on active subpage
-  const renderContent = () => {
-    if (activeSubpage === 'graphics') {
-      return renderGraphicsSubpage();
-    } else if (activeSubpage === 'display') {
-      return renderPlaceholderSubpage('Display', '🖥️');
-    } else if (activeSubpage === 'audio') {
-      return renderPlaceholderSubpage('Audio', '🔊');
-    } else if (activeSubpage === 'connectivity') {
-      return renderPlaceholderSubpage('Connectivity', '📡');
-    } else if (activeSubpage === 'vehicle') {
-      return renderPlaceholderSubpage('Vehicle', '🚗');
-    } else if (activeSubpage === 'system') {
-      return renderPlaceholderSubpage('System', '⚙️');
-    } else {
-      return renderMainMenu();
+  // Render page content based on active page
+  const renderPageContent = () => {
+    switch (activePage) {
+      case 'graphics':
+        return renderGraphicsPage();
+      case 'display':
+        return renderPlaceholderPage('Display Settings', 'Screen brightness and appearance', '🖥️');
+      case 'audio':
+        return renderPlaceholderPage('Audio Settings', 'Volume and sound preferences', '🔊');
+      case 'connectivity':
+        return renderPlaceholderPage('Connectivity', 'Bluetooth, Wi-Fi, and network settings', '📡');
+      case 'vehicle':
+        return renderPlaceholderPage('Vehicle Settings', 'Vehicle-specific preferences', '🚗');
+      case 'system':
+        return renderPlaceholderPage('System', 'System information and updates', '⚙️');
+      default:
+        return renderGraphicsPage();
     }
   };
 
   return (
     <div className="settings-app">
-      {renderContent()}
+      {/* Sidebar Menu */}
+      <nav className="settings-sidebar">
+        <div className="sidebar-header">
+          <Typography variant="headline-medium" as="h1">Settings</Typography>
+        </div>
+        <ul className="sidebar-menu">
+          {settingsCategories.map((category) => (
+            <li key={category.id}>
+              <button
+                className={`sidebar-menu-item ${activePage === category.id ? 'active' : ''}`}
+                onClick={() => setActivePage(category.id)}
+              >
+                <span className="sidebar-icon">{category.icon}</span>
+                <div className="sidebar-text">
+                  <Typography variant="body-large" className="sidebar-title">{category.title}</Typography>
+                  <Typography variant="body-tiny" className="sidebar-description">{category.description}</Typography>
+                </div>
+                {activePage === category.id && <span className="sidebar-active-indicator" />}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Main Content */}
+      <main className="settings-main">
+        {renderPageContent()}
+      </main>
     </div>
   );
 }
 
 export default SettingsApp;
-

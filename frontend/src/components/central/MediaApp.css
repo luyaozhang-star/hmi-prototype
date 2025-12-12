@@ -4,7 +4,7 @@
   bottom: var(--spacing-100, 100px);
   left: 0;
   right: 0;
-  padding: var(--spacing-32, 32px);
+  padding: 0 var(--spacing-24, 24px);
   display: flex;
   flex-direction: column;
   overflow: hidden;

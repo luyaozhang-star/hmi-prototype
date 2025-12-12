@@ -422,21 +422,14 @@
   overflow-y: auto;
   flex: 1;
   min-height: 0;
-  padding-right: var(--spacing-8, 8px);
   padding-bottom: var(--spacing-16, 16px);
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
 }
 
 .radio-stations::-webkit-scrollbar {
-  width: 4px;
-}
-
-.radio-stations::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.radio-stations::-webkit-scrollbar-thumb {
-  background: var(--surface-secondary-enabled);
-  border-radius: 2px;
+  display: none; /* Chrome, Safari, Edge */
 }
 
 /* Station Item */
