@@ -6,6 +6,7 @@ import NavigationApp from './central/NavigationApp';
 import CameraApp from './central/CameraApp';
 import SettingsApp from './central/SettingsApp';
 import MediaApp from './central/MediaApp';
+import AppLauncherApp from './central/AppLauncherApp';
 import WidgetsContainer from './central/WidgetsContainer';
 import Vehicle3D from './central/Vehicle3D';
 import './CentralDisplay.css';
@@ -250,6 +251,9 @@ function CentralDisplay() {
       
       {/* Media App */}
       {activeView === 'media' && <MediaApp />}
+      
+      {/* App Launcher */}
+      {activeView === 'apps' && <AppLauncherApp setActiveView={setActiveView} />}
       
       <BottomNav activeView={activeView} setActiveView={setActiveView} />
     </div>

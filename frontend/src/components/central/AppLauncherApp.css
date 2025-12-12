@@ -1,0 +1,175 @@
+/* AppLauncherApp Styles */
+/* Uses semantic design tokens for consistent theming */
+
+.app-launcher {
+  position: absolute;
+  top: var(--spacing-64, 60px);
+  bottom: var(--spacing-100, 100px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--spacing-24, 24px);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Override Card component styles for app launcher container */
+.app-launcher-container.ds-card {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.app-launcher-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--spacing-64, 64px) var(--spacing-80, 80px);
+  justify-items: center;
+  align-items: start;
+  padding: 0 var(--spacing-48, 48px);
+}
+
+/* Responsive grid - adjust columns based on container width */
+@media (max-width: 1600px) {
+  .app-launcher-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--spacing-48, 48px) var(--spacing-64, 64px);
+  }
+}
+
+@media (max-width: 1280px) {
+  .app-launcher-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-40, 40px) var(--spacing-48, 48px);
+  }
+}
+
+@media (max-width: 960px) {
+  .app-launcher-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-32, 32px) var(--spacing-40, 40px);
+    padding: 0 var(--spacing-24, 24px);
+  }
+}
+
+/* App Icon Wrapper - contains icon and label */
+.app-icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16, 16px);
+  width: 160px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--motion-duration-medium, 200ms) var(--motion-easing-standard, ease);
+}
+
+.app-icon-wrapper:hover {
+  transform: scale(1.05);
+}
+
+.app-icon-wrapper:active {
+  transform: scale(0.98);
+}
+
+.app-icon-wrapper:focus-visible {
+  outline: 2px solid var(--surface-primary-enabled, #335fff);
+  outline-offset: 8px;
+  border-radius: var(--borderRadius-20, 20px);
+}
+
+/* App Icon */
+.app-icon {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--borderRadius-20, 20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    0px 0px 0.563px 0px rgba(0, 0, 0, 0.3),
+    0px 1.125px 16.875px 0px rgba(0, 0, 0, 0.08),
+    0px 0px 8.438px 0px rgba(0, 0, 0, 0.03);
+  transition: box-shadow var(--motion-duration-medium, 200ms) var(--motion-easing-standard, ease);
+}
+
+.app-icon-wrapper:hover .app-icon {
+  box-shadow: 
+    0px 0px 1px 0px rgba(0, 0, 0, 0.4),
+    0px 4px 24px 0px rgba(0, 0, 0, 0.15),
+    0px 0px 12px 0px rgba(0, 0, 0, 0.05);
+}
+
+/* Image-based app icons */
+.app-icon-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--borderRadius-20, 20px);
+}
+
+/* SVG/Icon container */
+.app-icon-svg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.app-icon-svg svg {
+  width: 64px;
+  height: 64px;
+}
+
+.app-icon-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.app-icon-fallback svg {
+  width: 64px;
+  height: 64px;
+}
+
+/* App Name Label */
+.app-name {
+  color: var(--onSurface-enabled, #ffffffe6);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hover state for app name */
+.app-icon-wrapper:hover .app-name {
+  color: var(--onSurface-primary-enabled, #ffffffe6);
+}
+
+/* Scrollbar styling for the container */
+.app-launcher-container.ds-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.app-launcher-container.ds-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.app-launcher-container.ds-card::-webkit-scrollbar-thumb {
+  background: var(--surface-secondary-enabled, rgba(255, 255, 255, 0.1));
+  border-radius: 3px;
+}
+
+.app-launcher-container.ds-card::-webkit-scrollbar-thumb:hover {
+  background: var(--surface-secondary-pressed, rgba(255, 255, 255, 0.15));
+}
+

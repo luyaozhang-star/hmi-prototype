@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useHMI } from '../../contexts/HMIContext';
 import { Typography, Card } from '../../design-system';
 import './SettingsApp.css';
@@ -6,6 +7,7 @@ import './SettingsApp.css';
 function SettingsApp() {
   const { state, updateState } = useHMI();
   const [activePage, setActivePage] = useState('graphics');
+  const navigate = useNavigate();
 
   const handleQualityChange = (quality) => {
     updateState({ graphicsQuality: quality });
@@ -15,10 +17,34 @@ function SettingsApp() {
     updateState({ selected3DModel: modelPath });
   };
 
+  const navigationOptions = [
+    {
+      id: 'cluster',
+      path: '/cluster',
+      label: 'Cluster Display',
+      description: 'Driver instrument cluster',
+      icon: '🎛️',
+    },
+    {
+      id: 'passenger',
+      path: '/passenger',
+      label: 'Passenger Display',
+      description: 'Passenger entertainment screen',
+      icon: '🎬',
+    },
+    {
+      id: 'design-system',
+      path: '/design-system',
+      label: 'Design System',
+      description: 'Component library showcase',
+      icon: '🎨',
+    },
+  ];
+
   const settingsCategories = [
     {
       id: 'graphics',
-      title: '3D Scene',
+      title: 'Prototype Controls',
       description: 'Graphics & performance',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +202,7 @@ function SettingsApp() {
   const renderGraphicsPage = () => (
     <div className="settings-page">
       <div className="settings-page-header">
-        <Typography variant="headline-large" as="h2">3D Scene Settings</Typography>
+        <Typography variant="headline-large" as="h2">Prototype Controls</Typography>
         <Typography variant="body-medium" className="settings-page-subtitle">
           Adjust graphics quality and performance
         </Typography>
@@ -184,7 +210,7 @@ function SettingsApp() {
 
       <div className="settings-page-content">
         {/* Graphics Quality Section */}
-        <section className="settings-section">
+        <Card className="settings-section">
           <div className="section-header">
             <span className="section-icon">🎮</span>
             <div>
@@ -209,11 +235,6 @@ function SettingsApp() {
                     <Typography variant="body-large" className="quality-label">{option.label}</Typography>
                     <Typography variant="body-small" className="quality-description">{option.description}</Typography>
                   </div>
-                  <div className="quality-radio">
-                    {state.graphicsQuality === option.id && (
-                      <div className="radio-selected" />
-                    )}
-                  </div>
                 </div>
                 <div className="quality-specs">
                   {option.specs.map((spec, index) => (
@@ -226,10 +247,10 @@ function SettingsApp() {
               </Card>
             ))}
           </div>
-        </section>
+        </Card>
 
         {/* Vehicle Model Section */}
-        <section className="settings-section">
+        <Card className="settings-section">
           <div className="section-header">
             <span className="section-icon">🚗</span>
             <div>
@@ -257,19 +278,14 @@ function SettingsApp() {
                     </div>
                     <Typography variant="body-small" className="model-description">{option.description}</Typography>
                   </div>
-                  <div className="model-radio">
-                    {state.selected3DModel === option.path && !option.disabled && (
-                      <div className="radio-selected" />
-                    )}
-                  </div>
                 </div>
               </Card>
             ))}
           </div>
-        </section>
+        </Card>
 
         {/* Performance Info */}
-        <section className="settings-section info-section">
+        <Card className="settings-section info-section">
           <div className="section-header">
             <span className="section-icon">📊</span>
             <div>
@@ -300,7 +316,39 @@ function SettingsApp() {
               <Typography variant="body-large" className="info-value">WebGL 2</Typography>
             </Card>
           </div>
-        </section>
+        </Card>
+
+        {/* Navigate to Other Screens */}
+        <Card className="settings-section">
+          <div className="section-header">
+            <span className="section-icon">🖥️</span>
+            <div>
+              <Typography variant="headline-small" as="h3">Navigate to Screens</Typography>
+              <Typography variant="body-small" className="section-description">
+                Switch between different displays and views
+              </Typography>
+            </div>
+          </div>
+
+          <div className="navigation-options">
+            {navigationOptions.map((option) => (
+              <Card
+                key={option.id}
+                variant="default"
+                className="navigation-option"
+                onClick={() => navigate(option.path)}
+              >
+                <div className="navigation-option-header">
+                  <span className="navigation-icon">{option.icon}</span>
+                  <div className="navigation-info">
+                    <Typography variant="body-large" className="navigation-label">{option.label}</Typography>
+                    <Typography variant="body-small" className="navigation-description">{option.description}</Typography>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Card>
       </div>
     </div>
   );
@@ -351,9 +399,6 @@ function SettingsApp() {
     <div className="settings-app">
       {/* Sidebar Menu */}
       <nav className="settings-sidebar">
-        <div className="sidebar-header">
-          <Typography variant="headline-medium" as="h1">Settings</Typography>
-        </div>
         <ul className="sidebar-menu">
           {settingsCategories.map((category) => (
             <li key={category.id}>
@@ -363,10 +408,9 @@ function SettingsApp() {
               >
                 <span className="sidebar-icon">{category.icon}</span>
                 <div className="sidebar-text">
-                  <Typography variant="body-large" className="sidebar-title">{category.title}</Typography>
-                  <Typography variant="body-tiny" className="sidebar-description">{category.description}</Typography>
+                  <Typography variant="label-large" className="sidebar-title">{category.title}</Typography>
+                  <Typography variant="body-small" className="sidebar-description">{category.description}</Typography>
                 </div>
-                {activePage === category.id && <span className="sidebar-active-indicator" />}
               </button>
             </li>
           ))}
