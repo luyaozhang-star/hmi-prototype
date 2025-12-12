@@ -3,6 +3,9 @@ import { Card, Typography, IconButton, Slider, Button } from '../../design-syste
 import { useRadio } from '../../hooks/useRadio';
 import './RadioView.css';
 
+// Backend URL from environment variable (defaults to localhost)
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+
 // Media source options
 const MEDIA_SOURCES = [
   { id: 'radio', label: 'Radio', icon: 'radio', enabled: true },
@@ -133,7 +136,7 @@ const RadioView = () => {
       
       try {
         const response = await fetch(
-          `http://localhost:3001/api/now-playing?url=${encodeURIComponent(streamUrl)}`
+          `${BACKEND_URL}/api/now-playing?url=${encodeURIComponent(streamUrl)}`
         );
         const data = await response.json();
         

@@ -3,6 +3,9 @@ import { io } from 'socket.io-client';
 
 const HMIContext = createContext();
 
+// Backend URL from environment variable (defaults to localhost)
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+
 // Radio API base URL
 const RADIO_API_BASE = 'https://de1.api.radio-browser.info/json';
 
@@ -301,7 +304,7 @@ export const HMIProvider = ({ children }) => {
   useEffect(() => {
     const fetchInitialState = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/state');
+        const response = await fetch(`${BACKEND_URL}/api/state`);
         if (response.ok) {
           const initialState = await response.json();
           // Load persisted radio settings from backend
@@ -337,7 +340,7 @@ export const HMIProvider = ({ children }) => {
 
   useEffect(() => {
     // Connect to backend via WebSocket
-    const newSocket = io('http://localhost:3001');
+    const newSocket = io(BACKEND_URL);
     
     newSocket.on('connect', () => {
       console.log('Connected to HMI backend');

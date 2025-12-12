@@ -3,6 +3,9 @@ import { Card, Button, Typography, IconButton } from '../../design-system';
 import { useRadio } from '../../hooks/useRadio';
 import './WidgetsContainer.css';
 
+// Backend URL from environment variable (defaults to localhost)
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+
 // ===== FALLBACK LOCATION (used when geolocation is unavailable) =====
 // San Mateo Downtown, CA coordinates
 const FALLBACK_LOCATION = {
@@ -255,7 +258,7 @@ const WidgetsContainer = ({ setActiveView, setPendingDestination }) => {
       
       try {
         const response = await fetch(
-          `http://localhost:3001/api/now-playing?url=${encodeURIComponent(streamUrl)}`
+          `${BACKEND_URL}/api/now-playing?url=${encodeURIComponent(streamUrl)}`
         );
         const data = await response.json();
         
