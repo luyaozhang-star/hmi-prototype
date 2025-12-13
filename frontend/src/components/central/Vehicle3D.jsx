@@ -204,7 +204,7 @@ const MODEL_SCALE_CONFIG = {
   },
   '/models/macan.glb': {
     targetSize: 3.6, // Porsche Macan - compact luxury SUV
-    positionOffset: { x: 0.4, y: -0.13, z: 0 }, // Adjust after testing
+    positionOffset: { x: 0, y: -0.13, z: -0.2 }, // Adjust after testing
     rotation: { x: 0, y: 0, z: 0 }, // Adjust after testing
   },
 };
